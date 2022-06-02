@@ -1,5 +1,8 @@
 # Prerequisites
 *.d
+*.json
+*.xml
+/.vscode
 
 # Compiled Object files
 *.slo
@@ -30,3 +33,13 @@
 *.exe
 *.out
 *.app
+Compilador
+ejercicio2
+
+# CodeBlocks
+*.cbp
+*.depend
+*.layout
+/bin
+/obj
+/debug
