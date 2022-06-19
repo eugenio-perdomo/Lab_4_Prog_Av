@@ -1,37 +1,30 @@
 #ifndef INDIVIDUAL_H
 #define INDIVIDUAL_H
 
-#include "./Partida.h"
-// TODO: los nickjugadores pueden ser simplemente un string
-// o tambien podemos utilizar la coleccion de partidas que tiene Jugador
-// en el DCD está como DtJugador
-// es un arreglo sin definir su maximo
-// el set y get talvez vayan a ser diferentes
-
+#include "Partida.h"
+#include "Transmision.h"
 class Multijugador : public Partida
 {
 private:
 	bool transmitidaEnVivo;
-	std::string nickJugadores[10];
 	DtFecha ultimaConexion;
 	int cantJugadores;
+	Transmision *transmision;
 
 public:
 	Multijugador();
-	Multijugador(bool transmitidaEnVivo,
-				 std::string nickJugadores,
-				 DtFecha ultimaConexion,
-				 int cantJugadores);
+	Multijugador(bool transmitidaEnVivo, DtFecha ultimaConexion, int cantJugadores);
 
 	bool getTransmitidaEnVivo();
-	std::string getNickJugadores();
 	DtFecha getUltimaConexion();
 	int getCantJugadores();
 
-	void setTransmitidaEnVivo();
-	void setNickJugadores();
-	void setUltimaConexion();
-	void setCantJugadores();
+	void setTransmitidaEnVivo(bool transmitidaEnVivo);
+	void setUltimaConexion(DtFecha ultimaConexion);
+	void setCantJugadores(int cantJugadores);
+	
+	Transmision *Gettransmision() { return transmision; }
+	void Settransmision(Transmision *val) { transmision = val; }
 
 	virtual ~Multijugador();
 };

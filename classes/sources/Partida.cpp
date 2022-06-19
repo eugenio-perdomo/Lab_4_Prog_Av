@@ -7,7 +7,8 @@ Partida::Partida(std::string id,
                  bool finalizado,
                  float duracionPartida,
                  DtFecha fechaInicio,
-                 DtFecha fechaFin)
+                 DtFecha fechaFin,
+                 Videojuego *juego)
 {
     this->id = id;
     this->nombreVideojuego = nombreVideojuego;
@@ -15,6 +16,7 @@ Partida::Partida(std::string id,
     this->duracionPartida = duracionPartida;
     this->fechaInicio = fechaInicio;
     this->fechaFin = fechaFin;
+    this->juego = juego;
 }
 
 std::string Partida::getId()

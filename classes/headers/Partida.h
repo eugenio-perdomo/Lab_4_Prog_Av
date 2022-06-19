@@ -2,8 +2,9 @@
 #define PARTIDA_H
 
 #include <string>
-#include "ICollection.h"
-#include "DtFecha.h"
+#include "./../../ICollection/interfaces/ICollection.h"
+#include "./../../datatypes/headers/DtFecha.h"
+#include "Videojuego.h"
 
 class Partida : public ICollection
 {
@@ -14,6 +15,7 @@ private:
 	float duracionPartida; // En Minutos, el set va a ser un date.fin - date.inicio
 	DtFecha fechaInicio;
 	DtFecha fechaFin;
+	Videojuego *juego;
 
 public:
 	Partida();
@@ -22,7 +24,8 @@ public:
 			bool finalizado,
 			float duracionPartida,
 			DtFecha fechaInicio,
-			DtFecha fechaFin);
+			DtFecha fechaFin,
+			Videojuego *juego);
 
 	std::string getId();
 	std::string getNombreVideojuego();
@@ -38,9 +41,7 @@ public:
 	void setFechaInicio(DtFecha fechaInicio);
 	void setFechaFin(DtFecha fechaFin);
 
-	/*TerminarPartida(id)
-	+ GetPartida(): DtIndividual, DtMultijugador
-	+ GetPartida() : DtIndividual()*/
+	void TerminarPartida(std::string id);
 
 	virtual ~Partida();
 };

@@ -13,36 +13,36 @@ Comentario::Comentario(std::string id,
     this->fechaEnvio = fechaEnvio;
 }
 
-Comentario::std::string getId()
+std::string Comentario::getId()
 {
     return this->id;
 }
-Comentario::std::string getTexto()
+std::string Comentario::getTexto()
 {
     return this->texto;
 }
-Comentario::std::string getNickUsuarioComentario()
+std::string Comentario::getNickUsuarioComentario()
 {
     return this->nickUsuarioComentario;
 }
-Comentario::DtFecha getFechaEnvio()
+DtFecha Comentario::getFechaEnvio()
 {
     return this->fechaEnvio;
 }
 
-Comentario::void setId(std::string id)
+void Comentario::setId(std::string id)
 {
     this->id = id;
 }
-Comentario::void setTexto(std::string texto)
+void Comentario::setTexto(std::string texto)
 {
     this->texto = texto;
 }
-Comentario::void setNickUsuarioComentario(std::string nickUsuarioComentario)
+void Comentario::setNickUsuarioComentario(std::string nickUsuarioComentario)
 {
     this->nickUsuarioComentario = nickUsuarioComentario;
 }
-Comentario::void setFechaEnvio(DtFecha fechaEnvio)
+void Comentario::setFechaEnvio(DtFecha fechaEnvio)
 {
     this->fechaEnvio = fechaEnvio;
 }

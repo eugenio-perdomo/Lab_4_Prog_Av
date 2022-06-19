@@ -10,10 +10,10 @@ private:
 public:
 	Desarrollador();
 	Desarrollador(std::string empresa);
-	Desarrollador(std::string empresa, std::string _email, std::string _contrasenia);
 
-	std::string getCi();
-	void setCi(std::string empresa);
+	std::string Getempresa() { return empresa; }
+	void Setempresa(std::string val) { empresa = val; }
+
 	virtual ~Desarrollador();
 };
 

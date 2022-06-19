@@ -14,11 +14,10 @@ public:
 	Usuario();
 	Usuario(std::string _email, std::string _contrasenia);
 
-	std::string getEmail();
-	std::string getContrasenia();
-
-	void setEmail(std::string _email);
-	void setContrasenia(std::string _contrasenia);
+	std::string getEmail(){ return email; }
+	std::string getContrasenia(){ return contrasenia; }
+	void setEmail(std::string val){ email = val; }
+	void setContrasenia(std::string val){ contrasenia = val; }
 
 	virtual ~Usuario();
 };

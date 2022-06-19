@@ -1,8 +1,8 @@
 #ifndef COMENTARIO_H
 #define COMENTARIO_H
 
+#include "./../../datatypes/headers/DtFecha.h"
 #include <string>
-#include "DtFecha.h"
 
 class Comentario
 {

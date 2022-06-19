@@ -2,27 +2,26 @@
 
 Individual::Individual() {}
 
-Individual::Individual(bool esContinuacion,
-                       std::string nickJugador)
+Individual::Individual(bool esContinuacion, std::string nickJugador)
 {
     this->esContinuacion = esContinuacion;
     this->nickJugador = nickJugador;
 }
 
-Individual::bool getEsContinuacion()
+bool Individual::getEsContinuacion()
 {
     return this->esContinuacion;
 }
-Individual::std::string getNickJugador()
+std::string Individual::getNickJugador()
 {
     return this->nickJugador;
 }
 
-Individual::void setEsContinuacion()
+void Individual::setEsContinuacion(bool esContinuacion)
 {
     this->esContinuacion = esContinuacion;
 }
-Individual::void setNickJugador()
+void Individual::setNickJugador(std::string nickJugador)
 {
     this->nickJugador = nickJugador;
 }

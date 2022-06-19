@@ -1,17 +1,17 @@
 #include "./../headers/Sistema.h"
 Sistema::Sistema() {
-    this->usuarios = new OrderedDictionary;
-    this->fecha = new DtFecha(01, 01, 2022, 00, 00, 00);
+    /*this->usuarios = new OrderedDictionary;
+    this->fecha = new DtFecha(01, 01, 2022, 00, 00, 00);*/
 }
 
-
-void Sistema::menuCaso1()
+// Alta de usuario
+void menuCaso1()
 {
     int opcionUsuario;
     bool bandera = true;
     while (bandera == true)
     {
-        Sistema::imprimirMenuAdministrador();
+        //Sistema::imprimirMenuJugador();
         std::cin >> opcionUsuario;
         std::cout << "\e[0m";
         std::cin.clear();
@@ -47,6 +47,7 @@ void Sistema::menuCaso1()
     }
 }
 
+// Iniciar sesión
 void Sistema::menuCaso2()
 {
     int opcionUsuario;
@@ -61,7 +62,6 @@ void Sistema::menuCaso2()
         InicioSesion(email, contrasenia, 2);
         while (bandera == true)
         {
-            Sistema::imprimirMenuDesarrollador();
             std::cin >> opcionUsuario;
             std::cout << "\e[0m";
             std::cin.clear();
@@ -103,12 +103,13 @@ void Sistema::menuCaso2()
     }
 }
 
+// Cargar datos de prueba
 void Sistema::menuCaso3()
 {
 
 }
 
-void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
+/*void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
 {
     IKey *k = new String(email);
     if(i == 1)
@@ -155,7 +156,7 @@ void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
             throw std::invalid_argument("\e[0;31mEl Usuario ingresado no es un Desarrollador.\e[0m");
         }
     }
-}
+}*/
 
 
 

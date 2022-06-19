@@ -1,17 +1,26 @@
 #ifndef CATEGORIA_H
 #define CATEGORIA_H
 
-class Categoria
+#include "./../../ICollection/interfaces/ICollection.h"
+#include "string"
+
+class Categoria : public ICollection
 {
 private:
+	std::string nombre;
+	std::string descripcion;
+	bool plataforma;
 
 public:
 	Categoria();
-	Categoria();
 
+	std::string Getnombre() { return nombre; }
+	void Setnombre(std::string val) { nombre = val; }
+	std::string Getdescripcion() { return descripcion; }
+	void Setdescripcion(std::string val) { descripcion = val; }
+	bool Getplataforma() { return plataforma; }
+	void Setplataforma(bool val) { plataforma = val; }
 
-	int get();
-	void set();
 	virtual ~Categoria();
 };
 

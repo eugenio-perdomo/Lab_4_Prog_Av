@@ -7,12 +7,12 @@ Transmision::Transmision(DtFecha fechaInicio)
     this->fechaInicio = fechaInicio;
 }
 
-Transmision::DtFecha getFechaInicio()
+DtFecha Transmision::getFechaInicio()
 {
     return this->fechaInicio;
 }
 
-Transmision::void setFechaInicio(DtFecha fechaInicio)
+void Transmision::setFechaInicio(DtFecha fechaInicio)
 {
     this->fechaInicio = fechaInicio;
 }
