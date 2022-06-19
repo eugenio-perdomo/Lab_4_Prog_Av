@@ -1,17 +1,21 @@
 #ifndef TRANSMISION_H
 #define TRANSMISION_H
 
+#include "DtFecha.h"
+
 class Transmision
 {
 private:
+	DtFecha fechaInicio;
 
 public:
 	Transmision();
-	Transmision();
+	Transmision(DtFecha fechaInicio);
 
 
-	int get();
-	void set();
+	DtFecha getFechaInicio();
+	void setFechaInicio(DtFecha fechaInicio);
+
 	virtual ~Transmision();
 };
 

@@ -6,14 +6,20 @@
 class Individual : public Partida
 {
 private:
+	bool esContinuacion;
+	std::string nickJugador;
 
 public:
 	Individual();
-	Individual();
+	Individual(bool esContinuacion,
+			   std::string nickJugador);
 
+	bool getEsContinuacion();
+	std::string getNickJugador();
+	
+	void setEsContinuacion();
+	void setNickJugador();
 
-	int get();
-	void set();
 	virtual ~Individual();
 };
 

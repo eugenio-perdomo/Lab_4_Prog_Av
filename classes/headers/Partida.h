@@ -1,17 +1,47 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
 
-class Partida
+#include <string>
+#include "ICollection.h"
+#include "DtFecha.h"
+
+class Partida : public ICollection
 {
 private:
+	std::string id;
+	std::string nombreVideojuego;
+	bool finalizado;
+	float duracionPartida; // En Minutos, el set va a ser un date.fin - date.inicio
+	DtFecha fechaInicio;
+	DtFecha fechaFin;
 
 public:
 	Partida();
-	Partida();
+	Partida(std::string id,
+			std::string nombreVideojuego,
+			bool finalizado,
+			float duracionPartida,
+			DtFecha fechaInicio,
+			DtFecha fechaFin);
 
+	std::string getId();
+	std::string getNombreVideojuego();
+	bool getFinalizado();
+	float getDuracionPartida();
+	DtFecha getFechaInicio();
+	DtFecha getFechaFin();
 
-	int get();
-	void set();
+	void setId(std::string id);
+	void setNombreVideojuego(std::string nombreVideojuego);
+	void setFinalizado(bool finalizado);
+	void setDuracionPartida(float duracionPartida);
+	void setFechaInicio(DtFecha fechaInicio);
+	void setFechaFin(DtFecha fechaFin);
+
+	/*TerminarPartida(id)
+	+ GetPartida(): DtIndividual, DtMultijugador
+	+ GetPartida() : DtIndividual()*/
+
 	virtual ~Partida();
 };
 

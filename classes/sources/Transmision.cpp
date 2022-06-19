@@ -2,14 +2,19 @@
 
 Transmision::Transmision() {}
 
-Transmision::Transmision(int _variable)
+Transmision::Transmision(DtFecha fechaInicio)
 {
-    this->variable = _variable;
+    this->fechaInicio = fechaInicio;
 }
 
-int Transmision::getVariable()
+Transmision::DtFecha getFechaInicio()
 {
-    return this->variable;
+    return this->fechaInicio;
+}
+
+Transmision::void setFechaInicio(DtFecha fechaInicio)
+{
+    this->fechaInicio = fechaInicio;
 }
 
 Transmision::~Transmision() {}
