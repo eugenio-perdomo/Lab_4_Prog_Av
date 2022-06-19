@@ -1,17 +1,22 @@
 #include "./../headers/Sistema.h"
-Sistema::Sistema() {
+Sistema::Sistema()
+{
     /*this->usuarios = new OrderedDictionary;
     this->fecha = new DtFecha(01, 01, 2022, 00, 00, 00);*/
 }
 
+void Sistema::imprimirTextoPrincipal(){}
+void Sistema::imprimirMenuDesarrollador(){}
+void Sistema::imprimirMenuJugador(){}
+
 // Alta de usuario
-void menuCaso1()
+void Sistema::menuCaso1()
 {
     int opcionUsuario;
     bool bandera = true;
     while (bandera == true)
     {
-        //Sistema::imprimirMenuJugador();
+        // Sistema::imprimirMenuJugador();
         std::cin >> opcionUsuario;
         std::cout << "\e[0m";
         std::cin.clear();
@@ -19,23 +24,23 @@ void menuCaso1()
         {
             switch (opcionUsuario)
             {
-                case 1:
-                {
-                    break;
-                }
-                case 2:
-                {
-                    break;
-                }
-                case 3:
-                {
-                    break;
-                }
-                case 4: //CASO SALIDA DE SISTEMA
-                {
-                    bandera = false;
-                    break;
-                }
+            case 1:
+            {
+                break;
+            }
+            case 2:
+            {
+                break;
+            }
+            case 3:
+            {
+                break;
+            }
+            case 4: // CASO SALIDA DE SISTEMA
+            {
+                bandera = false;
+                break;
+            }
             default:
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
             }
@@ -67,31 +72,31 @@ void Sistema::menuCaso2()
             std::cin.clear();
             switch (opcionUsuario)
             {
-                case 1:
-                {
-                    break;
-                }
-                case 2:
-                {
-                    break;
-                }
-                case 3:
-                {
-                    break;
-                }
-                case 4:
-                {
-                    break;
-                }
-                case 5:
-                {
-                    break;
-                }
-                case 6: //CASO SALIDA DE SISTEMA
-                {
-                    bandera = false;
-                    break;
-                }
+            case 1:
+            {
+                break;
+            }
+            case 2:
+            {
+                break;
+            }
+            case 3:
+            {
+                break;
+            }
+            case 4:
+            {
+                break;
+            }
+            case 5:
+            {
+                break;
+            }
+            case 6: // CASO SALIDA DE SISTEMA
+            {
+                bandera = false;
+                break;
+            }
             default:
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
             }
@@ -106,12 +111,11 @@ void Sistema::menuCaso2()
 // Cargar datos de prueba
 void Sistema::menuCaso3()
 {
-
 }
 
-/*void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
+void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
 {
-    IKey *k = new String(email);
+/*    IKey *k = new String(email);
     if(i == 1)
     {
         if(!this->usuarios->member(k))
@@ -156,8 +160,7 @@ void Sistema::menuCaso3()
             throw std::invalid_argument("\e[0;31mEl Usuario ingresado no es un Desarrollador.\e[0m");
         }
     }
-}*/
-
-
+*/
+}
 
 Sistema::~Sistema() {}
