@@ -22,7 +22,6 @@
 #include "./../../ICollection/String.h"
 
 #include "./../../datatypes/headers/DtFecha.h"
-#include "./Fabrica.h"
 #include "./Usuario.h"
 #include "./Desarrollador.h"
 #include "./Jugador.h"

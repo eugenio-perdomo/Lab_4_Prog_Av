@@ -15,10 +15,11 @@ void Sistema::menuCaso1()
     bool bandera = true;
     while (bandera == true)
     {
-        Sistema::imprimirTextoPrincipal();
+        //Sistema::imprimirTextoPrincipal();
         std::cin >> opcionUsuario;
         std::cout << "\e[0m";
         std::cin.clear();
+        std::cin.ignore(10000, '\n');
         try
         {
             switch (opcionUsuario)
@@ -41,6 +42,7 @@ void Sistema::menuCaso1()
                 break;
             }
             default:
+                std::cout.flush();
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
                 break;
             }
@@ -60,8 +62,12 @@ void Sistema::menuCaso2()
     bool bandera = true;
     std::cout << "\nIngrese email: ";
     std::cin >> email;
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
     std::cout << "\nIngrese contraseña: ";
     std::cin >> contrasenia;
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
     try
     {
         InicioSesion(email, contrasenia, 2);
@@ -70,6 +76,7 @@ void Sistema::menuCaso2()
             std::cin >> opcionUsuario;
             std::cout << "\e[0m";
             std::cin.clear();
+            std::cin.ignore(10000, '\n');
             switch (opcionUsuario)
             {
             case 1:
@@ -98,6 +105,7 @@ void Sistema::menuCaso2()
                 break;
             }
             default:
+                std::cout.flush();
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
             }
         }
@@ -214,6 +222,7 @@ void Sistema::imprimirMenuDesarrollador()
                 break;
             }
             default:
+                std::cout.flush();
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
                 break;
             }
@@ -235,6 +244,7 @@ void Sistema::imprimirMenuJugador()
         std::cin >> opcionUsuario;
         std::cout << "\e[0m";
         std::cin.clear();
+        std::cin.ignore(10000, '\n');
         try
         {
             switch (opcionUsuario)
@@ -273,6 +283,7 @@ void Sistema::imprimirMenuJugador()
                 break;
             }
             default:
+                std::cout.flush();
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
                 break;
             }

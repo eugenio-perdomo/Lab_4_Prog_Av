@@ -10,16 +10,19 @@ int main()
     bool bandera = true;
     while (bandera == true)
     {
+        
         s->imprimirTextoPrincipal();
         std::cin >> opcionUsuario;
         std::cout << "\e[0m";
         std::cin.clear();
+        cin.ignore(10000, '\n');
         try
         {
             switch (opcionUsuario)
             {
             case 1: // Alta de usuario
             {
+                std::cout << "Entra aca";
                 s->menuCaso1();
                 break;
             }
@@ -39,7 +42,8 @@ int main()
                 break;
             }
             default:
-                throw std::invalid_argument("\nLa opcion ingresada no es correcta.\n");
+                std::cout.flush();
+                throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
                 break;
             }
         }
