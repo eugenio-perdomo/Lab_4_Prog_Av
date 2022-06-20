@@ -8,6 +8,7 @@ private:
 	std::string nick;
 	std::string descripcion;
 	ICollection *suscripcion;
+	ICollection *partidas;
 
 public:
 	Jugador();

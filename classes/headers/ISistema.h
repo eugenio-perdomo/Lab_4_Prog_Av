@@ -22,7 +22,21 @@
 #include "./../../ICollection/String.h"
 
 #include "./../../datatypes/headers/DtFecha.h"
+#include "./Fabrica.h"
 #include "./Usuario.h"
+#include "./Desarrollador.h"
+#include "./Jugador.h"
+
+#include "./Partida.h"
+#include "./Multijugador.h"
+#include "./Individual.h"
+#include "./Transmision.h"
+#include "./Comentario.h"
+
+#include "./Videojuego.h"
+#include "./Estadistica.h"
+#include "./Categoria.h"
+#include "./Suscripcion.h"
 
 class ISistema
 {
@@ -34,6 +48,8 @@ public:
 	virtual void menuCaso2() = 0;
 	virtual void menuCaso3() = 0;
 	virtual void imprimirTextoPrincipal() = 0;
+	virtual void imprimirTextoDelDesarrollador() = 0;
+	virtual void imprimirTextoDelJugador() = 0;
 	virtual void imprimirMenuDesarrollador() = 0;
 	virtual void imprimirMenuJugador() = 0;
 	virtual void InicioSesion(std::string email, std::string contrasenia, int i) = 0;

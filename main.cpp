@@ -12,6 +12,7 @@ int main()
     {
         s->imprimirTextoPrincipal();
         std::cin >> opcionUsuario;
+        std::cout << "\e[0m";
         std::cin.clear();
         try
         {
@@ -39,6 +40,7 @@ int main()
             }
             default:
                 throw std::invalid_argument("\nLa opcion ingresada no es correcta.\n");
+                break;
             }
         }
         catch (std::invalid_argument &e)

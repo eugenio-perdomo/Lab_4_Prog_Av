@@ -1,13 +1,12 @@
 #include "./../headers/Sistema.h"
 Sistema::Sistema()
 {
-    /*this->usuarios = new OrderedDictionary;
-    this->fecha = new DtFecha(01, 01, 2022, 00, 00, 00);*/
+    this->videojuegos = new OrderedDictionary;
+    this->categorias = new OrderedDictionary;
+    this->jugadores = new OrderedDictionary;
+    this->desarrolladores = new OrderedDictionary;
+    this->fechaDelSistema = new DtFecha(03, 07, 2022, 00, 30, 10);
 }
-
-void Sistema::imprimirTextoPrincipal(){}
-void Sistema::imprimirMenuDesarrollador(){}
-void Sistema::imprimirMenuJugador(){}
 
 // Alta de usuario
 void Sistema::menuCaso1()
@@ -16,7 +15,7 @@ void Sistema::menuCaso1()
     bool bandera = true;
     while (bandera == true)
     {
-        // Sistema::imprimirMenuJugador();
+        Sistema::imprimirTextoPrincipal();
         std::cin >> opcionUsuario;
         std::cout << "\e[0m";
         std::cin.clear();
@@ -43,6 +42,7 @@ void Sistema::menuCaso1()
             }
             default:
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
+                break;
             }
         }
         catch (std::invalid_argument &e)
@@ -111,56 +111,212 @@ void Sistema::menuCaso2()
 // Cargar datos de prueba
 void Sistema::menuCaso3()
 {
+    
 }
 
 void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
 {
-/*    IKey *k = new String(email);
-    if(i == 1)
-    {
-        if(!this->usuarios->member(k))
+    /*    IKey *k = new String(email);
+        if(i == 1)
         {
-            throw std::invalid_argument("\e[0;31mEl email ingresado no es correcto.\e[0m");
-        }
-        Usuario * u = (Usuario *)this->usuarios->find(k);
-        if (dynamic_cast<Jugador *>(u))
-        {
-            Jugador *j = new Jugador;
-            j = dynamic_cast<Jugador *>(u);
-            if(j->getContrasenia().compare(contrasenia) != 0)
+            if(!this->usuarios->member(k))
             {
-                throw std::invalid_argument("\e[0;31mLa contraseña ingresada no es correcta.\e[0m");
+                throw std::invalid_argument("\e[0;31mEl email ingresado no es correcto.\e[0m");
             }
-            this->actual = j;
+            Usuario * u = (Usuario *)this->usuarios->find(k);
+            if (dynamic_cast<Jugador *>(u))
+            {
+                Jugador *j = new Jugador;
+                j = dynamic_cast<Jugador *>(u);
+                if(j->getContrasenia().compare(contrasenia) != 0)
+                {
+                    throw std::invalid_argument("\e[0;31mLa contraseña ingresada no es correcta.\e[0m");
+                }
+                this->actual = j;
+            }
+            else
+            {
+                throw std::invalid_argument("\e[0;31mEl Usuario ingresado no es un Jugador.\e[0m");
+            }
         }
-        else
+        if(i == 2)
         {
-            throw std::invalid_argument("\e[0;31mEl Usuario ingresado no es un Jugador.\e[0m");
+            if(!this->usuarios->member(k))
+            {
+                throw std::invalid_argument("\e[0;31mEl email ingresado no es correcto.\e[0m");
+            }
+            Usuario * u = (Usuario *)this->usuarios->find(k);
+            if (dynamic_cast<Desarrollador *>(u))
+            {
+                Desarrollador *d = new Desarrollador;
+                d = dynamic_cast<Desarrollador *>(u);
+                if(d->getContrasenia().compare(contrasenia) != 0)
+                {
+                    throw std::invalid_argument("\e[0;31mLa contraseña ingresada no es correcta.\e[0m");
+                }
+                this->actual = d;
+            }
+            else
+            {
+                throw std::invalid_argument("\e[0;31mEl Usuario ingresado no es un Desarrollador.\e[0m");
+            }
+        }
+    */
+}
+
+
+
+void Sistema::imprimirMenuDesarrollador()
+{
+    int opcionUsuario;
+    bool bandera = true;
+    while (bandera == true)
+    {
+        Sistema::imprimirTextoDelDesarrollador();
+        std::cin >> opcionUsuario;
+        std::cout << "\e[0m";
+        std::cin.clear();
+        try
+        {
+            switch (opcionUsuario)
+            {
+            case 1: // Agregar categoría
+            {
+                break;
+            }
+            case 2: // Publicar videojuego
+            {
+                break;
+            }
+            case 3: // Eliminar videojuego
+            {
+                break;
+            }
+            case 4: // Seleccionar estadísticas
+            {
+                break;
+            }
+            case 5: // Consultar estadísticas
+            {
+                break;
+            }
+            case 6: // Ver información de videojuego
+            {
+                break;
+            }
+            case 7: // Modificar fecha del sistema
+            {
+                break;
+            }
+            case 8: // CASO SALIDA DE SISTEMA
+            {
+                bandera = false;
+                break;
+            }
+            default:
+                throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
+                break;
+            }
+        }
+        catch (std::invalid_argument &e)
+        {
+            std::cerr << e.what() << std::endl;
         }
     }
-    if(i == 2)
+}
+
+void Sistema::imprimirMenuJugador()
+{
+    int opcionUsuario;
+    bool bandera = true;
+    while (bandera == true)
     {
-        if(!this->usuarios->member(k))
+        Sistema::imprimirTextoDelJugador();
+        std::cin >> opcionUsuario;
+        std::cout << "\e[0m";
+        std::cin.clear();
+        try
         {
-            throw std::invalid_argument("\e[0;31mEl email ingresado no es correcto.\e[0m");
-        }
-        Usuario * u = (Usuario *)this->usuarios->find(k);
-        if (dynamic_cast<Desarrollador *>(u))
-        {
-            Desarrollador *d = new Desarrollador;
-            d = dynamic_cast<Desarrollador *>(u);
-            if(d->getContrasenia().compare(contrasenia) != 0)
+            switch (opcionUsuario)
             {
-                throw std::invalid_argument("\e[0;31mLa contraseña ingresada no es correcta.\e[0m");
+            case 1: // Suscribirse a videojuego
+            {
+                break;
             }
-            this->actual = d;
+            case 2: // Asignar puntaje a videojuego
+            {
+                break;
+            }
+            case 3: // Iniciar partida
+            {
+                break;
+            }
+            case 4: // Abandonar partida multijugador
+            {
+                break;
+            }
+            case 5: // Finalizar partida
+            {
+                break;
+            }
+            case 6: // Ver información de videojuego
+            {
+                break;
+            }
+            case 7: // Modificar fecha del sistema
+            {
+                break;
+            }
+            case 8: // CASO SALIDA DE SISTEMA
+            {
+                bandera = false;
+                break;
+            }
+            default:
+                throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
+                break;
+            }
         }
-        else
+        catch (std::invalid_argument &e)
         {
-            throw std::invalid_argument("\e[0;31mEl Usuario ingresado no es un Desarrollador.\e[0m");
+            std::cerr << e.what() << std::endl;
         }
     }
-*/
+}
+
+void Sistema::imprimirTextoPrincipal()
+{
+    std::cout << "\e[0;92mBienvenido - Elija una opción\e[0m:";
+    std::cout << "\n\e[0;92m1)\e[0m Alta de usuario.\n";
+    std::cout << "\e[0;92m2)\e[0m Iniciar sesión.\n";
+    std::cout << "\e[0;92m3)\e[0m Cargar datos de prueba.\n";
+    std::cout << "Pulse \e[0;92m4\e[0m para salir.\n\nOpcion: \e[0;92m";
+}
+
+void Sistema::imprimirTextoDelDesarrollador()
+{
+    std::cout << "\e[0;92mMenú de Desarrollador - Elija una opción\e[0m:";
+    std::cout << "\n\e[0;92m1)\e[0m Agregar categoría.\n";
+    std::cout << "\e[0;92m2)\e[0m Publicar videojuego.\n";
+    std::cout << "\e[0;92m3)\e[0m Eliminar videojuego.\n";
+    std::cout << "\e[0;92m4)\e[0m Seleccionar estadísticas.\n";
+    std::cout << "\e[0;92m5)\e[0m Consultar estadísticas.\n";
+    std::cout << "\e[0;92m6)\e[0m Ver información de videojuego.\n";
+    std::cout << "\e[0;92m7)\e[0m Modificar fecha del sistema.\n";
+    std::cout << "Pulse \e[0;92m8\e[0m para salir.\n\nOpcion: \e[0;92m";
+}
+
+void Sistema::imprimirTextoDelJugador()
+{
+    std::cout << "\e[0;92mMenú de Jugador - Elija una opción\e[0m:";
+    std::cout << "\n\e[0;92m1)\e[0m Suscribirse a videojuego.\n";
+    std::cout << "\e[0;92m2)\e[0m Asignar puntaje a videojuego.\n";
+    std::cout << "\e[0;92m3)\e[0m Iniciar partida.\n";
+    std::cout << "\e[0;92m4)\e[0m Abandonar partida multijugador.\n";
+    std::cout << "\e[0;92m5)\e[0m Finalizar partida.\n";
+    std::cout << "\e[0;92m6)\e[0m Ver información de videojuego.\n";
+    std::cout << "\e[0;92m7)\e[0m Modificar fecha del sistema.\n";
+    std::cout << "Pulse \e[0;92m8\e[0m para salir.\n\nOpcion: \e[0;92m";
 }
 
 Sistema::~Sistema() {}
