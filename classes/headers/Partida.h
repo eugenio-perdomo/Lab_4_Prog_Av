@@ -8,7 +8,7 @@
 
 class Partida : public ICollection
 {
-private:
+protected:
 	std::string id;
 	std::string nombreVideojuego;
 	bool finalizado;

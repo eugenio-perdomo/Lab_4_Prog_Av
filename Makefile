@@ -1,13 +1,13 @@
 OBJETOS = Categoria.o Comentario.o Desarrollador.o Estadistica.o Individual.o \
 Usuario.o Jugador.o Multijugador.o Suscripcion.o Transmision.o Partida.o Sistema.o Videojuego.o ISistema.o \
 DtFecha.o main.o List.o ListIterator.o ListNode.o OrderedDictionary.o OrderedKey.o OrderedDictionaryEntry.o \
-ICollectible.o ICollection.o IDictionary.o IIterator.o IKey.o Integer.o String.o
+ICollectible.o ICollection.o IDictionary.o IIterator.o IKey.o Integer.o String.o StringKey.o
 
 DEF = ./ICollection/interfaces/ICollectible.h ./ICollection/interfaces/IKey.h ./ICollection/interfaces/IIterator.h \
 ./ICollection/interfaces/ICollection.h ./ICollection/interfaces/IDictionary.h ./ICollection/interfaces/OrderedKey.h \
 ./ICollection/collections/OrderedDictionaryEntry.h ./ICollection/collections/ListNode.h \
 ./ICollection/collections/List.h ./ICollection/collections/ListIterator.h ./ICollection/collections/OrderedDictionary.h \
-./ICollection/Integer.h ./ICollection/String.h ./classes/headers/Tipo.h ./datatypes/headers/DtFecha.h \
+./ICollection/Integer.h ./ICollection/String.h ./ICollection/StringKey.h ./classes/headers/Tipo.h ./datatypes/headers/DtFecha.h \
 ./classes/headers/Usuario.h ./classes/headers/Categoria.h ./classes/headers/Desarrollador.h \
 ./classes/headers/Estadistica.h ./classes/headers/Individual.h \
 ./classes/headers/Jugador.h ./classes/headers/Transmision.h ./classes/headers/Videojuego.h \
@@ -109,6 +109,9 @@ Integer.o: ./ICollection/Integer.h ./ICollection/Integer.cpp
 
 String.o: ./ICollection/String.h ./ICollection/String.cpp
 	$(CC) $(OPCIONES) ./ICollection/String.cpp
+
+StringKey.o: ./ICollection/StringKey.h ./ICollection/StringKey.cpp
+	$(CC) $(OPCIONES) ./ICollection/StringKey.cpp
 
 clean:
 	rm -rf *o Laboratorio_4

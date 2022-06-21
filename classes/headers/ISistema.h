@@ -20,6 +20,7 @@
 
 #include "./../../ICollection/Integer.h"
 #include "./../../ICollection/String.h"
+#include "./../../ICollection/StringKey.h"
 
 #include "./../../datatypes/headers/DtFecha.h"
 #include "./Usuario.h"
@@ -40,10 +41,8 @@
 class ISistema
 {
 private:
-
 public:
-
-    virtual void menuCaso1() = 0;
+	virtual void menuCaso1() = 0;
 	virtual void menuCaso2() = 0;
 	virtual void menuCaso3() = 0;
 	virtual void imprimirTextoPrincipal() = 0;
@@ -53,16 +52,14 @@ public:
 	virtual void imprimirMenuJugador() = 0;
 	virtual void InicioSesion(std::string email, std::string contrasenia, int i) = 0;
 
-    //CASO DE USO 1: ALTA USUARIO
-	void agregarJugador(string email, string contrasenia, string nick, string desc)=0;
-    void agregarDesarrollador(string email, string contrasenia, string empresa)=0;
+	// CASO DE USO 1: ALTA USUARIO
+	virtual void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc) = 0;
+	virtual void agregarDesarrollador(std::string email, std::string contrasenia, std::string empresa) = 0;
 
-    //CASO DE USO 2: INICIAR SESION
-    int iniciarSesion(string email, string contrasenia)=0;
-    jugador* obtenerJugadorActual(string email)=0;
-    desarrollador* obtenerDesarrolladorActual(string email)=0;
-
-
+	// CASO DE USO 2: INICIAR SESION
+	virtual int iniciarSesion(std::string email, std::string contrasenia) = 0;
+	virtual Jugador *obtenerJugadorActual(std::string email) = 0;
+	virtual Desarrollador *obtenerDesarrolladorActual(std::string email) = 0;
 
 	virtual ~ISistema();
 };

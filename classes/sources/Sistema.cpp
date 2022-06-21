@@ -8,7 +8,6 @@ Sistema::Sistema()
     this->fechaDelSistema = new DtFecha(03, 07, 2022, 00, 30, 10);
 }
 
-
 // Alta de usuario
 void Sistema::menuCaso1()
 {
@@ -16,7 +15,7 @@ void Sistema::menuCaso1()
     bool bandera = true;
     while (bandera == true)
     {
-        //Sistema::imprimirTextoPrincipal();
+        // Sistema::imprimirTextoPrincipal();
         std::cin >> opcionUsuario;
         std::cout << "\e[0m";
         std::cin.clear();
@@ -55,16 +54,18 @@ void Sistema::menuCaso1()
     }
 }
 
-void Sistema::agregarJugador(string email, string contrasenia, string nick, string desc){
-    StringKey* key=new StringKey(email);
-    jugador* jug= new jugador(email, contrasenia, nick, desc);
+void Sistema::agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc)
+{
+    StringKey *key = new StringKey(email);
+    Jugador *jug = new Jugador(email, contrasenia, nick, desc);
     jugadores->add(key, jug);
 }
 
-void Sistema::agregarDesarrollador(string email, string contrasenia, string empresa){
-    StringKey* key=new StringKey(email);
-    desarrollador* des=new desarrollador(email, contrasenia, empresa);
-    desarrolladores->add(key,des);
+void Sistema::agregarDesarrollador(std::string email, std::string contrasenia, std::string empresa)
+{
+    StringKey *key = new StringKey(email);
+    Desarrollador *des = new Desarrollador(email, contrasenia, empresa);
+    desarrolladores->add(key, des);
 }
 
 // Iniciar sesión
@@ -129,45 +130,54 @@ void Sistema::menuCaso2()
     }
 }
 
-int Sistema::iniciarSesion(string email, string contrasenia){
-    StringKey* key=new StringKey(email);
-    //int validador=0;
+int Sistema::iniciarSesion(string email, string contrasenia)
+{
+    StringKey *key = new StringKey(email);
+    // int validador=0;
 
-    //Verifica si ese email pertenece a un jugador o a un desarrollador
-    bool validarJugador= jugadores->member(key);
-    bool validarDesarrollador= desarrolladores->member(key);
+    // Verifica si ese email pertenece a un jugador o a un desarrollador
+    bool validarJugador = jugadores->member(key);
+    bool validarDesarrollador = desarrolladores->member(key);
 
-    if (validarJugador==true){
-        jugador* auxJugador=dynamic_cast<jugador*>(jugadores->find(key));
-
-        if (contrasenia==auxJugador->Getcontrasenia()){ return 1; }
+    if (validarJugador == true)
+    {
+        Jugador *auxJugador = dynamic_cast<Jugador *>(jugadores->find(key));
+        // Es usuario el que tiene contrasenia. Jugador debe tener constructor de todo entonces
+        if (contrasenia == auxJugador->getContrasenia())
+        {
+            return 1;
+        }
     }
 
-    if (validarDesarrollador==true){
-        desarrollador* auxDesarrollador=dynamic_cast<desarrollador*>(desarrolladores->find(key));
-        if (contrasenia==auxDesarrollador->Getcontrasenia()){ return 2; }
+    if (validarDesarrollador == true)
+    {
+        Desarrollador *auxDesarrollador = dynamic_cast<Desarrollador *>(desarrolladores->find(key));
+        if (contrasenia == auxDesarrollador->getContrasenia())
+        {
+            return 2;
+        }
     }
 
     return 0;
-
 }
 
-jugador* Sistema::obtenerJugadorActual(string email){
-    StringKey* key=new StringKey(email);
-    jugador* auxJugador=dynamic_cast<jugador*>(jugadores->find(key));
+Jugador *Sistema::obtenerJugadorActual(string email)
+{
+    StringKey *key = new StringKey(email);
+    Jugador *auxJugador = dynamic_cast<Jugador *>(jugadores->find(key));
     return auxJugador;
 }
 
-desarrollador* Sistema::obtenerDesarrolladorActual(string email){
-    StringKey* key=new StringKey(email);
-    desarrollador* auxDesarrollador=dynamic_cast<desarrollador*>(desarrolladores->find(key));
+Desarrollador *Sistema::obtenerDesarrolladorActual(string email)
+{
+    StringKey *key = new StringKey(email);
+    Desarrollador *auxDesarrollador = dynamic_cast<Desarrollador *>(desarrolladores->find(key));
     return auxDesarrollador;
 }
 
 // Cargar datos de prueba
 void Sistema::menuCaso3()
 {
-    
 }
 
 void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
@@ -219,8 +229,6 @@ void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
         }
     */
 }
-
-
 
 void Sistema::imprimirMenuDesarrollador()
 {

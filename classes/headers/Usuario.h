@@ -3,6 +3,8 @@
 
 #include <string>
 #include "./../../ICollection/interfaces/ICollection.h"
+#include "./../../ICollection/interfaces/IDictionary.h"
+#include "./../../ICollection/collections/OrderedDictionary.h"
 
 class Usuario : public ICollectible
 {
