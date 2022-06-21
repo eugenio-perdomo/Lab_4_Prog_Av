@@ -7,7 +7,7 @@ class Jugador : public Usuario
 private:
 	std::string nick;
 	std::string descripcion;
-	ICollection *suscripcion;
+	IDictionary *suscripcion;
 	ICollection *partidas;
 
 public:

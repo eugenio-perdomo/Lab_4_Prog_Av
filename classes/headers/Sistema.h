@@ -25,6 +25,16 @@ public:
 	void imprimirMenuDesarrollador();
 	void imprimirMenuJugador();
 	void InicioSesion(std::string email, std::string contrasenia, int i);
+
+    //CASO DE USO 1: ALTA USUARIO
+	void agregarJugador(string email, string contrasenia, string nick, string desc);
+    void agregarDesarrollador(string email, string contrasenia, string empresa);
+
+    //CASO DE USO 2: INICIAR SESION
+    int iniciarSesion(string email, string contrasenia);
+    jugador* obtenerJugadorActual(string email);
+    desarrollador* obtenerDesarrolladorActual(string email);
+
 	virtual ~Sistema();
 };
 

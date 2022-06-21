@@ -8,6 +8,7 @@ Sistema::Sistema()
     this->fechaDelSistema = new DtFecha(03, 07, 2022, 00, 30, 10);
 }
 
+
 // Alta de usuario
 void Sistema::menuCaso1()
 {
@@ -52,6 +53,18 @@ void Sistema::menuCaso1()
             std::cerr << e.what() << std::endl;
         }
     }
+}
+
+void Sistema::agregarJugador(string email, string contrasenia, string nick, string desc){
+    StringKey* key=new StringKey(email);
+    jugador* jug= new jugador(email, contrasenia, nick, desc);
+    jugadores->add(key, jug);
+}
+
+void Sistema::agregarDesarrollador(string email, string contrasenia, string empresa){
+    StringKey* key=new StringKey(email);
+    desarrollador* des=new desarrollador(email, contrasenia, empresa);
+    desarrolladores->add(key,des);
 }
 
 // Iniciar sesión
@@ -114,6 +127,41 @@ void Sistema::menuCaso2()
     {
         std::cerr << e.what() << std::endl;
     }
+}
+
+int Sistema::iniciarSesion(string email, string contrasenia){
+    StringKey* key=new StringKey(email);
+    //int validador=0;
+
+    //Verifica si ese email pertenece a un jugador o a un desarrollador
+    bool validarJugador= jugadores->member(key);
+    bool validarDesarrollador= desarrolladores->member(key);
+
+    if (validarJugador==true){
+        jugador* auxJugador=dynamic_cast<jugador*>(jugadores->find(key));
+
+        if (contrasenia==auxJugador->Getcontrasenia()){ return 1; }
+    }
+
+    if (validarDesarrollador==true){
+        desarrollador* auxDesarrollador=dynamic_cast<desarrollador*>(desarrolladores->find(key));
+        if (contrasenia==auxDesarrollador->Getcontrasenia()){ return 2; }
+    }
+
+    return 0;
+
+}
+
+jugador* Sistema::obtenerJugadorActual(string email){
+    StringKey* key=new StringKey(email);
+    jugador* auxJugador=dynamic_cast<jugador*>(jugadores->find(key));
+    return auxJugador;
+}
+
+desarrollador* Sistema::obtenerDesarrolladorActual(string email){
+    StringKey* key=new StringKey(email);
+    desarrollador* auxDesarrollador=dynamic_cast<desarrollador*>(desarrolladores->find(key));
+    return auxDesarrollador;
 }
 
 // Cargar datos de prueba

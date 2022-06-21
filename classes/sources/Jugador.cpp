@@ -1,5 +1,7 @@
 #include "./../headers/Jugador.h"
 
-Jugador::Jugador() {}
+Jugador::Jugador() {
+    suscripcion=new OrderedDictionary();
+}
 
 Jugador::~Jugador() {}
