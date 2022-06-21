@@ -19,6 +19,12 @@ private:
 
 public:
 	Suscripcion();
+	Suscripcion(float costo,
+	DtFecha fechaInicio,
+	enum MetodoPago metodo,
+	enum Valor tipo,
+	bool cancelada,
+	Videojuego *juego);
 
 	float Getcosto() { return costo; }
 	void Setcosto(float val) { costo = val; }

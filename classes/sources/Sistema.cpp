@@ -11,48 +11,53 @@ Sistema::Sistema()
 // Alta de usuario
 void Sistema::menuCaso1()
 {
+    Sistema *s = new Sistema();
     int opcionUsuario;
     bool bandera = true;
     while (bandera == true)
     {
-        // Sistema::imprimirTextoPrincipal();
-        std::cin >> opcionUsuario;
-        std::cout << "\e[0m";
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
-        try
-        {
-            switch (opcionUsuario)
+        string email, contrasenia;
+            std::cout << "Ingresar email: ";
+            std::cin.ignore();
+            getline(std::cin, email);
+            std::cout << "Ingresar contrasenia: ";
+            std::cin.ignore();
+            getline(std::cin, contrasenia);
+
+            int tipo;
+
+            std::cout << "Indicar tipo (1-jugador 2-desarrollador)" << std::endl;
+            std::cin >> tipo;
+
+            if (tipo == 1)
             {
-            case 1:
+                // AGREGAR JUGADOR
+                string nick;
+                std::cout << "Ingresar nick: ";
+                std::cin.ignore();
+                getline(std::cin, nick);
+
+                string descripcion;
+                std::cout << "Ingresar descripcion: ";
+                std::cin.ignore();
+                getline(std::cin, descripcion);
+                s->agregarJugador(email, contrasenia, nick, descripcion);
+            }
+            else
             {
-                break;
+                // AGREGAR DESARROLLADOR
+                std::cout << "Ingresar empresa: ";
+                string empresa;
+                std::cin.ignore();
+                getline(std::cin, empresa);
+                s->agregarDesarrollador(email, contrasenia, empresa);
             }
-            case 2:
-            {
-                break;
-            }
-            case 3:
-            {
-                break;
-            }
-            case 4: // CASO SALIDA DE SISTEMA
-            {
-                bandera = false;
-                break;
-            }
-            default:
-                std::cout.flush();
-                throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
-                break;
-            }
-        }
-        catch (std::invalid_argument &e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-    }
+
+            break;
+        } 
 }
+
+
 
 void Sistema::agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc)
 {
@@ -71,9 +76,10 @@ void Sistema::agregarDesarrollador(std::string email, std::string contrasenia, s
 // Iniciar sesión
 void Sistema::menuCaso2()
 {
-    int opcionUsuario;
+    Sistema *s = new Sistema();
     std::string email, contrasenia;
     bool bandera = true;
+    int salir = 1;
     std::cout << "\nIngrese email: ";
     std::cin >> email;
     std::cin.clear();
@@ -84,40 +90,42 @@ void Sistema::menuCaso2()
     std::cin.ignore(10000, '\n');
     try
     {
-        InicioSesion(email, contrasenia, 2);
+        int opcionUsuario = iniciarSesion(email, contrasenia);
+        InicioSesion(email, contrasenia, opcionUsuario);
         while (bandera == true)
         {
-            std::cin >> opcionUsuario;
-            std::cout << "\e[0m";
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            switch (opcionUsuario)
+            
+            switch (opcionUsuario && salir !=0)
             {
+                case 0:
+                {
+                    std::cout << "Los datos de acceso son incorrectos" << std::endl;
+                    int op;
+                    std::cout << "Desea cancelar el inicio de sesion?" << std::endl;
+                    std::cout << "1- Si" << std::endl;
+                    std::cout << "2- No" << std::endl;
+                    std::cin >> op;
+
+                    if (op == 1)
+                    {
+                        salir = 0;
+                        bandera = false;
+                    }
+                    break;
+                }
             case 1:
             {
-                break;
+                std::cout << "Sesion iniciada como Jugador" << std::endl;
+                usuarioActual = s->obtenerJugadorActual(email);
+                imprimirMenuJugador();
             }
             case 2:
             {
-                break;
+                std::cout << "Sesion iniciada como Desarrollador" << std::endl;
+                usuarioActual = s->obtenerDesarrolladorActual(email);
+                imprimirMenuDesarrollador();
             }
-            case 3:
-            {
-                break;
-            }
-            case 4:
-            {
-                break;
-            }
-            case 5:
-            {
-                break;
-            }
-            case 6: // CASO SALIDA DE SISTEMA
-            {
-                bandera = false;
-                break;
-            }
+            
             default:
                 std::cout.flush();
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
@@ -244,35 +252,16 @@ void Sistema::imprimirMenuDesarrollador()
         {
             switch (opcionUsuario)
             {
-            case 1: // Agregar categoría
+            case 1: //Publicar Videojuego
             {
                 break;
             }
-            case 2: // Publicar videojuego
+            case 2: //Eliminar Videojuego
             {
                 break;
             }
-            case 3: // Eliminar videojuego
-            {
-                break;
-            }
-            case 4: // Seleccionar estadísticas
-            {
-                break;
-            }
-            case 5: // Consultar estadísticas
-            {
-                break;
-            }
-            case 6: // Ver información de videojuego
-            {
-                break;
-            }
-            case 7: // Modificar fecha del sistema
-            {
-                break;
-            }
-            case 8: // CASO SALIDA DE SISTEMA
+            
+            case 3: // CASO SALIDA DE SISTEMA
             {
                 bandera = false;
                 break;
@@ -309,31 +298,20 @@ void Sistema::imprimirMenuJugador()
             {
                 break;
             }
-            case 2: // Asignar puntaje a videojuego
+            case 2: // Iniciar partida
             {
                 break;
             }
-            case 3: // Iniciar partida
+            case 3: // Finalizar partida
             {
                 break;
             }
-            case 4: // Abandonar partida multijugador
+            case 4: // Ver información de videojuego
             {
                 break;
             }
-            case 5: // Finalizar partida
-            {
-                break;
-            }
-            case 6: // Ver información de videojuego
-            {
-                break;
-            }
-            case 7: // Modificar fecha del sistema
-            {
-                break;
-            }
-            case 8: // CASO SALIDA DE SISTEMA
+        
+            case 5: // CASO SALIDA DE SISTEMA
             {
                 bandera = false;
                 break;
@@ -363,27 +341,19 @@ void Sistema::imprimirTextoPrincipal()
 void Sistema::imprimirTextoDelDesarrollador()
 {
     std::cout << "\e[0;92mMenú de Desarrollador - Elija una opción\e[0m:";
-    std::cout << "\n\e[0;92m1)\e[0m Agregar categoría.\n";
-    std::cout << "\e[0;92m2)\e[0m Publicar videojuego.\n";
-    std::cout << "\e[0;92m3)\e[0m Eliminar videojuego.\n";
-    std::cout << "\e[0;92m4)\e[0m Seleccionar estadísticas.\n";
-    std::cout << "\e[0;92m5)\e[0m Consultar estadísticas.\n";
-    std::cout << "\e[0;92m6)\e[0m Ver información de videojuego.\n";
-    std::cout << "\e[0;92m7)\e[0m Modificar fecha del sistema.\n";
-    std::cout << "Pulse \e[0;92m8\e[0m para salir.\n\nOpcion: \e[0;92m";
+    std::cout << "\e[0;92m2)\e[0m 1: Publicar videojuego.\n";
+    std::cout << "\e[0;92m3)\e[0m 2: Eliminar videojuego.\n";
+    std::cout << "Pulse \e[0;92m8\e[0m 3: Para salir.\n\nOpcion: \e[0;92m";
 }
 
 void Sistema::imprimirTextoDelJugador()
 {
     std::cout << "\e[0;92mMenú de Jugador - Elija una opción\e[0m:";
-    std::cout << "\n\e[0;92m1)\e[0m Suscribirse a videojuego.\n";
-    std::cout << "\e[0;92m2)\e[0m Asignar puntaje a videojuego.\n";
-    std::cout << "\e[0;92m3)\e[0m Iniciar partida.\n";
-    std::cout << "\e[0;92m4)\e[0m Abandonar partida multijugador.\n";
-    std::cout << "\e[0;92m5)\e[0m Finalizar partida.\n";
-    std::cout << "\e[0;92m6)\e[0m Ver información de videojuego.\n";
-    std::cout << "\e[0;92m7)\e[0m Modificar fecha del sistema.\n";
-    std::cout << "Pulse \e[0;92m8\e[0m para salir.\n\nOpcion: \e[0;92m";
+    std::cout << "\n\e[0;92m1)\e[0m 1: Suscribirse a videojuego.\n";
+    std::cout << "\e[0;92m3)\e[0m 2: Iniciar partida.\n";
+    std::cout << "\e[0;92m5)\e[0m 3: Finalizar partida.\n";
+    std::cout << "\e[0;92m6)\e[0m 4: Ver información de videojuego.\n";
+    std::cout << "Pulse \e[0;92m8\e[0m 5: para salir.\n\nOpcion: \e[0;92m";
 }
 
 Sistema::~Sistema() {}

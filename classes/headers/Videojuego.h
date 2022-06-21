@@ -5,6 +5,7 @@
 #include "Estadistica.h"
 #include "Categoria.h"
 #include "./../../ICollection/interfaces/ICollection.h"
+#include "./../../ICollection/collections/List.h"
 
 class Videojuego
 {
@@ -21,7 +22,8 @@ private:
 
 public:
 	Videojuego();
-
+	Videojuego(std::string nombre,std::string descripcion,float costoVitalicia,float costoMensual,float costoTrimestral,
+float costoAnual,Estadistica *est);
 	std::string Getnombre() { return nombre; }
 	void Setnombre(std::string val) { nombre = val; }
 	std::string Getdescripcion() { return descripcion; }

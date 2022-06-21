@@ -11,6 +11,7 @@ private:
 	IDictionary *desarrolladores;
 	DtFecha *fechaDelSistema;
 	Usuario *usuarioActual;
+	
 
 public:
 	Sistema();
