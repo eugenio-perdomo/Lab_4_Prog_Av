@@ -18,6 +18,9 @@ public:
 	void menuCaso1(); // Alta de usuario
 	void menuCaso2(); // Iniciar sesión
 	void menuCaso3(); // Cargar datos de prueba
+
+	void menuCaso4(); //Publicar videojuego
+	
 	void imprimirTextoPrincipal();
 	void imprimirTextoDelDesarrollador();
 	void imprimirTextoDelJugador();
@@ -33,6 +36,10 @@ public:
 	int iniciarSesion(std::string email, std::string contrasenia);
 	Jugador *obtenerJugadorActual(std::string email);
 	Desarrollador *obtenerDesarrolladorActual(std::string email);
+
+	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
+	void mostrarCategorias();
+	Categoria* obtenerCategoria(std::string categoria);
 
 	virtual ~Sistema();
 };

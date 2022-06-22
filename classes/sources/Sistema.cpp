@@ -238,6 +238,89 @@ void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
     */
 }
 
+//Publicar videojuego
+void menuCaso4(){
+    Sistema *s = new Sistema();
+
+    std::string nom, desc;
+    float cMensual, cTristral, cAnual;
+
+    std::cout << "\nIngrese nombre: ";
+    std::cin >> nom;
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+    std::cout << "\nIngrese descripcion: ";
+    std::cin >> desc;
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+
+    std::cout << "\nIngrese costo menusal: ";
+    std::cin >> cMensual;
+    std::cout << "\nIngrese costo trimestral: ";
+    std::cin >> cTristral;
+    std::cout << "\nIngrese costo anual: ";
+    std::cin >> cAnual;
+
+    bool deseaAgregar=true;
+    int op2 = 1;
+    List* aux_categorias = new List();
+
+    while(deseaAgregar==true){
+
+        s->mostrarCategorias(); //Sin implementar
+
+        std::string cat;
+        std::cout << "\nSeleccione una categoria: ";
+        std::cin >> cat;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        Categoria* aux = s->obtenerCategoria(cat);
+        
+        if (aux_categorias->member(aux)){
+            //La categoria ya habia sido agregada a la lista auxiliar anteriormente
+            std::cout << "\nEsa categoria ya fue seleccionada anteriormente";
+        } else {
+            aux_categorias->add(aux);
+        }  
+
+        std::cout << "\nDesea asignar otra categoria?";
+        std::cout << "1- Si";
+        std::cout << "2- No";
+        std::cin >> op2;
+
+        if (op2==1){
+            deseaAgregar=false;
+        }
+    
+    } 
+
+    //MOSTRAR LOS DATOS:
+
+    //CONFIRMAR:
+
+} 
+
+
+void Sistema::mostrarCategorias(){
+
+}
+
+Categoria* Sistema::obtenerCategoria(std::string categoria){
+    StringKey* key = new StringKey(categoria);
+    Categoria* aux = dynamic_cast<Categoria*>(categorias->find(key));
+    return aux;
+}
+
+
+
+
+
+
+
+
+
+
+
 void Sistema::imprimirMenuDesarrollador()
 {
     int opcionUsuario;

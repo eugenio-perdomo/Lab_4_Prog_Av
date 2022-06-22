@@ -45,6 +45,8 @@ public:
 	virtual void menuCaso1() = 0;
 	virtual void menuCaso2() = 0;
 	virtual void menuCaso3() = 0;
+	virtual void menuCaso4() = 0;
+
 	virtual void imprimirTextoPrincipal() = 0;
 	virtual void imprimirTextoDelDesarrollador() = 0;
 	virtual void imprimirTextoDelJugador() = 0;
@@ -60,6 +62,10 @@ public:
 	virtual int iniciarSesion(std::string email, std::string contrasenia) = 0;
 	virtual Jugador *obtenerJugadorActual(std::string email) = 0;
 	virtual Desarrollador *obtenerDesarrolladorActual(std::string email) = 0;
+
+	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
+	virtual void mostrarCategorias() = 0;
+	virtual Categoria* obtenerCategoria(std::string categoria) = 0;
 
 	virtual ~ISistema();
 };

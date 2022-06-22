@@ -22,7 +22,6 @@ int main()
             {
             case 1: // Alta de usuario
             {
-                std::cout << "Entra aca";
                 s->menuCaso1();
                 break;
             }
@@ -52,6 +51,7 @@ int main()
             std::cerr << e.what() << endl;
         }
     }
+    
     /*
     // Menu de prueba de Alta de usuario e Iniciar Sesion******
 

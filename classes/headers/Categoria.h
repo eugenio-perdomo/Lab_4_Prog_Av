@@ -4,7 +4,7 @@
 #include "./../../ICollection/interfaces/ICollection.h"
 #include "string"
 
-class Categoria : public ICollection
+class Categoria : public ICollectible
 {
 private:
 	std::string nombre;
