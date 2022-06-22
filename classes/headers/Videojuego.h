@@ -2,10 +2,13 @@
 #define VIJEOJUEGO_H
 
 #include "string"
-#include "Estadistica.h"
-#include "Categoria.h"
+#include "./Estadistica.h"
+#include "./Categoria.h"
+#include "./Suscripcion.h"
 #include "./../../ICollection/interfaces/ICollection.h"
 #include "./../../ICollection/collections/List.h"
+
+class Suscripcion;
 
 class Videojuego
 {
@@ -22,8 +25,8 @@ private:
 
 public:
 	Videojuego();
-	Videojuego(std::string nombre,std::string descripcion,float costoVitalicia,float costoMensual,float costoTrimestral,
-float costoAnual,Estadistica *est);
+	Videojuego(std::string nombre, std::string descripcion, float costoVitalicia, float costoMensual, float costoTrimestral,
+			   float costoAnual, Estadistica *est);
 	std::string Getnombre() { return nombre; }
 	void Setnombre(std::string val) { nombre = val; }
 	std::string Getdescripcion() { return descripcion; }
@@ -38,6 +41,9 @@ float costoAnual,Estadistica *est);
 	void SetcostoAnual(float val) { costoAnual = val; }
 	Estadistica *Getestadistica() { return est; }
 	void Setestadistica(Estadistica *val) { est = val; }
+
+	void setCategoria(Categoria *c);
+	void setSuscripcion(Suscripcion *s);
 
 	virtual ~Videojuego();
 };

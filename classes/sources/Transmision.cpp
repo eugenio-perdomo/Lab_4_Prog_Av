@@ -1,20 +1,29 @@
 #include "./../headers/Transmision.h"
 
-Transmision::Transmision() {}
+Transmision::Transmision()
+{
+    this->comentarios = new List();
+}
 
-Transmision::Transmision(DtFecha fechaInicio)
+Transmision::Transmision(DtFecha *fechaInicio)
 {
     this->fechaInicio = fechaInicio;
+    this->comentarios = new List();
 }
 
 DtFecha Transmision::getFechaInicio()
 {
-    return this->fechaInicio;
+    return *fechaInicio;
 }
 
-void Transmision::setFechaInicio(DtFecha fechaInicio)
+void Transmision::setFechaInicio(DtFecha *fechaInicio)
 {
     this->fechaInicio = fechaInicio;
 }
+
+/*void Transmision::setComentario(Comentario *c)
+{
+    comentarios->add(c);
+}*/
 
 Transmision::~Transmision() {}

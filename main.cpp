@@ -7,10 +7,10 @@ int main()
     Fabrica f;
     ISistema *s = f.getSistema();
     int opcionUsuario;
+    int cargaDatosPrueba = 0;
     bool bandera = true;
     while (bandera == true)
     {
-
         s->imprimirTextoPrincipal();
         std::cin >> opcionUsuario;
         std::cout << "\e[0m";
@@ -32,7 +32,9 @@ int main()
             }
             case 3: // Cargar datos de prueba
             {
-                s->menuCaso3();
+                s->menuCaso3(cargaDatosPrueba);
+                std::cout << "\n\e[1;33mDatos de prueba cargados\n\e[0m";
+                cargaDatosPrueba++;
                 break;
             }
             case 4: // Salir
@@ -51,7 +53,7 @@ int main()
             std::cerr << e.what() << endl;
         }
     }
-    
+
     /*
     // Menu de prueba de Alta de usuario e Iniciar Sesion******
 

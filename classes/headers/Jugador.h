@@ -1,6 +1,8 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
 #include "./Usuario.h"
+#include "./Suscripcion.h"
+#include "./Partida.h"
 #include "./../../ICollection/collections/List.h"
 
 class Jugador : public Usuario
@@ -8,7 +10,8 @@ class Jugador : public Usuario
 private:
 	std::string nick;
 	std::string descripcion;
-	IDictionary *suscripcion;
+	ICollection *suscripcion; 	// Luego definir si esto es una colleccion o es un IDictionary
+								// Va a cambiar el set, utilizando IKey
 	ICollection *partidas;
 
 public:
@@ -21,6 +24,10 @@ public:
 	void Setdescripcion(std::string val) { descripcion = val; }
 
 	std::string getContrasenia() { return contrasenia; }
+
+	void setSuscripcion(Suscripcion *_suscripcion);
+	void setPartida(Partida *_partida);
+
 
 	virtual ~Jugador();
 };

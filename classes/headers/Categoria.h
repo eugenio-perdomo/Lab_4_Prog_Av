@@ -9,17 +9,17 @@ class Categoria : public ICollectible
 private:
 	std::string nombre;
 	std::string descripcion;
-	bool plataforma;
+	std::string tipo;
 
 public:
 	Categoria();
-	//Categoria::Categoria(std::string nombre,std::string descripcion,bool plataforma);
+	Categoria(std::string nombre,std::string descripcion, std::string tipo);
 	std::string Getnombre() { return nombre; }
 	void Setnombre(std::string val) { nombre = val; }
 	std::string Getdescripcion() { return descripcion; }
 	void Setdescripcion(std::string val) { descripcion = val; }
-	bool Getplataforma() { return plataforma; }
-	void Setplataforma(bool val) { plataforma = val; }
+	std::string Getplataforma() { return tipo; }
+	void Setplataforma(std::string val) { tipo = val; }
 
 	virtual ~Categoria();
 };

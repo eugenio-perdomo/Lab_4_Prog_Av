@@ -2,10 +2,7 @@
 
 Comentario::Comentario() {}
 
-Comentario::Comentario(std::string id,
-                       std::string texto,
-                       std::string nickUsuarioComentario,
-                       DtFecha fechaEnvio)
+Comentario::Comentario(std::string id, std::string texto, std::string nickUsuarioComentario, DtFecha *fechaEnvio)
 {
     this->id = id;
     this->texto = texto;
@@ -27,7 +24,7 @@ std::string Comentario::getNickUsuarioComentario()
 }
 DtFecha Comentario::getFechaEnvio()
 {
-    return this->fechaEnvio;
+    return *fechaEnvio;
 }
 
 void Comentario::setId(std::string id)
@@ -42,7 +39,7 @@ void Comentario::setNickUsuarioComentario(std::string nickUsuarioComentario)
 {
     this->nickUsuarioComentario = nickUsuarioComentario;
 }
-void Comentario::setFechaEnvio(DtFecha fechaEnvio)
+void Comentario::setFechaEnvio(DtFecha *fechaEnvio)
 {
     this->fechaEnvio = fechaEnvio;
 }

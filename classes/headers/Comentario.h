@@ -1,23 +1,24 @@
 #ifndef COMENTARIO_H
 #define COMENTARIO_H
 
+#include "./../../ICollection/interfaces/ICollection.h"
 #include "./../../datatypes/headers/DtFecha.h"
 #include <string>
 
-class Comentario
+class Comentario : ICollectible
 {
 private:
 	std::string id;
 	std::string texto;
 	std::string nickUsuarioComentario;
-	DtFecha fechaEnvio;
+	DtFecha *fechaEnvio;
 
 public:
 	Comentario();
 	Comentario(std::string id,
 			   std::string texto,
 			   std::string nickUsuarioComentario,
-			   DtFecha fechaEnvio);
+			   DtFecha *fechaEnvio);
 
 	std::string getId();
 	std::string getTexto();
@@ -27,7 +28,7 @@ public:
 	void setId(std::string id);
 	void setTexto(std::string texto);
 	void setNickUsuarioComentario(std::string nickUsuarioComentario);
-	void setFechaEnvio(DtFecha fechaEnvio);
+	void setFechaEnvio(DtFecha *fechaEnvio);
 
 	virtual ~Comentario();
 };

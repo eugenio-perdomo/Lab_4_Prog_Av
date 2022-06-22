@@ -44,15 +44,13 @@ private:
 public:
 	virtual void menuCaso1() = 0;
 	virtual void menuCaso2() = 0;
-	virtual void menuCaso3() = 0;
-	virtual void menuCaso4() = 0;
+	virtual void menuCaso3(int i) = 0;
 
 	virtual void imprimirTextoPrincipal() = 0;
 	virtual void imprimirTextoDelDesarrollador() = 0;
 	virtual void imprimirTextoDelJugador() = 0;
 	virtual void imprimirMenuDesarrollador() = 0;
 	virtual void imprimirMenuJugador() = 0;
-	virtual void InicioSesion(std::string email, std::string contrasenia, int i) = 0;
 
 	// CASO DE USO 1: ALTA USUARIO
 	virtual void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc) = 0;
@@ -66,6 +64,7 @@ public:
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	virtual void mostrarCategorias() = 0;
 	virtual Categoria* obtenerCategoria(std::string categoria) = 0;
+	virtual void publicarVideojuego() = 0;
 
 	virtual ~ISistema();
 };

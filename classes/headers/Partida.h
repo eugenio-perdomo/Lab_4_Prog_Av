@@ -6,7 +6,7 @@
 #include "./../../datatypes/headers/DtFecha.h"
 #include "Videojuego.h"
 
-class Partida : public ICollection
+class Partida : public ICollectible
 {
 protected:
 	std::string id;

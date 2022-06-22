@@ -17,16 +17,13 @@ public:
 	Sistema();
 	void menuCaso1(); // Alta de usuario
 	void menuCaso2(); // Iniciar sesión
-	void menuCaso3(); // Cargar datos de prueba
-
-	void menuCaso4(); //Publicar videojuego
+	void menuCaso3(int i); // Cargar datos de prueba
 	
 	void imprimirTextoPrincipal();
 	void imprimirTextoDelDesarrollador();
 	void imprimirTextoDelJugador();
 	void imprimirMenuDesarrollador();
 	void imprimirMenuJugador();
-	void InicioSesion(std::string email, std::string contrasenia, int i);
 
 	// CASO DE USO 1: ALTA USUARIO
 	void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc);
@@ -40,6 +37,7 @@ public:
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	void mostrarCategorias();
 	Categoria* obtenerCategoria(std::string categoria);
+	void publicarVideojuego();
 
 	virtual ~Sistema();
 };

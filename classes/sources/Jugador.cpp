@@ -2,17 +2,30 @@
 
 Jugador::Jugador()
 {
-    this->suscripcion = new OrderedDictionary();
+    // Seria new OrderedDictionary() en caso de ser parte de IDictionary
+    this->suscripcion = new List();
     this->partidas = new List();
 }
 
-Jugador::Jugador(std::string _email, std::string _contrasenia, std::string _nick, std::string _desc) : Usuario (_email, _contrasenia)
+Jugador::Jugador(std::string _email, std::string _contrasenia, std::string _nick, std::string _desc) : Usuario(_email, _contrasenia)
 {
     this->nick = _nick;
     this->descripcion = _desc;
-    this->suscripcion = new OrderedDictionary();
+    this->suscripcion = new List();
     this->partidas = new List();
 }
 
+void Jugador::setSuscripcion(Suscripcion *_suscripcion)
+{
+    /*
+        IKey *k = new String(jug->getEmail());
+        this->suscripcion->add(k, jug);
+    */
+    this->suscripcion->add(_suscripcion);
+}
+void Jugador::setPartida(Partida *_partida)
+{
+    this->partidas->add(_partida);
+}
 
 Jugador::~Jugador() {}
