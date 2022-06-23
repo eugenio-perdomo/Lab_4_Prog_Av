@@ -9,9 +9,8 @@ Sistema::Sistema()
 }
 
 // Alta de usuario
-void Sistema::menuCaso1()
+void Sistema::menuCaso1(Sistema* s)
 {
-    Sistema *s = new Sistema();
     int opcionUsuario;
     bool bandera = true;
     while (bandera == true)
@@ -72,9 +71,8 @@ void Sistema::agregarDesarrollador(std::string email, std::string contrasenia, s
 }
 
 // Iniciar sesión
-void Sistema::menuCaso2()
+void Sistema::menuCaso2(Sistema* s)
 {
-    Sistema *s = new Sistema();
     std::string email, contrasenia;
     bool bandera = true;
     int opcionUsuario;
@@ -183,7 +181,7 @@ Desarrollador *Sistema::obtenerDesarrolladorActual(string email)
 }
 
 // Cargar datos de prueba
-void Sistema::menuCaso3(int i)
+void Sistema::menuCaso3(int i, Sistema* s)
 {
     if (i == 0)
     {
@@ -259,10 +257,8 @@ void Sistema::menuCaso3(int i)
 }
 
 // Publicar videojuego
-void Sistema::publicarVideojuego()
+void Sistema::publicarVideojuego(Sistema *s)
 {
-    Sistema *s = new Sistema();
-
     std::string nom, desc;
     float cMensual, cTristral, cAnual, cVitalicio;
 
@@ -396,7 +392,7 @@ void Sistema::imprimirMenuDesarrollador()
             {
             case 1: // Publicar Videojuego
             {
-                publicarVideojuego();
+                publicarVideojuego(this);
                 break;
             }
             case 2: // Eliminar Videojuego

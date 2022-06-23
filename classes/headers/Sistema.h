@@ -15,9 +15,9 @@ private:
 
 public:
 	Sistema();
-	void menuCaso1(); // Alta de usuario
-	void menuCaso2(); // Iniciar sesión
-	void menuCaso3(int i); // Cargar datos de prueba
+	void menuCaso1(Sistema* s); // Alta de usuario
+	void menuCaso2(Sistema* s); // Iniciar sesión
+	void menuCaso3(int i, Sistema* s); // Cargar datos de prueba
 	
 	void imprimirTextoPrincipal();
 	void imprimirTextoDelDesarrollador();
@@ -37,7 +37,7 @@ public:
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	void mostrarCategorias();
 	Categoria* obtenerCategoria(std::string categoria);
-	void publicarVideojuego();
+	void publicarVideojuego(Sistema *s);
 
 	void mostrarListaCategorias(List* lista);
 

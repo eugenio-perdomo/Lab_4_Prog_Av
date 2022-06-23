@@ -6,6 +6,9 @@ int main()
 {
     Fabrica f;
     ISistema *s = f.getSistema();
+
+    Sistema* sis=new Sistema();
+
     int opcionUsuario;
     int cargaDatosPrueba = 0;
     bool bandera = true;
@@ -22,17 +25,17 @@ int main()
             {
             case 1: // Alta de usuario
             {
-                s->menuCaso1();
+                s->menuCaso1(sis);
                 break;
             }
             case 2: // Iniciar sesión
             {
-                s->menuCaso2();
+                s->menuCaso2(sis);
                 break;
             }
             case 3: // Cargar datos de prueba
             {
-                s->menuCaso3(cargaDatosPrueba);
+                s->menuCaso3(cargaDatosPrueba, sis);
                 std::cout << "\n\e[1;33mDatos de prueba cargados\n\e[0m";
                 cargaDatosPrueba++;
                 break;

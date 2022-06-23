@@ -42,9 +42,9 @@ class ISistema
 {
 private:
 public:
-	virtual void menuCaso1() = 0;
-	virtual void menuCaso2() = 0;
-	virtual void menuCaso3(int i) = 0;
+	virtual void menuCaso1(Sistema* s) = 0;
+	virtual void menuCaso2(Sistema* s) = 0;
+	virtual void menuCaso3(int i, Sistema* s) = 0;
 
 	virtual void imprimirTextoPrincipal() = 0;
 	virtual void imprimirTextoDelDesarrollador() = 0;
@@ -64,7 +64,7 @@ public:
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	virtual void mostrarCategorias() = 0;
 	virtual Categoria* obtenerCategoria(std::string categoria) = 0;
-	virtual void publicarVideojuego() = 0;
+	virtual void publicarVideojuego(Sistema *s) = 0;
 
 	virtual void mostrarListaCategorias(List* lista) = 0;
 
