@@ -364,13 +364,51 @@ void mostrarListaCategorias(List* lista){
     }
 
 }
+void Sistema::mostrarVideojuegosDesarrollador()
+{
+}
 
+Videojuego *Sistema::obtenerVideojuegodesarrollador(std::string videojuego)
+{
+    StringKey *key = new StringKey(videojuego);
+    Videojuego *aux = dynamic_cast<Videojuego *>(videojuegos->find(key));
+    return aux;
+}
 
+void mostrarListaVideojuegos(List *lista){
+    
+    IIterator* it= lista->getIterator();
 
+    while(it->hasCurrent()){
+        Videojuego* aux= dynamic_cast<Videojuego*>(it->getCurrent());
 
+        std::cout << aux->Getnombre();
 
+        it->next();
+    }
 
+}
 
+// Eliminar Videojuego
+void Sistema::EliminarVideojuego(Sistema *s)
+{
+    string nom;
+    s->mostrarVideojuegosDesarrollador();
+    std::cout << "\nIngrese nombre del videojuego a eliminar; ";
+    std::cin >> nom;
+    Videojuego *aux = s->obtenerVideojuegodesarrollador(nom);
+
+    int op3;
+    std::cout << "\nDesea eliminar el videojuego?";
+    std::cout << "1- Si";
+    std::cout << "2- No";
+    std::cin >> op3;
+
+    if (op3==1){
+        //Confirma eliminar el videojuego
+
+    }
+}
 
 
 
@@ -397,6 +435,7 @@ void Sistema::imprimirMenuDesarrollador()
             }
             case 2: // Eliminar Videojuego
             {
+                EliminarVideojuego(this);
                 break;
             }
 

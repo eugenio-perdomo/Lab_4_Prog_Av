@@ -12,6 +12,7 @@ Videojuego::Videojuego(std::string _nombre, std::string _descripcion, float _cos
     this->est = _est;
     this->categoria = new List();
     this->suscripcion = new List();
+    this->partidas = new OrderedDictionary;
 }
 
 Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float costoT, float costoA, float costoV, List* cat){
@@ -22,7 +23,6 @@ Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float co
     this->costoAnual=costoA;
     this->costoVitalicia=costoV;
     this->suscripcion= new List();
-
     this->categoria=new List();
     this->categoria=cat;
 

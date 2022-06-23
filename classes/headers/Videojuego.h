@@ -7,6 +7,7 @@
 #include "./Suscripcion.h"
 #include "./../../ICollection/interfaces/ICollection.h"
 #include "./../../ICollection/collections/List.h"
+#include "./../../ICollection/collections/OrderedDictionary.h"
 
 class Suscripcion;
 
@@ -22,6 +23,7 @@ private:
 	Estadistica *est;
 	ICollection *categoria;
 	ICollection *suscripcion;
+	IDictionary *partidas;
 
 public:
 	Videojuego();

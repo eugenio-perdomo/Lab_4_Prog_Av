@@ -65,8 +65,13 @@ public:
 	virtual void mostrarCategorias() = 0;
 	virtual Categoria* obtenerCategoria(std::string categoria) = 0;
 	virtual void publicarVideojuego(Sistema *s) = 0;
-
 	virtual void mostrarListaCategorias(List* lista) = 0;
+
+	//CASO DE USO : ELIMINAR VIDEOJUEGO
+	virtual void mostrarVideojuegosDesarrollador() = 0;
+	virtual Videojuego* obtenerVideojuegodesarrollador(std::string videojuego) = 0;
+	virtual void EliminarVideojuego(Sistema *s) = 0;
+	virtual void mostrarListaVideojuegos(List *lista) = 0;
 
 	virtual ~ISistema();
 };

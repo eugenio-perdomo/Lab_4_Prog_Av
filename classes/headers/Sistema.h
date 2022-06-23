@@ -38,8 +38,13 @@ public:
 	void mostrarCategorias();
 	Categoria* obtenerCategoria(std::string categoria);
 	void publicarVideojuego(Sistema *s);
-
 	void mostrarListaCategorias(List* lista);
+
+	//CASO DE USO : ELIMINAR VIDEOJUEGO
+	void mostrarVideojuegosDesarrollador();
+	Videojuego* obtenerVideojuegodesarrollador(std::string videojuego);
+	void EliminarVideojuego(Sistema *s);
+	void mostrarListaVideojuegos(List *lista);
 
 	virtual ~Sistema();
 };
