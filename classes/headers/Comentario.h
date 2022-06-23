@@ -5,13 +5,14 @@
 #include "./../../datatypes/headers/DtFecha.h"
 #include <string>
 
-class Comentario : ICollectible
+class Comentario : public ICollectible
 {
 private:
 	std::string id;
 	std::string texto;
 	std::string nickUsuarioComentario;
 	DtFecha *fechaEnvio;
+
 
 public:
 	Comentario();
@@ -29,7 +30,7 @@ public:
 	void setTexto(std::string texto);
 	void setNickUsuarioComentario(std::string nickUsuarioComentario);
 	void setFechaEnvio(DtFecha *fechaEnvio);
-
+	void Eliminarme();
 	virtual ~Comentario();
 };
 

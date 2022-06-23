@@ -4,6 +4,7 @@
 #include "./../../ICollection/interfaces/ICollection.h"
 #include "./../../datatypes/headers/DtFecha.h"
 #include "./Videojuego.h"
+#include "./Jugador.h"
 #include "./MetodoPago.h"
 #include "./Valor.h"
 
@@ -18,6 +19,7 @@ private:
 	Valor tipo;
 	bool cancelada;
 	Videojuego *juego;
+	Jugador *jugador;
 
 public:
 	Suscripcion();
@@ -26,7 +28,8 @@ public:
 	MetodoPago metodo,
 	Valor tipo,
 	bool cancelada,
-	Videojuego *juego);
+	Videojuego *juego,
+	Jugador *jugador);
 
 	/*float Getcosto() { return costo; }
 	void Setcosto(float val) { costo = val; }*/
@@ -44,7 +47,7 @@ public:
 
 	/*Videojuego Getjuego() { return *juego; }
 	void Setjuego(Videojuego *val) { juego = val; }*/
-
+	void eliminarme();
 	virtual ~Suscripcion();
 };
 

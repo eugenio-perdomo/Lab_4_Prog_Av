@@ -2,7 +2,6 @@
 #define ESTUDIANTE_H
 
 #include "./Usuario.h"
-
 class Desarrollador : public Usuario
 {
 private:
@@ -18,6 +17,8 @@ public:
 	void Setempresa(std::string val) { empresa = val; }
 
 	std::string getContrasenia() { return contrasenia; }
+	void mostrarVideojuegosDesarrollador();
+	void EliminarEsteJuego(Videojuego *v);
 
 	virtual ~Desarrollador();
 };

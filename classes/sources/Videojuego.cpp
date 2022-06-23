@@ -45,4 +45,31 @@ void Videojuego::setSuscripcion(Suscripcion *s)
     this->suscripcion->add(s);
 }
 
+void Videojuego::eliminarme()
+{
+    delete(this->est);
+    IIterator* it= this->suscripcion->getIterator();
+    while(it->hasCurrent()){
+        Suscripcion *sus = dynamic_cast<Suscripcion*>(it->getCurrent());
+        suscripcion->remove(sus);
+        sus->eliminarme();
+        delete(sus);
+        it->next();
+    }
+
+    IIterator* itP= this->partidas->getIterator();
+    while(it->hasCurrent()){
+        Partida *part = dynamic_cast<Partida*>(it->getCurrent());
+        StringKey *key = new StringKey(part->getId());
+        partidas->remove(key);
+        part->eliminarme();
+        delete(part);
+        it->next();
+    }
+    delete it;
+    delete itP;
+}
+void Videojuego::Borrame(){
+    delete(this);
+}
 Videojuego::~Videojuego() {}

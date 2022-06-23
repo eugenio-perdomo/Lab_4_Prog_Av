@@ -17,6 +17,7 @@ Partida::Partida(std::string id,
     this->fechaInicio = fechaInicio;
     this->fechaFin = fechaFin;
     this->juego = juego;
+    this->comentarios = new List();
 }
 
 std::string Partida::getId()
@@ -68,6 +69,18 @@ void Partida::setFechaInicio(DtFecha fechaInicio)
 void Partida::setFechaFin(DtFecha fechaFin) 
 {
     this->fechaFin = fechaFin;
+}
+
+void Partida::eliminarme(){
+    IIterator* it= this->comentarios->getIterator();
+    while(it->hasCurrent()){
+        Comentario *com = dynamic_cast<Comentario*>(it->getCurrent());
+        comentarios->remove(com);
+        com->Eliminarme();
+        delete(com);
+        it->next();
+    }
+    delete it;
 }
 
 Partida::~Partida() {}

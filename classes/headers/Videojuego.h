@@ -46,9 +46,10 @@ public:
 	void SetcostoAnual(float val) { costoAnual = val; }
 	Estadistica *Getestadistica() { return est; }
 	void Setestadistica(Estadistica *val) { est = val; }
-
+	void eliminarme();
 	void setCategoria(Categoria *c);
 	void setSuscripcion(Suscripcion *s);
+	void Borrame();
 
 	virtual ~Videojuego();
 };

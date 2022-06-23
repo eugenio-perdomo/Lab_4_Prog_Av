@@ -5,16 +5,19 @@
 #include "./../../ICollection/interfaces/ICollection.h"
 #include "./../../datatypes/headers/DtFecha.h"
 #include "Videojuego.h"
+#include "Comentario.h"
 
 class Partida : public ICollectible
 {
-protected:
+	public:
 	std::string id;
 	std::string nombreVideojuego;
 	bool finalizado;
 	float duracionPartida; // En Minutos, el set va a ser un date.fin - date.inicio
 	DtFecha fechaInicio;
 	DtFecha fechaFin;
+	ICollection *comentarios;
+protected:
 	Videojuego *juego;
 
 public:
@@ -42,7 +45,7 @@ public:
 	void setFechaFin(DtFecha fechaFin);
 
 	void TerminarPartida(std::string id);
-
+	void eliminarme();
 	virtual ~Partida();
 };
 

@@ -119,6 +119,7 @@ void Sistema::menuCaso2(Sistema* s)
             {
                 std::cout << "Sesion iniciada como Desarrollador" << std::endl;
                 usuarioActual = s->obtenerDesarrolladorActual(email);
+                desarrolladorActual = s->obtenerDesarrolladorActual(email);
                 imprimirMenuDesarrollador();
                 break;
             }
@@ -218,17 +219,17 @@ void Sistema::menuCaso3(int i, Sistema* s)
         Videojuego *vj4 = new Videojuego("FIFA 21", "Descripcion FIFA 21", 3, 8, 28, 50, est4);
 
         DtFecha *fecha1 = new DtFecha(01, 06, 2021, 0, 00, 9);
-        Suscripcion *sus1 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::TresMeses, false, vj1);
+        Suscripcion *sus1 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::TresMeses, false, vj1 ,j1);
         fecha1 = new DtFecha(02, 06, 2021, 0, 00, 11);
-        Suscripcion *sus2 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::TresMeses, false, vj2);
+        Suscripcion *sus2 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::TresMeses, false, vj2, j2);
         fecha1 = new DtFecha(04, 06, 2021, 0, 00, 9);
-        Suscripcion *sus3 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::UnMes, false, vj2);
+        Suscripcion *sus3 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::UnMes, false, vj2, j3);
         fecha1 = new DtFecha(11, 06, 2021, 0, 00, 9);
-        Suscripcion *sus4 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Anio, false, vj3);
+        Suscripcion *sus4 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Anio, false, vj3, j4);
         fecha1 = new DtFecha(03, 06, 2021, 0, 00, 7);
-        Suscripcion *sus5 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::UnMes, false, vj2);
+        Suscripcion *sus5 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::UnMes, false, vj2, j1);
         fecha1 = new DtFecha(21, 12, 2020, 0, 00, 15);
-        Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false, vj3);
+        Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false,vj2, j2);
 
         vj1->setCategoria(c1);
         vj1->setCategoria(c2);
@@ -364,9 +365,6 @@ void mostrarListaCategorias(List* lista){
     }
 
 }
-void Sistema::mostrarVideojuegosDesarrollador()
-{
-}
 
 Videojuego *Sistema::obtenerVideojuegodesarrollador(std::string videojuego)
 {
@@ -381,19 +379,17 @@ void mostrarListaVideojuegos(List *lista){
 
     while(it->hasCurrent()){
         Videojuego* aux= dynamic_cast<Videojuego*>(it->getCurrent());
-
         std::cout << aux->Getnombre();
-
         it->next();
     }
 
 }
 
 // Eliminar Videojuego
-void Sistema::EliminarVideojuego(Sistema *s)
+void Sistema::EliminarVideojuego(Desarrollador *d, Sistema *s)
 {
     string nom;
-    s->mostrarVideojuegosDesarrollador();
+    d->mostrarVideojuegosDesarrollador();
     std::cout << "\nIngrese nombre del videojuego a eliminar; ";
     std::cin >> nom;
     Videojuego *aux = s->obtenerVideojuegodesarrollador(nom);
@@ -406,13 +402,9 @@ void Sistema::EliminarVideojuego(Sistema *s)
 
     if (op3==1){
         //Confirma eliminar el videojuego
-
+        d->EliminarEsteJuego(aux);
     }
 }
-
-
-
-
 
 void Sistema::imprimirMenuDesarrollador()
 {
@@ -435,7 +427,7 @@ void Sistema::imprimirMenuDesarrollador()
             }
             case 2: // Eliminar Videojuego
             {
-                EliminarVideojuego(this);
+                EliminarVideojuego(desarrolladorActual, this);
                 break;
             }
 

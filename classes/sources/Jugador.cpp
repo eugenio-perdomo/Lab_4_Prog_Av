@@ -28,4 +28,7 @@ void Jugador::setPartida(Partida *_partida)
     this->partidas->add(_partida);
 }
 
+void Jugador::EliminarMiSuscripcion(Suscripcion *s){
+    this->suscripcion->remove(s);
+}
 Jugador::~Jugador() {}

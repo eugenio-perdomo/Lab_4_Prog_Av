@@ -27,7 +27,7 @@ public:
 
 	void setSuscripcion(Suscripcion *_suscripcion);
 	void setPartida(Partida *_partida);
-
+	void EliminarMiSuscripcion(Suscripcion *s);
 
 	virtual ~Jugador();
 };

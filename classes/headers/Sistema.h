@@ -11,6 +11,7 @@ private:
 	IDictionary *desarrolladores;
 	DtFecha *fechaDelSistema;
 	Usuario *usuarioActual;
+	Desarrollador *desarrolladorActual;
 	
 
 public:
@@ -43,7 +44,7 @@ public:
 	//CASO DE USO : ELIMINAR VIDEOJUEGO
 	void mostrarVideojuegosDesarrollador();
 	Videojuego* obtenerVideojuegodesarrollador(std::string videojuego);
-	void EliminarVideojuego(Sistema *s);
+	void EliminarVideojuego(Desarrollador *d, Sistema *s);
 	void mostrarListaVideojuegos(List *lista);
 
 	virtual ~Sistema();

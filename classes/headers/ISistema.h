@@ -70,7 +70,7 @@ public:
 	//CASO DE USO : ELIMINAR VIDEOJUEGO
 	virtual void mostrarVideojuegosDesarrollador() = 0;
 	virtual Videojuego* obtenerVideojuegodesarrollador(std::string videojuego) = 0;
-	virtual void EliminarVideojuego(Sistema *s) = 0;
+	virtual void EliminarVideojuego(Desarrollador *d ,Sistema *s) = 0;
 	virtual void mostrarListaVideojuegos(List *lista) = 0;
 
 	virtual ~ISistema();
