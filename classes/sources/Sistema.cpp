@@ -264,7 +264,7 @@ void Sistema::publicarVideojuego()
     Sistema *s = new Sistema();
 
     std::string nom, desc;
-    float cMensual, cTristral, cAnual;
+    float cMensual, cTristral, cAnual, cVitalicio;
 
     std::cout << "\nIngrese nombre: ";
     std::cin >> nom;
@@ -281,6 +281,8 @@ void Sistema::publicarVideojuego()
     std::cin >> cTristral;
     std::cout << "\nIngrese costo anual: ";
     std::cin >> cAnual;
+    std::cout << "\nIngrese costo vitalicio: ";
+    std::cin >> cVitalicio;
 
     bool deseaAgregar = true;
     int op2 = 1;
@@ -289,7 +291,7 @@ void Sistema::publicarVideojuego()
     while (deseaAgregar == true)
     {
 
-        s->mostrarCategorias(); // Sin implementar
+        s->mostrarCategorias(); // ***Sin implementar***
 
         std::string cat;
         std::cout << "\nSeleccione una categoria: ";
@@ -320,8 +322,27 @@ void Sistema::publicarVideojuego()
     }
 
     // MOSTRAR LOS DATOS:
+    std::cout << "\nDatos del videojuego:\n";
+    std::cout << "\nNombre: " << nom;
+    std::cout << "\nDescripcion: " << desc;
+    std::cout << "\nCosto mensual: " << cMensual;
+    std::cout << "\nCosto trimestral: " << cTristral;
+    std::cout << "\nCosto anual: " << cAnual;
+    std::cout << "\nCosto vitalicio: " << cVitalicio;
+    std::cout << "\nCategorias: ";
+    s->mostrarListaCategorias(aux_categorias);
 
-    // CONFIRMAR:
+    int op3;
+    std::cout << "\nDesea publicar el videojuego?";
+    std::cout << "1- Si";
+    std::cout << "2- No";
+    std::cin >> op3;
+
+    if (op3==1){
+        //Confirma publicar el videojuego
+        Videojuego* videojuegoAux = new Videojuego(nom,desc,cMensual,cTristral,cAnual,cVitalicio,aux_categorias);
+    }
+
 }
 
 void Sistema::mostrarCategorias()
@@ -334,6 +355,30 @@ Categoria *Sistema::obtenerCategoria(std::string categoria)
     Categoria *aux = dynamic_cast<Categoria *>(categorias->find(key));
     return aux;
 }
+
+void mostrarListaCategorias(List* lista){
+    IIterator* it= lista->getIterator();
+
+    while(it->hasCurrent()){
+        Categoria* aux= dynamic_cast<Categoria*>(it->getCurrent());
+
+        std::cout << aux->Getnombre();
+
+        it->next();
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 void Sistema::imprimirMenuDesarrollador()
 {

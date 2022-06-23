@@ -25,6 +25,9 @@ private:
 
 public:
 	Videojuego();
+
+	Videojuego(std::string nom, std::string desc, float costoM, float costoT, float costoA, float costoV, List* cat);
+
 	Videojuego(std::string nombre, std::string descripcion, float costoVitalicia, float costoMensual, float costoTrimestral,
 			   float costoAnual, Estadistica *est);
 	std::string Getnombre() { return nombre; }

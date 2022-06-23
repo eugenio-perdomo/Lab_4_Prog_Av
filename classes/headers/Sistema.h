@@ -39,6 +39,8 @@ public:
 	Categoria* obtenerCategoria(std::string categoria);
 	void publicarVideojuego();
 
+	void mostrarListaCategorias(List* lista);
+
 	virtual ~Sistema();
 };
 

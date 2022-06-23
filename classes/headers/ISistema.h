@@ -66,6 +66,8 @@ public:
 	virtual Categoria* obtenerCategoria(std::string categoria) = 0;
 	virtual void publicarVideojuego() = 0;
 
+	virtual void mostrarListaCategorias(List* lista) = 0;
+
 	virtual ~ISistema();
 };
 

@@ -14,6 +14,21 @@ Videojuego::Videojuego(std::string _nombre, std::string _descripcion, float _cos
     this->suscripcion = new List();
 }
 
+Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float costoT, float costoA, float costoV, List* cat){
+    this->nombre=nom;
+    this->descripcion=desc;
+    this->costoMensual=costoM;
+    this->costoTrimestral=costoT;
+    this->costoAnual=costoA;
+    this->costoVitalicia=costoV;
+    this->suscripcion= new List();
+
+    this->categoria=new List();
+    this->categoria=cat;
+
+}
+
+
 Videojuego::Videojuego()
 {
     this->categoria = new List();
