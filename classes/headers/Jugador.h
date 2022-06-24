@@ -29,6 +29,10 @@ public:
 	void setPartida(Partida *_partida);
 	void EliminarMiSuscripcion(Suscripcion *s);
 
+	bool verificarSuscripcion(string nombreJuego);
+	bool verificarEsVitalicia(string nombreJuego);
+	void cancelarSuscripcion(Videojuego* vj);
+
 	virtual ~Jugador();
 };
 

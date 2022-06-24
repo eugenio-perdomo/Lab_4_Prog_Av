@@ -47,6 +47,9 @@ public:
 
 	/*Videojuego Getjuego() { return *juego; }
 	void Setjuego(Videojuego *val) { juego = val; }*/
+
+	string GetNombreVideojuego();
+
 	void eliminarme();
 	virtual ~Suscripcion();
 };

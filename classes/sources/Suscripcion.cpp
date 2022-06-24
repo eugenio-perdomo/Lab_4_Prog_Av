@@ -17,3 +17,7 @@ void Suscripcion::eliminarme() {
     delete(this);
 }
 Suscripcion::~Suscripcion() {}
+
+string Suscripcion::GetNombreVideojuego(){
+    return juego->Getnombre();
+}

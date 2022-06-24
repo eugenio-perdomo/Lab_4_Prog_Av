@@ -67,6 +67,11 @@ public:
 	virtual void publicarVideojuego(Sistema *s) = 0;
 	virtual void mostrarListaCategorias(List* lista) = 0;
 
+	// CASO DE USO 4: SUSCRIBIRSE A VIDEOJUEGO
+	virtual void suscribirseVideojuego()=0;
+	virtual void mostrarVideojuegos()=0;
+
+
 	//CASO DE USO : ELIMINAR VIDEOJUEGO
 	virtual void mostrarVideojuegosDesarrollador() = 0;
 	virtual Videojuego* obtenerVideojuegodesarrollador(std::string videojuego) = 0;

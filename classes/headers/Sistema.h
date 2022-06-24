@@ -12,6 +12,7 @@ private:
 	DtFecha *fechaDelSistema;
 	Usuario *usuarioActual;
 	Desarrollador *desarrolladorActual;
+	Jugador *jugadorActual;
 	
 
 public:
@@ -40,6 +41,11 @@ public:
 	Categoria* obtenerCategoria(std::string categoria);
 	void publicarVideojuego(Sistema *s);
 	void mostrarListaCategorias(List* lista);
+
+	// CASO DE USO 4: SUSCRIBIRSE A VIDEOJUEGO
+	void suscribirseVideojuego();
+	void mostrarVideojuegos();
+	Videojuego* GetUnVideojuego(StringKey* nombreVideojuego);
 
 	//CASO DE USO : ELIMINAR VIDEOJUEGO
 	void mostrarVideojuegosDesarrollador();

@@ -342,8 +342,8 @@ void Sistema::publicarVideojuego(Sistema *s)
 
 }
 
-void Sistema::mostrarCategorias()
-{
+void Sistema::mostrarCategorias(){
+
 }
 
 Categoria *Sistema::obtenerCategoria(std::string categoria)
@@ -353,7 +353,7 @@ Categoria *Sistema::obtenerCategoria(std::string categoria)
     return aux;
 }
 
-void mostrarListaCategorias(List* lista){
+void Sistema::mostrarListaCategorias(List* lista){
     IIterator* it= lista->getIterator();
 
     while(it->hasCurrent()){
@@ -373,7 +373,7 @@ Videojuego *Sistema::obtenerVideojuegodesarrollador(std::string videojuego)
     return aux;
 }
 
-void mostrarListaVideojuegos(List *lista){
+void Sistema::mostrarListaVideojuegos(List *lista){
     
     IIterator* it= lista->getIterator();
 
@@ -384,6 +384,72 @@ void mostrarListaVideojuegos(List *lista){
     }
 
 }
+
+
+
+//Suscribirse a videojuego
+
+void Sistema::suscribirseVideojuego(){
+    mostrarVideojuegos();
+
+    std::string nombreVideojuego;
+    std::cout << "\nIndicar el nombre del videojuego: ";
+    std::cin >> nombreVideojuego;
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+
+    StringKey* key = new StringKey(nombreVideojuego);
+
+    if (videojuegos->member(key)){
+        
+        if(jugadorActual->verificarSuscripcion(nombreVideojuego)){
+            //Ya tiene una suscripcion activa para ese videojuego.
+
+            if(jugadorActual->verificarEsVitalicia(nombreVideojuego)){
+                //La suscripcion es vitalicia
+                std::cout << "\nLas suscripciones vitalicias no se pueden cancelar";
+            } else {
+                //La suscripcion no es vitalicia
+                int op2;
+                std::cout << "\nDesea cancelar la suscripcion para el videojuego?";
+                std::cout << "1- Si";
+                std::cout << "2- No";
+                std::cin >> op2;
+
+                jugadorActual->cancelarSuscripcion(GetUnVideojuego(key));
+            }
+
+        } else{
+            //No tiene una suscripcion para ese videojuego.
+
+            //ENTONCES: crear la suscripcion y agregarla o cancelar el proceso
+        }
+
+    } else {
+        std::cout << "\nEl videojuego no existe";
+    }
+
+}
+
+void Sistema::mostrarVideojuegos(){
+    IIterator* it= videojuegos->getIterator();
+
+    while(it->hasCurrent()){
+        Videojuego* aux= dynamic_cast<Videojuego*>(it->getCurrent());
+        std::cout << aux->Getnombre();
+        it->next();
+    }
+}
+
+Videojuego* Sistema::GetUnVideojuego(StringKey* nombreVideojuego){
+    Videojuego* aux =dynamic_cast<Videojuego*>(videojuegos->find(nombreVideojuego));
+    return aux;
+}
+
+
+
+
+
 
 // Eliminar Videojuego
 void Sistema::EliminarVideojuego(Desarrollador *d, Sistema *s)

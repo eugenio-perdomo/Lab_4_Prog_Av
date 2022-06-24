@@ -11,7 +11,7 @@
 
 class Suscripcion;
 
-class Videojuego
+class Videojuego: public ICollectible
 {
 private:
 	std::string nombre;

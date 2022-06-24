@@ -32,3 +32,42 @@ void Jugador::EliminarMiSuscripcion(Suscripcion *s){
     this->suscripcion->remove(s);
 }
 Jugador::~Jugador() {}
+
+bool Jugador::verificarSuscripcion(string nombreJuego){
+
+    bool resultado = false;
+
+    IIterator* it = suscripcion->getIterator();
+
+    while (it->hasCurrent()){
+        Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
+
+        if (aux->GetNombreVideojuego()==nombreJuego){
+            resultado = true;
+        }
+        it->next();
+    }  
+    return resultado;
+}
+
+bool Jugador::verificarEsVitalicia(string nombreJuego){
+
+    bool resultado = false;
+    IIterator* it = suscripcion->getIterator();
+
+    while(it->hasCurrent()){
+        Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
+        
+        if (aux->GetNombreVideojuego()==nombreJuego){
+            if (aux->Gettipo()==Vitalicia){
+                resultado = true;
+            }
+        }
+        it->next();
+    }  
+    return resultado;
+}
+
+void Jugador::cancelarSuscripcion(Videojuego* vj){
+    suscripcion->remove(vj);
+}
