@@ -1,4 +1,4 @@
-#include "./../headers/Individual.h"
+#include "../headers/Individual.h"
 
 Individual::Individual() {}
 

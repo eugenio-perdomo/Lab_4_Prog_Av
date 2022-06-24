@@ -1,8 +1,8 @@
 #ifndef COMENTARIO_H
 #define COMENTARIO_H
 
-#include "./../../ICollection/interfaces/ICollection.h"
-#include "./../../datatypes/headers/DtFecha.h"
+#include "../../ICollection/interfaces/ICollection.h"
+#include "../../datatypes/headers/DtFecha.h"
 #include <string>
 
 class Comentario : public ICollectible

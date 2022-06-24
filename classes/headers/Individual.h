@@ -1,7 +1,7 @@
 #ifndef INDIVIDUAL_H
 #define INDIVIDUAL_H
 
-#include "./Partida.h"
+#include "Partida.h"
 
 class Individual : public Partida
 {

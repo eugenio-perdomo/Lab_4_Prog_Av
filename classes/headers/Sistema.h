@@ -1,6 +1,6 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
-#include "./ISistema.h"
+#include "ISistema.h"
 
 class Sistema : public ISistema
 {
@@ -48,7 +48,6 @@ public:
 	Videojuego* GetUnVideojuego(StringKey* nombreVideojuego);
 
 	//CASO DE USO : ELIMINAR VIDEOJUEGO
-	void mostrarVideojuegosDesarrollador();
 	Videojuego* obtenerVideojuegodesarrollador(std::string videojuego);
 	void EliminarVideojuego(Desarrollador *d, Sistema *s);
 	void mostrarListaVideojuegos(List *lista);

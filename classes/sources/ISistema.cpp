@@ -1,2 +1,2 @@
-#include "./../headers/ISistema.h"
+#include "../headers/ISistema.h"
 ISistema::~ISistema(){}

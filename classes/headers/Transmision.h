@@ -1,11 +1,11 @@
 #ifndef TRANSMISION_H
 #define TRANSMISION_H
 
-#include "./Comentario.h"
-#include "./../../ICollection/collections/List.h"
-#include "./../../ICollection/interfaces/ICollection.h"
-#include "./../../ICollection/interfaces/ICollectible.h"
-#include "./../../datatypes/headers/DtFecha.h"
+#include "Comentario.h"
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/interfaces/ICollection.h"
+#include "../../ICollection/interfaces/ICollectible.h"
+#include "../../datatypes/headers/DtFecha.h"
 
 class Transmision
 {

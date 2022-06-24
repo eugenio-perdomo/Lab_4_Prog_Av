@@ -1,4 +1,4 @@
-#include "./../headers/Partida.h"
+#include "../headers/Partida.h"
 
 Partida::Partida() {}
 

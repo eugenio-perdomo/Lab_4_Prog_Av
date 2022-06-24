@@ -1,9 +1,11 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
 
+class Videojuego;
+
 #include <string>
-#include "./../../ICollection/interfaces/ICollection.h"
-#include "./../../datatypes/headers/DtFecha.h"
+#include "../../ICollection/interfaces/ICollection.h"
+#include "../../datatypes/headers/DtFecha.h"
 #include "Videojuego.h"
 #include "Comentario.h"
 

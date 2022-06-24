@@ -1,9 +1,13 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
-#include "./Usuario.h"
-#include "./Suscripcion.h"
-#include "./Partida.h"
-#include "./../../ICollection/collections/List.h"
+
+class Partida;
+class Suscripcion;
+
+#include "Usuario.h"
+#include "Suscripcion.h"
+#include "Partida.h"
+#include "../../ICollection/collections/List.h"
 
 class Jugador : public Usuario
 {
@@ -23,14 +27,14 @@ public:
 	std::string Getdescripcion() { return descripcion; }
 	void Setdescripcion(std::string val) { descripcion = val; }
 
-	std::string getContrasenia() { return contrasenia; }
+	std::string getContrasenia();
 
 	void setSuscripcion(Suscripcion *_suscripcion);
 	void setPartida(Partida *_partida);
 	void EliminarMiSuscripcion(Suscripcion *s);
 
-	bool verificarSuscripcion(string nombreJuego);
-	bool verificarEsVitalicia(string nombreJuego);
+	bool verificarSuscripcion(std::string nombreJuego);
+	bool verificarEsVitalicia(std::string nombreJuego);
 	void cancelarSuscripcion(Videojuego* vj);
 
 	virtual ~Jugador();

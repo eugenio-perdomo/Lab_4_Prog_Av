@@ -1,4 +1,4 @@
-#include "./../headers/Desarrollador.h"
+#include "../headers/Desarrollador.h"
 
 Desarrollador::Desarrollador() {}
 

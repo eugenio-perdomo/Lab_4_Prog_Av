@@ -1,4 +1,4 @@
-#include "./../headers/Comentario.h"
+#include "../headers/Comentario.h"
 
 Comentario::Comentario() {}
 

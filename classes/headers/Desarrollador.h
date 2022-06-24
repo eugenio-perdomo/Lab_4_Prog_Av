@@ -1,7 +1,9 @@
-#ifndef ESTUDIANTE_H
-#define ESTUDIANTE_H
+#ifndef DESARROLLADOR_H_INCLUDED
+#define DESARROLLADOR_H_INCLUDED
 
-#include "./Usuario.h"
+#include "Usuario.h"
+#include "Videojuego.h"
+
 class Desarrollador : public Usuario
 {
 private:

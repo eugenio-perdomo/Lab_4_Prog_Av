@@ -1,14 +1,17 @@
 #ifndef SUSCRIPCION_H
 #define SUSCRIPCION_H
 
-#include "./../../ICollection/interfaces/ICollection.h"
-#include "./../../datatypes/headers/DtFecha.h"
-#include "./Videojuego.h"
-#include "./Jugador.h"
-#include "./MetodoPago.h"
-#include "./Valor.h"
-
+class Jugador;
 class Videojuego;
+
+#include "string.h"
+#include "../../ICollection/interfaces/ICollection.h"
+#include "../../datatypes/headers/DtFecha.h"
+#include "Jugador.h"
+#include "Videojuego.h"
+#include "MetodoPago.h"
+#include "Valor.h"
+
 
 class Suscripcion : public ICollectible
 {
@@ -48,7 +51,7 @@ public:
 	/*Videojuego Getjuego() { return *juego; }
 	void Setjuego(Videojuego *val) { juego = val; }*/
 
-	string GetNombreVideojuego();
+	std::string GetNombreVideojuego();
 
 	void eliminarme();
 	virtual ~Suscripcion();

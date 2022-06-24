@@ -1,4 +1,4 @@
-#include "./../headers/Sistema.h"
+#include "../headers/Sistema.h"
 Sistema::Sistema()
 {
     this->videojuegos = new OrderedDictionary;

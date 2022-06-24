@@ -1,7 +1,7 @@
 #ifndef FABRICA_H
 #define FABRICA_H
-#include "./ISistema.h"
-#include "./Sistema.h"
+#include "ISistema.h"
+#include "Sistema.h"
 // class ISistema;
 
 class Fabrica

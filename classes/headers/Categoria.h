@@ -1,7 +1,7 @@
 #ifndef CATEGORIA_H
 #define CATEGORIA_H
 
-#include "./../../ICollection/interfaces/ICollection.h"
+#include "../../ICollection/interfaces/ICollection.h"
 #include "string"
 
 class Categoria : public ICollectible

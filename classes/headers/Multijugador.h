@@ -1,5 +1,5 @@
-#ifndef INDIVIDUAL_H
-#define INDIVIDUAL_H
+#ifndef MULTIJUGADOR_H
+#define MULTIJUGADOR_H
 
 #include "Partida.h"
 #include "Transmision.h"

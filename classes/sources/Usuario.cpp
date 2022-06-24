@@ -1,4 +1,4 @@
-#include "./../headers/Usuario.h"
+#include "../headers/Usuario.h"
 
 Usuario::Usuario() {}
 Usuario::Usuario(std::string _email, std::string _contrasenia)

@@ -1,4 +1,4 @@
-#include "./../headers/Multijugador.h"
+#include "../headers/Multijugador.h"
 
 Multijugador::Multijugador() {}
 

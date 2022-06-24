@@ -1,4 +1,4 @@
-#include "./../headers/Categoria.h"
+#include "../headers/Categoria.h"
 
 Categoria::Categoria() {}
 

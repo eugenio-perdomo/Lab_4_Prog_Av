@@ -1,4 +1,4 @@
-#include "./../headers/Estadistica.h"
+#include "../headers/Estadistica.h"
 
 Estadistica::Estadistica() {}
 Estadistica::~Estadistica() {}

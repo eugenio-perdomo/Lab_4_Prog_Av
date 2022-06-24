@@ -1,4 +1,4 @@
-#include "./../headers/Suscripcion.h"
+#include "../headers/Suscripcion.h"
 
 Suscripcion::Suscripcion(){}
 
@@ -18,6 +18,6 @@ void Suscripcion::eliminarme() {
 }
 Suscripcion::~Suscripcion() {}
 
-string Suscripcion::GetNombreVideojuego(){
+std::string Suscripcion::GetNombreVideojuego(){
     return juego->Getnombre();
 }

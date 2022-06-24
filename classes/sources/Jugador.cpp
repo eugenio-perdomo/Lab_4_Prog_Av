@@ -1,4 +1,4 @@
-#include "./../headers/Jugador.h"
+#include "../headers/Jugador.h"
 
 Jugador::Jugador()
 {
@@ -15,6 +15,10 @@ Jugador::Jugador(std::string _email, std::string _contrasenia, std::string _nick
     this->partidas = new List();
 }
 
+std::string Jugador::getContrasenia()
+{
+    return this->contrasenia;
+}
 void Jugador::setSuscripcion(Suscripcion *_suscripcion)
 {
     /*
@@ -33,7 +37,7 @@ void Jugador::EliminarMiSuscripcion(Suscripcion *s){
 }
 Jugador::~Jugador() {}
 
-bool Jugador::verificarSuscripcion(string nombreJuego){
+bool Jugador::verificarSuscripcion(std::string nombreJuego){
 
     bool resultado = false;
 
@@ -50,7 +54,7 @@ bool Jugador::verificarSuscripcion(string nombreJuego){
     return resultado;
 }
 
-bool Jugador::verificarEsVitalicia(string nombreJuego){
+bool Jugador::verificarEsVitalicia(std::string nombreJuego){
 
     bool resultado = false;
     IIterator* it = suscripcion->getIterator();

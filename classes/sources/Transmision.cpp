@@ -1,4 +1,4 @@
-#include "./../headers/Transmision.h"
+#include "../headers/Transmision.h"
 
 Transmision::Transmision()
 {

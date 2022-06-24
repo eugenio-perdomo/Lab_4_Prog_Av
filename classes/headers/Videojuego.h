@@ -1,15 +1,17 @@
-#ifndef VIJEOJUEGO_H
-#define VIJEOJUEGO_H
-
-#include "string"
-#include "./Estadistica.h"
-#include "./Categoria.h"
-#include "./Suscripcion.h"
-#include "./../../ICollection/interfaces/ICollection.h"
-#include "./../../ICollection/collections/List.h"
-#include "./../../ICollection/collections/OrderedDictionary.h"
+#ifndef VIDEOJUEGO_H
+#define VIDEOJUEGO_H
 
 class Suscripcion;
+
+#include "string"
+#include "Estadistica.h"
+#include "Categoria.h"
+#include "Partida.h"
+#include "Suscripcion.h"
+#include "../../ICollection/interfaces/ICollection.h"
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/collections/OrderedDictionary.h"
+#include "../../ICollection/StringKey.h"
 
 class Videojuego: public ICollectible
 {

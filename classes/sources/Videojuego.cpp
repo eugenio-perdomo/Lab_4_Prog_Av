@@ -1,4 +1,4 @@
-#include "./../headers/Videojuego.h"
+#include "../headers/Videojuego.h"
 
 Videojuego::Videojuego(std::string _nombre, std::string _descripcion, float _costoVitalicia, float _costoMensual, float _costoTrimestral,
                        float _costoAnual, Estadistica *_est)

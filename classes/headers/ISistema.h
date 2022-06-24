@@ -5,38 +5,39 @@
 #include <ctime>
 #include <string>
 #include <string.h>
-#include "./../../ICollection/collections/List.h"
-#include "./../../ICollection/collections/ListIterator.h"
-#include "./../../ICollection/collections/ListNode.h"
-#include "./../../ICollection/collections/OrderedDictionary.h"
-#include "./../../ICollection/collections/OrderedDictionaryEntry.h"
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/collections/ListIterator.h"
+#include "../../ICollection/collections/ListNode.h"
+#include "../../ICollection/collections/OrderedDictionary.h"
+#include "../../ICollection/collections/OrderedDictionaryEntry.h"
 
-#include "./../../ICollection/interfaces/ICollectible.h"
-#include "./../../ICollection/interfaces/ICollection.h"
-#include "./../../ICollection/interfaces/IDictionary.h"
-#include "./../../ICollection/interfaces/IIterator.h"
-#include "./../../ICollection/interfaces/OrderedKey.h"
-#include "./../../ICollection/interfaces/IKey.h"
+#include "../../ICollection/interfaces/ICollectible.h"
+#include "../../ICollection/interfaces/ICollection.h"
+#include "../../ICollection/interfaces/IDictionary.h"
+#include "../../ICollection/interfaces/IIterator.h"
+#include "../../ICollection/interfaces/OrderedKey.h"
+#include "../../ICollection/interfaces/IKey.h"
 
-#include "./../../ICollection/Integer.h"
-#include "./../../ICollection/String.h"
-#include "./../../ICollection/StringKey.h"
+#include "../../ICollection/Integer.h"
+#include "../../ICollection/String.h"
+#include "../../ICollection/StringKey.h"
 
-#include "./../../datatypes/headers/DtFecha.h"
-#include "./Usuario.h"
-#include "./Desarrollador.h"
-#include "./Jugador.h"
+#include "../../datatypes/headers/DtFecha.h"
+#include "Usuario.h"
+#include "Desarrollador.h"
+#include "Jugador.h"
 
-#include "./Partida.h"
-#include "./Multijugador.h"
-#include "./Individual.h"
-#include "./Transmision.h"
-#include "./Comentario.h"
+#include "Partida.h"
+#include "Multijugador.h"
+#include "Individual.h"
+#include "Transmision.h"
+#include "Comentario.h"
 
-#include "./Videojuego.h"
-#include "./Estadistica.h"
-#include "./Categoria.h"
-#include "./Suscripcion.h"
+#include "Videojuego.h"
+#include "Estadistica.h"
+#include "Categoria.h"
+#include "Suscripcion.h"
+class Sistema;
 
 class ISistema
 {
@@ -73,7 +74,6 @@ public:
 
 
 	//CASO DE USO : ELIMINAR VIDEOJUEGO
-	virtual void mostrarVideojuegosDesarrollador() = 0;
 	virtual Videojuego* obtenerVideojuegodesarrollador(std::string videojuego) = 0;
 	virtual void EliminarVideojuego(Desarrollador *d ,Sistema *s) = 0;
 	virtual void mostrarListaVideojuegos(List *lista) = 0;
