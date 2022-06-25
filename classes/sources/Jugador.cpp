@@ -47,7 +47,11 @@ bool Jugador::verificarSuscripcion(std::string nombreJuego){
         Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
 
         if (aux->GetNombreVideojuego()==nombreJuego){
-            resultado = true;
+
+            if (aux->Getcancelada()==false){
+                resultado = true;
+            }
+
         }
         it->next();
     }  
@@ -63,8 +67,10 @@ bool Jugador::verificarEsVitalicia(std::string nombreJuego){
         Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
         
         if (aux->GetNombreVideojuego()==nombreJuego){
-            if (aux->Gettipo()==Vitalicia){
-                resultado = true;
+            if (aux->Getcancelada()==false){
+                if (aux->Gettipo()==Vitalicia){
+                    resultado = true;
+                }
             }
         }
         it->next();
@@ -73,5 +79,17 @@ bool Jugador::verificarEsVitalicia(std::string nombreJuego){
 }
 
 void Jugador::cancelarSuscripcion(Videojuego* vj){
-    suscripcion->remove(vj);
+
+    IIterator* it = suscripcion->getIterator();
+
+    while(it->hasCurrent()){
+        Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
+
+        if (aux->GetNombreVideojuego()==vj->Getnombre()){
+            aux->Setcancelada(true);
+        }
+        it->next();
+    }
+
+    //suscripcion->remove(vj);
 }

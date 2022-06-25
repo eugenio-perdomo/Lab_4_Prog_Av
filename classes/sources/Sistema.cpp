@@ -417,12 +417,65 @@ void Sistema::suscribirseVideojuego(){
                 std::cin >> op2;
 
                 jugadorActual->cancelarSuscripcion(GetUnVideojuego(key));
+
+                //Avisar a videojuego:
+                Videojuego* auxVideojuego1 = dynamic_cast<Videojuego*>(videojuegos->find(key));
+                auxVideojuego1->cancelarSuscripcion(jugadorActual->Getnick());
             }
 
         } else{
             //No tiene una suscripcion para ese videojuego.
 
-            //ENTONCES: crear la suscripcion y agregarla o cancelar el proceso
+            int op3;
+            std::cout << "\nSeleccionar metodo de pago:";
+            std::cout << "1- Tarjeta";
+            std::cout << "2- Paypal";
+            std::cin >> op3;
+            MetodoPago metodo;
+            if (op3==1){
+                metodo=Tarjeta;
+            } else {
+                metodo=Paypal;
+            }
+
+            int op4;
+            std::cout << "\nSeleccionar renovacion:";
+            std::cout << "1- Vitalicia";
+            std::cout << "2- Mensual";
+            std::cout << "3- Trimestral";
+            std::cout << "4- Anual";
+            std::cin >> op4;
+            Valor valor;
+
+            switch (op4){
+            case 1: valor=Vitalicia; 
+            break;
+
+            case 2: valor=UnMes;
+            break;
+
+            case 3: valor=TresMeses;
+            break;
+
+            case 4: valor=Anio;
+            break; 
+            }      
+
+            int op5;
+            std::cout << "\nDesea confirmar la suscripcion?";
+            std::cout << "1- Si";
+            std::cout << "2- No";
+            std::cin >> op5;
+
+            if (op5==1){
+                Suscripcion* susAux = new Suscripcion(fechaDelSistema, metodo, valor, false, dynamic_cast<Videojuego*>(videojuegos->find(key)),jugadorActual);
+                jugadorActual->setSuscripcion(susAux);
+
+                //Avisar a videojuego:
+                Videojuego* auxVideojuego2 = dynamic_cast<Videojuego*>(videojuegos->find(key));
+                auxVideojuego2->setSuscripcion(susAux);
+            }
+
         }
 
     } else {

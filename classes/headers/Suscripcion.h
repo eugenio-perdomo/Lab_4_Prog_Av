@@ -26,13 +26,7 @@ private:
 
 public:
 	Suscripcion();
-	Suscripcion(/*float costo,*/
-	DtFecha *fechaInicio,
-	MetodoPago metodo,
-	Valor tipo,
-	bool cancelada,
-	Videojuego *juego,
-	Jugador *jugador);
+	Suscripcion(/*float costo,*/DtFecha *fechaInicio, MetodoPago metodo, Valor tipo, bool cancelada, Videojuego* juego, Jugador *jugador);
 
 	/*float Getcosto() { return costo; }
 	void Setcosto(float val) { costo = val; }*/
@@ -52,6 +46,7 @@ public:
 	void Setjuego(Videojuego *val) { juego = val; }*/
 
 	std::string GetNombreVideojuego();
+	std::string GetNombreJugador();
 
 	void eliminarme();
 	virtual ~Suscripcion();

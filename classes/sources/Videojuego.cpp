@@ -73,3 +73,18 @@ void Videojuego::Borrame(){
     delete(this);
 }
 Videojuego::~Videojuego() {}
+
+void Videojuego::cancelarSuscripcion(std::string nick){
+    IIterator* it= suscripcion->getIterator();
+
+    while(it->hasCurrent()){
+        Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
+
+        if (aux->GetNombreJugador()==nick){
+            if (aux->Getcancelada()==false){
+                aux->Setcancelada(true);
+            }
+        }
+
+    }
+}

@@ -53,6 +53,8 @@ public:
 	void setSuscripcion(Suscripcion *s);
 	void Borrame();
 
+	void cancelarSuscripcion(std::string nick);
+
 	virtual ~Videojuego();
 };
 
