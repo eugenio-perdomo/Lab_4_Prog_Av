@@ -32,64 +32,76 @@ void Jugador::setPartida(Partida *_partida)
     this->partidas->add(_partida);
 }
 
-void Jugador::EliminarMiSuscripcion(Suscripcion *s){
+void Jugador::EliminarMiSuscripcion(Suscripcion *s)
+{
     this->suscripcion->remove(s);
 }
 Jugador::~Jugador() {}
 
-bool Jugador::verificarSuscripcion(std::string nombreJuego){
+bool Jugador::verificarSuscripcion(std::string nombreJuego)
+{
 
     bool resultado = false;
 
-    IIterator* it = suscripcion->getIterator();
+    IIterator *it = suscripcion->getIterator();
 
-    while (it->hasCurrent()){
-        Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
+    while (it->hasCurrent())
+    {
+        Suscripcion *aux = dynamic_cast<Suscripcion *>(it->getCurrent());
 
-        if (aux->GetNombreVideojuego()==nombreJuego){
+        if (aux->GetNombreVideojuego() == nombreJuego)
+        {
 
-            if (aux->Getcancelada()==false){
+            if (aux->Getcancelada() == false)
+            {
                 resultado = true;
             }
-
         }
         it->next();
-    }  
+    }
     return resultado;
 }
 
-bool Jugador::verificarEsVitalicia(std::string nombreJuego){
+bool Jugador::verificarEsVitalicia(std::string nombreJuego)
+{
 
     bool resultado = false;
-    IIterator* it = suscripcion->getIterator();
+    IIterator *it = suscripcion->getIterator();
 
-    while(it->hasCurrent()){
-        Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
-        
-        if (aux->GetNombreVideojuego()==nombreJuego){
-            if (aux->Getcancelada()==false){
-                if (aux->Gettipo()==Vitalicia){
+    while (it->hasCurrent())
+    {
+        Suscripcion *aux = dynamic_cast<Suscripcion *>(it->getCurrent());
+
+        if (aux->GetNombreVideojuego() == nombreJuego)
+        {
+            if (aux->Getcancelada() == false)
+            {
+                if (aux->Gettipo() == Vitalicia)
+                {
                     resultado = true;
                 }
             }
         }
         it->next();
-    }  
+    }
     return resultado;
 }
 
-void Jugador::cancelarSuscripcion(Videojuego* vj){
+void Jugador::cancelarSuscripcion(Videojuego *vj)
+{
 
-    IIterator* it = suscripcion->getIterator();
+    IIterator *it = suscripcion->getIterator();
 
-    while(it->hasCurrent()){
-        Suscripcion* aux=dynamic_cast<Suscripcion*>(it->getCurrent());
+    while (it->hasCurrent())
+    {
+        Suscripcion *aux = dynamic_cast<Suscripcion *>(it->getCurrent());
 
-        if (aux->GetNombreVideojuego()==vj->Getnombre()){
+        if (aux->GetNombreVideojuego() == vj->Getnombre())
+        {
             aux->Setcancelada(true);
         }
         it->next();
     }
 
-    //suscripcion->remove(vj);
+    // suscripcion->remove(vj);
 }

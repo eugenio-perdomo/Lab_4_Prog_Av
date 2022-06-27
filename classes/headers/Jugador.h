@@ -14,8 +14,8 @@ class Jugador : public Usuario
 private:
 	std::string nick;
 	std::string descripcion;
-	ICollection *suscripcion; 	// Luego definir si esto es una colleccion o es un IDictionary
-								// Va a cambiar el set, utilizando IKey
+	ICollection *suscripcion; // Luego definir si esto es una colleccion o es un IDictionary
+							  // Va a cambiar el set, utilizando IKey
 	ICollection *partidas;
 
 public:
@@ -35,7 +35,7 @@ public:
 
 	bool verificarSuscripcion(std::string nombreJuego);
 	bool verificarEsVitalicia(std::string nombreJuego);
-	void cancelarSuscripcion(Videojuego* vj);
+	void cancelarSuscripcion(Videojuego *vj);
 
 	virtual ~Jugador();
 };

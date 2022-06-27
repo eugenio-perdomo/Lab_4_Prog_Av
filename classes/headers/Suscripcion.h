@@ -12,11 +12,10 @@ class Videojuego;
 #include "MetodoPago.h"
 #include "Valor.h"
 
-
 class Suscripcion : public ICollectible
 {
 private:
-	//float costo;
+	// float costo;
 	DtFecha *fechaInicio;
 	MetodoPago metodo;
 	Valor tipo;
@@ -26,7 +25,7 @@ private:
 
 public:
 	Suscripcion();
-	Suscripcion(/*float costo,*/DtFecha *fechaInicio, MetodoPago metodo, Valor tipo, bool cancelada, Videojuego* juego, Jugador *jugador);
+	Suscripcion(/*float costo,*/ DtFecha *fechaInicio, MetodoPago metodo, Valor tipo, bool cancelada, Videojuego *juego, Jugador *jugador);
 
 	/*float Getcosto() { return costo; }
 	void Setcosto(float val) { costo = val; }*/

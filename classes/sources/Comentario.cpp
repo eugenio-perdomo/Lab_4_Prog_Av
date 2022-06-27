@@ -43,7 +43,8 @@ void Comentario::setFechaEnvio(DtFecha *fechaEnvio)
 {
     this->fechaEnvio = fechaEnvio;
 }
-void Comentario::Eliminarme(){
-    delete(this);
+void Comentario::Eliminarme()
+{
+    delete (this);
 }
 Comentario::~Comentario() {}

@@ -22,7 +22,7 @@ public:
 	void setTransmitidaEnVivo(bool transmitidaEnVivo);
 	void setUltimaConexion(DtFecha ultimaConexion);
 	void setCantJugadores(int cantJugadores);
-	
+
 	Transmision *Gettransmision() { return transmision; }
 	void Settransmision(Transmision *val) { transmision = val; }
 

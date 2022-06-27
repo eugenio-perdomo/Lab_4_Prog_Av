@@ -13,19 +13,19 @@ private:
 	Usuario *usuarioActual;
 	Desarrollador *desarrolladorActual;
 	Jugador *jugadorActual;
-	
 
 public:
 	Sistema();
-	void menuCaso1(Sistema* s); // Alta de usuario
-	void menuCaso2(Sistema* s); // Iniciar sesión
-	void menuCaso3(int i, Sistema* s); // Cargar datos de prueba
-	
+	void menuCaso1(/*Sistema* s*/);			// Alta de usuario
+	void menuCaso2(/*Sistema* s*/);			// Iniciar sesión
+	void menuCaso3(int i /*, Sistema* s*/); // Cargar datos de prueba
+
 	void imprimirTextoPrincipal();
 	void imprimirTextoDelDesarrollador();
 	void imprimirTextoDelJugador();
 	void imprimirMenuDesarrollador();
 	void imprimirMenuJugador();
+	void clearDeDatosDeEntrada();
 
 	// CASO DE USO 1: ALTA USUARIO
 	void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc);
@@ -38,18 +38,18 @@ public:
 
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	void mostrarCategorias();
-	Categoria* obtenerCategoria(std::string categoria);
-	void publicarVideojuego(Sistema *s);
-	void mostrarListaCategorias(List* lista);
+	Categoria *obtenerCategoria(std::string categoria);
+	void publicarVideojuego(/*Sistema* s*/);
+	void mostrarListaCategorias(List *lista);
 
 	// CASO DE USO 4: SUSCRIBIRSE A VIDEOJUEGO
 	void suscribirseVideojuego();
 	void mostrarVideojuegos();
-	Videojuego* GetUnVideojuego(StringKey* nombreVideojuego);
+	Videojuego *GetUnVideojuego(StringKey *nombreVideojuego);
 
-	//CASO DE USO : ELIMINAR VIDEOJUEGO
-	Videojuego* obtenerVideojuegodesarrollador(std::string videojuego);
-	void EliminarVideojuego(Desarrollador *d, Sistema *s);
+	// CASO DE USO : ELIMINAR VIDEOJUEGO
+	Videojuego *obtenerVideojuegodesarrollador(std::string videojuego);
+	void EliminarVideojuego(Desarrollador *d /*, Sistema* s*/);
 	void mostrarListaVideojuegos(List *lista);
 
 	virtual ~Sistema();

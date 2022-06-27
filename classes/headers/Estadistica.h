@@ -9,7 +9,11 @@ private:
 
 public:
 	Estadistica();
-	Estadistica(int _puntaje, float _duracionTotalPorJugador) { puntaje = _puntaje; duracionTotalPorJugador = _duracionTotalPorJugador; }
+	Estadistica(int _puntaje, float _duracionTotalPorJugador)
+	{
+		puntaje = _puntaje;
+		duracionTotalPorJugador = _duracionTotalPorJugador;
+	}
 
 	int Getpuntaje() { return puntaje; }
 	void Setpuntaje(int val) { puntaje = val; }

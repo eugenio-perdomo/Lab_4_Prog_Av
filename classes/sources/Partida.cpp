@@ -50,34 +50,36 @@ void Partida::setId(std::string id)
     this->id = id;
 }
 
-void Partida::setNombreVideojuego(std::string nombreVideojuego) 
+void Partida::setNombreVideojuego(std::string nombreVideojuego)
 {
     this->nombreVideojuego = nombreVideojuego;
 }
-void Partida::setFinalizado(bool finalizado) 
+void Partida::setFinalizado(bool finalizado)
 {
     this->finalizado = finalizado;
 }
-void Partida::setDuracionPartida(float duracionPartida) 
+void Partida::setDuracionPartida(float duracionPartida)
 {
     this->duracionPartida = duracionPartida;
 }
-void Partida::setFechaInicio(DtFecha fechaInicio) 
+void Partida::setFechaInicio(DtFecha fechaInicio)
 {
     this->fechaInicio = fechaInicio;
 }
-void Partida::setFechaFin(DtFecha fechaFin) 
+void Partida::setFechaFin(DtFecha fechaFin)
 {
     this->fechaFin = fechaFin;
 }
 
-void Partida::eliminarme(){
-    IIterator* it= this->comentarios->getIterator();
-    while(it->hasCurrent()){
-        Comentario *com = dynamic_cast<Comentario*>(it->getCurrent());
+void Partida::eliminarme()
+{
+    IIterator *it = this->comentarios->getIterator();
+    while (it->hasCurrent())
+    {
+        Comentario *com = dynamic_cast<Comentario *>(it->getCurrent());
         comentarios->remove(com);
         com->Eliminarme();
-        delete(com);
+        delete (com);
         it->next();
     }
     delete it;

@@ -16,7 +16,7 @@ public:
 
 	bool getEsContinuacion();
 	std::string getNickJugador();
-	
+
 	void setEsContinuacion(bool esContinuacion);
 	void setNickJugador(std::string nickJugador);
 

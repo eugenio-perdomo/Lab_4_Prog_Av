@@ -9,47 +9,43 @@ Sistema::Sistema()
 }
 
 // Alta de usuario
-void Sistema::menuCaso1(Sistema* s)
+void Sistema::menuCaso1(/*Sistema* s*/)
 {
-    int opcionUsuario;
+    int tipo;
     bool bandera = true;
     while (bandera == true)
     {
-        string email, contrasenia;
-        std::cout << "Ingresar email: ";
-        std::cin.ignore();
-        getline(std::cin, email);
+        std::string email, contrasenia;
+        std::cout << "\nIngresar email: ";
+        std::cin >> email;
+        clearDeDatosDeEntrada();
         std::cout << "Ingresar contrasenia: ";
-        std::cin.ignore();
-        getline(std::cin, contrasenia);
+        std::cin >> contrasenia;
+        clearDeDatosDeEntrada();
 
-        int tipo;
-
-        std::cout << "Indicar tipo (1-jugador 2-desarrollador)" << std::endl;
+        std::cout << "Indicar tipo de usuario \n1- Jugador \n2- Desarrollador\n\nOpcion: \e[0;92m";
         std::cin >> tipo;
-
+        clearDeDatosDeEntrada();
+        
         if (tipo == 1)
         {
             // AGREGAR JUGADOR
-            string nick;
+            std::string nick, descripcion;
             std::cout << "Ingresar nick: ";
-            std::cin.ignore();
-            getline(std::cin, nick);
-
-            string descripcion;
+            std::cin >> nick;
+            clearDeDatosDeEntrada();
             std::cout << "Ingresar descripcion: ";
-            std::cin.ignore();
-            getline(std::cin, descripcion);
-            s->agregarJugador(email, contrasenia, nick, descripcion);
+            std::cin >> descripcion;
+            clearDeDatosDeEntrada();
+            agregarJugador(email, contrasenia, nick, descripcion);
         }
         else
         {
             // AGREGAR DESARROLLADOR
             std::cout << "Ingresar empresa: ";
-            string empresa;
-            std::cin.ignore();
-            getline(std::cin, empresa);
-            s->agregarDesarrollador(email, contrasenia, empresa);
+            std::string empresa;
+            clearDeDatosDeEntrada();
+            agregarDesarrollador(email, contrasenia, empresa);
         }
 
         break;
@@ -59,19 +55,33 @@ void Sistema::menuCaso1(Sistema* s)
 void Sistema::agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc)
 {
     StringKey *key = new StringKey(email);
-    Jugador *jug = new Jugador(email, contrasenia, nick, desc);
-    jugadores->add(key, jug);
+    if (jugadores->member(key) == 1)
+    {
+        std::cout << "\e[1;33mYa existe un Jugador con ese mail\n\e[0m";
+    }
+    else
+    {
+        Jugador *jug = new Jugador(email, contrasenia, nick, desc);
+        jugadores->add(key, jug);
+    }
 }
 
 void Sistema::agregarDesarrollador(std::string email, std::string contrasenia, std::string empresa)
 {
     StringKey *key = new StringKey(email);
-    Desarrollador *des = new Desarrollador(email, contrasenia, empresa);
-    desarrolladores->add(key, des);
+    if (desarrolladores->member(key) == 1)
+    {
+        std::cout << "\e[1;33mYa existe un Desarrollador con ese mail\n\e[0m";
+    }
+    else
+    {
+        Desarrollador *des = new Desarrollador(email, contrasenia, empresa);
+        desarrolladores->add(key, des);
+    }
 }
 
 // Iniciar sesión
-void Sistema::menuCaso2(Sistema* s)
+void Sistema::menuCaso2(/*Sistema* s*/)
 {
     std::string email, contrasenia;
     bool bandera = true;
@@ -80,29 +90,24 @@ void Sistema::menuCaso2(Sistema* s)
     {
         while (bandera == true)
         {
-
             std::cout << "\nIngrese email: ";
             std::cin >> email;
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            std::cout << "\nIngrese contraseña: ";
+            clearDeDatosDeEntrada();
+            std::cout << "Ingrese contraseña: ";
             std::cin >> contrasenia;
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
+            clearDeDatosDeEntrada();
             opcionUsuario = iniciarSesion(email, contrasenia);
             switch (opcionUsuario)
             {
             case 0:
             {
                 int op;
-                std::cout << "Los datos de acceso son incorrectos" << std::endl;
-                std::cout << "Desea cancelar el inicio de sesion?" << std::endl;
-                std::cout << "1- Si" << std::endl;
-                std::cout << "2- No" << std::endl;
+                std::cout << "\e[1;33mLos datos de acceso son incorrectos.\e[0m\n";
+                std::cout << "¿Desea cancelar el inicio de sesion?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> op;
-                std::cin.clear();
-                std::cin.ignore(10000, '\n');
-                if (op == 1)
+                clearDeDatosDeEntrada();                
+
+                if (op != 2)
                 {
                     bandera = false;
                 }
@@ -110,17 +115,19 @@ void Sistema::menuCaso2(Sistema* s)
             }
             case 1:
             {
-                std::cout << "Sesion iniciada como Jugador" << std::endl;
-                usuarioActual = s->obtenerJugadorActual(email);
+                std::cout << "\e[1;33mSesion iniciada como Jugador.\e[0m\n";
+                usuarioActual = obtenerJugadorActual(email);
                 imprimirMenuJugador();
+                bandera = false;
                 break;
             }
             case 2:
             {
-                std::cout << "Sesion iniciada como Desarrollador" << std::endl;
-                usuarioActual = s->obtenerDesarrolladorActual(email);
-                desarrolladorActual = s->obtenerDesarrolladorActual(email);
+                std::cout << "\e[1;33mSesion iniciada como Desarrollador.\e[0m\n";
+                usuarioActual = obtenerDesarrolladorActual(email);
+                desarrolladorActual = obtenerDesarrolladorActual(email);
                 imprimirMenuDesarrollador();
+                bandera = false;
                 break;
             }
 
@@ -136,45 +143,38 @@ void Sistema::menuCaso2(Sistema* s)
     }
 }
 
-int Sistema::iniciarSesion(string email, string contrasenia)
+int Sistema::iniciarSesion(std::string email, std::string contrasenia)
 {
     StringKey *key = new StringKey(email);
-    // int validador=0;
-
     // Verifica si ese email pertenece a un jugador o a un desarrollador
     bool validarJugador = jugadores->member(key);
     bool validarDesarrollador = desarrolladores->member(key);
 
-    if (validarJugador == true)
+    if (validarJugador == 1)
     {
         Jugador *auxJugador = dynamic_cast<Jugador *>(jugadores->find(key));
         // Es usuario el que tiene contrasenia. Jugador debe tener constructor de todo entonces
         if (contrasenia == auxJugador->getContrasenia())
-        {
             return 1;
-        }
     }
 
-    if (validarDesarrollador == true)
+    if (validarDesarrollador == 1)
     {
         Desarrollador *auxDesarrollador = dynamic_cast<Desarrollador *>(desarrolladores->find(key));
         if (contrasenia == auxDesarrollador->getContrasenia())
-        {
             return 2;
-        }
     }
-
     return 0;
 }
 
-Jugador *Sistema::obtenerJugadorActual(string email)
+Jugador *Sistema::obtenerJugadorActual(std::string email)
 {
     StringKey *key = new StringKey(email);
     Jugador *auxJugador = dynamic_cast<Jugador *>(jugadores->find(key));
     return auxJugador;
 }
 
-Desarrollador *Sistema::obtenerDesarrolladorActual(string email)
+Desarrollador *Sistema::obtenerDesarrolladorActual(std::string email)
 {
     StringKey *key = new StringKey(email);
     Desarrollador *auxDesarrollador = dynamic_cast<Desarrollador *>(desarrolladores->find(key));
@@ -182,7 +182,7 @@ Desarrollador *Sistema::obtenerDesarrolladorActual(string email)
 }
 
 // Cargar datos de prueba
-void Sistema::menuCaso3(int i, Sistema* s)
+void Sistema::menuCaso3(int i /*, Sistema* s*/)
 {
     if (i == 0)
     {
@@ -219,7 +219,7 @@ void Sistema::menuCaso3(int i, Sistema* s)
         Videojuego *vj4 = new Videojuego("FIFA 21", "Descripcion FIFA 21", 3, 8, 28, 50, est4);
 
         DtFecha *fecha1 = new DtFecha(01, 06, 2021, 0, 00, 9);
-        Suscripcion *sus1 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::TresMeses, false, vj1 ,j1);
+        Suscripcion *sus1 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::TresMeses, false, vj1, j1);
         fecha1 = new DtFecha(02, 06, 2021, 0, 00, 11);
         Suscripcion *sus2 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::TresMeses, false, vj2, j2);
         fecha1 = new DtFecha(04, 06, 2021, 0, 00, 9);
@@ -229,7 +229,7 @@ void Sistema::menuCaso3(int i, Sistema* s)
         fecha1 = new DtFecha(03, 06, 2021, 0, 00, 7);
         Suscripcion *sus5 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::UnMes, false, vj2, j1);
         fecha1 = new DtFecha(21, 12, 2020, 0, 00, 15);
-        Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false,vj2, j2);
+        Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false, vj2, j2);
 
         vj1->setCategoria(c1);
         vj1->setCategoria(c2);
@@ -258,28 +258,30 @@ void Sistema::menuCaso3(int i, Sistema* s)
 }
 
 // Publicar videojuego
-void Sistema::publicarVideojuego(Sistema *s)
+void Sistema::publicarVideojuego(/*Sistema* s*/)
 {
     std::string nom, desc;
     float cMensual, cTristral, cAnual, cVitalicio;
 
     std::cout << "\nIngrese nombre: ";
     std::cin >> nom;
-    std::cin.clear();
-    std::cin.ignore(10000, '\n');
+    clearDeDatosDeEntrada();
     std::cout << "\nIngrese descripcion: ";
     std::cin >> desc;
-    std::cin.clear();
-    std::cin.ignore(10000, '\n');
+    clearDeDatosDeEntrada();
 
     std::cout << "\nIngrese costo menusal: ";
     std::cin >> cMensual;
+    clearDeDatosDeEntrada();
     std::cout << "\nIngrese costo trimestral: ";
     std::cin >> cTristral;
+    clearDeDatosDeEntrada();
     std::cout << "\nIngrese costo anual: ";
     std::cin >> cAnual;
+    clearDeDatosDeEntrada();
     std::cout << "\nIngrese costo vitalicio: ";
     std::cin >> cVitalicio;
+    clearDeDatosDeEntrada();
 
     bool deseaAgregar = true;
     int op2 = 1;
@@ -288,29 +290,27 @@ void Sistema::publicarVideojuego(Sistema *s)
     while (deseaAgregar == true)
     {
 
-        s->mostrarCategorias(); // ***Sin implementar***
-
+        mostrarCategorias(); // ***Sin implementar***
+        std::cout << "\nmostrarCategorias() aun sin implementar\n";
         std::string cat;
         std::cout << "\nSeleccione una categoria: ";
         std::cin >> cat;
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
-        Categoria *aux = s->obtenerCategoria(cat);
+        clearDeDatosDeEntrada();
+        Categoria *aux = obtenerCategoria(cat);
 
-        if (aux_categorias->member(aux))
-        {
-            // La categoria ya habia sido agregada a la lista auxiliar anteriormente
-            std::cout << "\nEsa categoria ya fue seleccionada anteriormente";
-        }
-        else
+        if (aux_categorias->member(aux) == 1)
         {
             aux_categorias->add(aux);
         }
+        else
+        {
+            // La categoria ya habia sido agregada a la lista auxiliar anteriormente
+            std::cout << "\n\e[0;31mEsa categoria ya fue seleccionada anteriormente\e[0m";
+        }
 
-        std::cout << "\nDesea asignar otra categoria?";
-        std::cout << "1- Si";
-        std::cout << "2- No";
+        std::cout << "\nDesea asignar otra categoria?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
         std::cin >> op2;
+        clearDeDatosDeEntrada();        
 
         if (op2 == 1)
         {
@@ -327,23 +327,23 @@ void Sistema::publicarVideojuego(Sistema *s)
     std::cout << "\nCosto anual: " << cAnual;
     std::cout << "\nCosto vitalicio: " << cVitalicio;
     std::cout << "\nCategorias: ";
-    s->mostrarListaCategorias(aux_categorias);
+    mostrarListaCategorias(aux_categorias);
 
     int op3;
-    std::cout << "\nDesea publicar el videojuego?";
-    std::cout << "1- Si";
-    std::cout << "2- No";
+    std::cout << "\nDesea publicar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
     std::cin >> op3;
+    clearDeDatosDeEntrada();    
 
-    if (op3==1){
-        //Confirma publicar el videojuego
-        Videojuego* videojuegoAux = new Videojuego(nom,desc,cMensual,cTristral,cAnual,cVitalicio,aux_categorias);
+    if (op3 == 1)
+    {
+        // Confirma publicar el videojuego
+        Videojuego *videojuegoAux = new Videojuego(nom, desc, cMensual, cTristral, cAnual, cVitalicio, aux_categorias);
+        // TODO: aquí la lista videojuegos de desarrollador le hacemos un -> add(vidJAux);
     }
-
 }
 
-void Sistema::mostrarCategorias(){
-
+void Sistema::mostrarCategorias()
+{
 }
 
 Categoria *Sistema::obtenerCategoria(std::string categoria)
@@ -353,17 +353,18 @@ Categoria *Sistema::obtenerCategoria(std::string categoria)
     return aux;
 }
 
-void Sistema::mostrarListaCategorias(List* lista){
-    IIterator* it= lista->getIterator();
+void Sistema::mostrarListaCategorias(List *lista)
+{
+    IIterator *it = lista->getIterator();
 
-    while(it->hasCurrent()){
-        Categoria* aux= dynamic_cast<Categoria*>(it->getCurrent());
+    while (it->hasCurrent())
+    {
+        Categoria *aux = dynamic_cast<Categoria *>(it->getCurrent());
 
         std::cout << aux->Getnombre();
 
         it->next();
     }
-
 }
 
 Videojuego *Sistema::obtenerVideojuegodesarrollador(std::string videojuego)
@@ -373,154 +374,163 @@ Videojuego *Sistema::obtenerVideojuegodesarrollador(std::string videojuego)
     return aux;
 }
 
-void Sistema::mostrarListaVideojuegos(List *lista){
-    
-    IIterator* it= lista->getIterator();
+void Sistema::mostrarListaVideojuegos(List *lista)
+{
 
-    while(it->hasCurrent()){
-        Videojuego* aux= dynamic_cast<Videojuego*>(it->getCurrent());
+    IIterator *it = lista->getIterator();
+
+    while (it->hasCurrent())
+    {
+        Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
         std::cout << aux->Getnombre();
         it->next();
     }
-
 }
 
+// Suscribirse a videojuego
 
-
-//Suscribirse a videojuego
-
-void Sistema::suscribirseVideojuego(){
+void Sistema::suscribirseVideojuego()
+{
     mostrarVideojuegos();
 
     std::string nombreVideojuego;
     std::cout << "\nIndicar el nombre del videojuego: ";
     std::cin >> nombreVideojuego;
-    std::cin.clear();
-    std::cin.ignore(10000, '\n');
+    clearDeDatosDeEntrada();
 
-    StringKey* key = new StringKey(nombreVideojuego);
+    StringKey *key = new StringKey(nombreVideojuego);
 
-    if (videojuegos->member(key)){
-        
-        if(jugadorActual->verificarSuscripcion(nombreVideojuego)){
-            //Ya tiene una suscripcion activa para ese videojuego.
+    if (videojuegos->member(key) == 1)
+    {
 
-            if(jugadorActual->verificarEsVitalicia(nombreVideojuego)){
-                //La suscripcion es vitalicia
-                std::cout << "\nLas suscripciones vitalicias no se pueden cancelar";
-            } else {
-                //La suscripcion no es vitalicia
+        if (jugadorActual->verificarSuscripcion(nombreVideojuego))
+        {
+            // Ya tiene una suscripcion activa para ese videojuego.
+
+            if (jugadorActual->verificarEsVitalicia(nombreVideojuego))
+            {
+                // La suscripcion es vitalicia
+                std::cout << "\n\e[1;31mLas suscripciones vitalicias no se pueden cancelar.\n\e[0m";
+            }
+            else
+            {
+                // La suscripcion no es vitalicia
                 int op2;
-                std::cout << "\nDesea cancelar la suscripcion para el videojuego?";
-                std::cout << "1- Si";
-                std::cout << "2- No";
+                std::cout << "\n\e[1;33mDesea cancelar la suscripcion para el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> op2;
+                clearDeDatosDeEntrada();                
 
                 jugadorActual->cancelarSuscripcion(GetUnVideojuego(key));
 
-                //Avisar a videojuego:
-                Videojuego* auxVideojuego1 = dynamic_cast<Videojuego*>(videojuegos->find(key));
+                // Avisar a videojuego:
+                Videojuego *auxVideojuego1 = dynamic_cast<Videojuego *>(videojuegos->find(key));
                 auxVideojuego1->cancelarSuscripcion(jugadorActual->Getnick());
             }
-
-        } else{
-            //No tiene una suscripcion para ese videojuego.
+        }
+        else
+        {
+            // No tiene una suscripcion para ese videojuego.
 
             int op3;
-            std::cout << "\nSeleccionar metodo de pago:";
-            std::cout << "1- Tarjeta";
-            std::cout << "2- Paypal";
+            std::cout << "\n\e[1;33mSeleccionar metodo de pago:\e[0m\n1- Tarjeta\n2- Paypal\n\nOpcion: \e[0;92m";
             std::cin >> op3;
+            clearDeDatosDeEntrada();
+            
             MetodoPago metodo;
-            if (op3==1){
-                metodo=Tarjeta;
-            } else {
-                metodo=Paypal;
+            if (op3 == 1)
+            {
+                metodo = Tarjeta;
+            }
+            else
+            {
+                metodo = Paypal;
             }
 
             int op4;
-            std::cout << "\nSeleccionar renovacion:";
-            std::cout << "1- Vitalicia";
-            std::cout << "2- Mensual";
-            std::cout << "3- Trimestral";
-            std::cout << "4- Anual";
+            std::cout << "\n\e[1;33mSeleccionar renovacion:\e[0m\n1- Vitalicia\n2- Mensual\n3- Trimestral\n4- Anual\n\nOpcion: \e[0;92m";
             std::cin >> op4;
+            clearDeDatosDeEntrada();
+            
             Valor valor;
 
-            switch (op4){
-            case 1: valor=Vitalicia; 
-            break;
+            switch (op4)
+            {
+            case 1:
+                valor = Vitalicia;
+                break;
 
-            case 2: valor=UnMes;
-            break;
+            case 2:
+                valor = UnMes;
+                break;
 
-            case 3: valor=TresMeses;
-            break;
+            case 3:
+                valor = TresMeses;
+                break;
 
-            case 4: valor=Anio;
-            break; 
-            }      
-
-            int op5;
-            std::cout << "\nDesea confirmar la suscripcion?";
-            std::cout << "1- Si";
-            std::cout << "2- No";
-            std::cin >> op5;
-
-            if (op5==1){
-                Suscripcion* susAux = new Suscripcion(fechaDelSistema, metodo, valor, false, dynamic_cast<Videojuego*>(videojuegos->find(key)),jugadorActual);
-                jugadorActual->setSuscripcion(susAux);
-
-                //Avisar a videojuego:
-                Videojuego* auxVideojuego2 = dynamic_cast<Videojuego*>(videojuegos->find(key));
-                auxVideojuego2->setSuscripcion(susAux);
+            case 4:
+                valor = Anio;
+                break;
             }
 
+            int op5;
+            std::cout << "\n\e[1;33mDesea confirmar la suscripcion?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+            std::cin >> op5;
+            clearDeDatosDeEntrada();
+            
+            if (op5 == 1)
+            {
+                Suscripcion *susAux = new Suscripcion(fechaDelSistema, metodo, valor, false, dynamic_cast<Videojuego *>(videojuegos->find(key)), jugadorActual);
+                jugadorActual->setSuscripcion(susAux);
+
+                // Avisar a videojuego:
+                Videojuego *auxVideojuego2 = dynamic_cast<Videojuego *>(videojuegos->find(key));
+                auxVideojuego2->setSuscripcion(susAux);
+            }
         }
-
-    } else {
-        std::cout << "\nEl videojuego no existe";
     }
-
+    else
+    {
+        std::cout << "\n\e[1;31mEl videojuego no existe.\n\e[0m";
+    }
 }
 
-void Sistema::mostrarVideojuegos(){
-    IIterator* it= videojuegos->getIterator();
+void Sistema::mostrarVideojuegos()
+{
+    IIterator *it = videojuegos->getIterator();
 
-    while(it->hasCurrent()){
-        Videojuego* aux= dynamic_cast<Videojuego*>(it->getCurrent());
+    while (it->hasCurrent())
+    {
+        Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
         std::cout << aux->Getnombre();
         it->next();
     }
 }
 
-Videojuego* Sistema::GetUnVideojuego(StringKey* nombreVideojuego){
-    Videojuego* aux =dynamic_cast<Videojuego*>(videojuegos->find(nombreVideojuego));
+Videojuego *Sistema::GetUnVideojuego(StringKey *nombreVideojuego)
+{
+    Videojuego *aux = dynamic_cast<Videojuego *>(videojuegos->find(nombreVideojuego));
     return aux;
 }
 
-
-
-
-
-
 // Eliminar Videojuego
-void Sistema::EliminarVideojuego(Desarrollador *d, Sistema *s)
+void Sistema::EliminarVideojuego(Desarrollador *d /*, Sistema* s*/)
 {
-    string nom;
+    std::string nom;
     d->mostrarVideojuegosDesarrollador();
-    std::cout << "\nIngrese nombre del videojuego a eliminar; ";
+    std::cout << "\nIngrese nombre del videojuego a eliminar: ";
     std::cin >> nom;
-    Videojuego *aux = s->obtenerVideojuegodesarrollador(nom);
+    clearDeDatosDeEntrada();
+    Videojuego *aux = obtenerVideojuegodesarrollador(nom);
 
     int op3;
-    std::cout << "\nDesea eliminar el videojuego?";
-    std::cout << "1- Si";
-    std::cout << "2- No";
+    std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
     std::cin >> op3;
+    clearDeDatosDeEntrada();
+    
 
-    if (op3==1){
-        //Confirma eliminar el videojuego
+    if (op3 == 1)
+    {
+        // Confirma eliminar el videojuego
         d->EliminarEsteJuego(aux);
     }
 }
@@ -532,21 +542,21 @@ void Sistema::imprimirMenuDesarrollador()
     while (bandera == true)
     {
         Sistema::imprimirTextoDelDesarrollador();
-        std::cin >> opcionUsuario;
-        std::cout << "\e[0m";
-        std::cin.clear();
+        std::cin >> opcionUsuario;        
+        clearDeDatosDeEntrada();
+
         try
         {
             switch (opcionUsuario)
             {
             case 1: // Publicar Videojuego
             {
-                publicarVideojuego(this);
+                publicarVideojuego(/*this*/);
                 break;
             }
             case 2: // Eliminar Videojuego
             {
-                EliminarVideojuego(desarrolladorActual, this);
+                EliminarVideojuego(desarrolladorActual /*, this*/);
                 break;
             }
 
@@ -575,10 +585,9 @@ void Sistema::imprimirMenuJugador()
     while (bandera == true)
     {
         Sistema::imprimirTextoDelJugador();
-        std::cin >> opcionUsuario;
-        std::cout << "\e[0m";
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
+        std::cin >> opcionUsuario;        
+        clearDeDatosDeEntrada();
+
         try
         {
             switch (opcionUsuario)
@@ -630,19 +639,26 @@ void Sistema::imprimirTextoPrincipal()
 void Sistema::imprimirTextoDelDesarrollador()
 {
     std::cout << "\e[0;92mMenú de Desarrollador - Elija una opción\e[0m:";
-    std::cout << "\e[0;92m2)\e[0m 1: Publicar videojuego.\n";
-    std::cout << "\e[0;92m3)\e[0m 2: Eliminar videojuego.\n";
-    std::cout << "Pulse \e[0;92m8\e[0m 3: Para salir.\n\nOpcion: \e[0;92m";
+    std::cout << "\n\e[0;92m1)\e[0m Publicar videojuego.\n";
+    std::cout << "\e[0;92m2)\e[0m Eliminar videojuego.\n";
+    std::cout << "Pulse \e[0;92m3\e[0m Para salir.\n\nOpcion: \e[0;92m";
 }
 
 void Sistema::imprimirTextoDelJugador()
 {
     std::cout << "\e[0;92mMenú de Jugador - Elija una opción\e[0m:";
-    std::cout << "\n\e[0;92m1)\e[0m 1: Suscribirse a videojuego.\n";
-    std::cout << "\e[0;92m3)\e[0m 2: Iniciar partida.\n";
-    std::cout << "\e[0;92m5)\e[0m 3: Finalizar partida.\n";
-    std::cout << "\e[0;92m6)\e[0m 4: Ver información de videojuego.\n";
-    std::cout << "Pulse \e[0;92m8\e[0m 5: para salir.\n\nOpcion: \e[0;92m";
+    std::cout << "\n\e[0;92m1)\e[0m Suscribirse a videojuego.\n";
+    std::cout << "\e[0;92m2)\e[0m Iniciar partida.\n";
+    std::cout << "\e[0;92m3)\e[0m Finalizar partida.\n";
+    std::cout << "\e[0;92m4)\e[0m Ver información de videojuego.\n";
+    std::cout << "Pulse \e[0;92m5\e[0m para salir.\n\nOpcion: \e[0;92m";
+}
+
+void Sistema::clearDeDatosDeEntrada()
+{
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+    std::cout << "\e[0m";
 }
 
 Sistema::~Sistema() {}

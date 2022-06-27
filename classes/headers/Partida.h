@@ -11,7 +11,7 @@ class Videojuego;
 
 class Partida : public ICollectible
 {
-	public:
+public:
 	std::string id;
 	std::string nombreVideojuego;
 	bool finalizado;
@@ -19,6 +19,7 @@ class Partida : public ICollectible
 	DtFecha fechaInicio;
 	DtFecha fechaFin;
 	ICollection *comentarios;
+
 protected:
 	Videojuego *juego;
 

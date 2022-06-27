@@ -43,15 +43,16 @@ class ISistema
 {
 private:
 public:
-	virtual void menuCaso1(Sistema* s) = 0;
-	virtual void menuCaso2(Sistema* s) = 0;
-	virtual void menuCaso3(int i, Sistema* s) = 0;
+	virtual void menuCaso1(/*Sistema* s*/) = 0;
+	virtual void menuCaso2(/*Sistema* s*/) = 0;
+	virtual void menuCaso3(int i /*, Sistema* s*/) = 0;
 
 	virtual void imprimirTextoPrincipal() = 0;
 	virtual void imprimirTextoDelDesarrollador() = 0;
 	virtual void imprimirTextoDelJugador() = 0;
 	virtual void imprimirMenuDesarrollador() = 0;
 	virtual void imprimirMenuJugador() = 0;
+	virtual void clearDeDatosDeEntrada() = 0;
 
 	// CASO DE USO 1: ALTA USUARIO
 	virtual void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc) = 0;
@@ -64,18 +65,17 @@ public:
 
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	virtual void mostrarCategorias() = 0;
-	virtual Categoria* obtenerCategoria(std::string categoria) = 0;
-	virtual void publicarVideojuego(Sistema *s) = 0;
-	virtual void mostrarListaCategorias(List* lista) = 0;
+	virtual Categoria *obtenerCategoria(std::string categoria) = 0;
+	virtual void publicarVideojuego(/*Sistema* s*/) = 0;
+	virtual void mostrarListaCategorias(List *lista) = 0;
 
 	// CASO DE USO 4: SUSCRIBIRSE A VIDEOJUEGO
-	virtual void suscribirseVideojuego()=0;
-	virtual void mostrarVideojuegos()=0;
+	virtual void suscribirseVideojuego() = 0;
+	virtual void mostrarVideojuegos() = 0;
 
-
-	//CASO DE USO : ELIMINAR VIDEOJUEGO
-	virtual Videojuego* obtenerVideojuegodesarrollador(std::string videojuego) = 0;
-	virtual void EliminarVideojuego(Desarrollador *d ,Sistema *s) = 0;
+	// CASO DE USO : ELIMINAR VIDEOJUEGO
+	virtual Videojuego *obtenerVideojuegodesarrollador(std::string videojuego) = 0;
+	virtual void EliminarVideojuego(Desarrollador *d /*, Sistema* s*/) = 0;
 	virtual void mostrarListaVideojuegos(List *lista) = 0;
 
 	virtual ~ISistema();

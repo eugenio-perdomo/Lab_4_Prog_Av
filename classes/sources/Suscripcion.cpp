@@ -1,10 +1,10 @@
 #include "../headers/Suscripcion.h"
 
-Suscripcion::Suscripcion(){}
+Suscripcion::Suscripcion() {}
 
-Suscripcion::Suscripcion(/*float _costo, */DtFecha *_fechaInicio, MetodoPago _metodo, Valor _tipo, bool _cancelada, Videojuego *_juego, Jugador *_jugador)
+Suscripcion::Suscripcion(/*float _costo, */ DtFecha *_fechaInicio, MetodoPago _metodo, Valor _tipo, bool _cancelada, Videojuego *_juego, Jugador *_jugador)
 {
-    //this->costo = _costo;
+    // this->costo = _costo;
     this->fechaInicio = _fechaInicio;
     this->metodo = _metodo;
     this->tipo = _tipo;
@@ -12,16 +12,19 @@ Suscripcion::Suscripcion(/*float _costo, */DtFecha *_fechaInicio, MetodoPago _me
     this->juego = _juego;
     this->jugador = _jugador;
 }
-void Suscripcion::eliminarme() {
+void Suscripcion::eliminarme()
+{
     this->jugador->EliminarMiSuscripcion(this);
-    delete(this);
+    delete (this);
 }
 Suscripcion::~Suscripcion() {}
 
-std::string Suscripcion::GetNombreVideojuego(){
+std::string Suscripcion::GetNombreVideojuego()
+{
     return juego->Getnombre();
 }
 
-std::string Suscripcion::GetNombreJugador(){
+std::string Suscripcion::GetNombreJugador()
+{
     return jugador->Getnick();
 }

@@ -13,7 +13,6 @@ private:
 	std::string nickUsuarioComentario;
 	DtFecha *fechaEnvio;
 
-
 public:
 	Comentario();
 	Comentario(std::string id,
