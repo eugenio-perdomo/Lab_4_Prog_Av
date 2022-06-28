@@ -26,7 +26,7 @@ void Sistema::menuCaso1(/*Sistema* s*/)
         std::cout << "Indicar tipo de usuario \n1- Jugador \n2- Desarrollador\n\nOpcion: \e[0;92m";
         std::cin >> tipo;
         clearDeDatosDeEntrada();
-        
+
         if (tipo == 1)
         {
             // AGREGAR JUGADOR
@@ -105,7 +105,7 @@ void Sistema::menuCaso2(/*Sistema* s*/)
                 std::cout << "\e[1;33mLos datos de acceso son incorrectos.\e[0m\n";
                 std::cout << "¿Desea cancelar el inicio de sesion?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> op;
-                clearDeDatosDeEntrada();                
+                clearDeDatosDeEntrada();
 
                 if (op != 2)
                 {
@@ -116,8 +116,8 @@ void Sistema::menuCaso2(/*Sistema* s*/)
             case 1:
             {
                 std::cout << "\e[1;33mSesion iniciada como Jugador.\e[0m\n";
-                usuarioActual = obtenerJugadorActual(email);
-                imprimirMenuJugador();
+                jugadorActual = obtenerJugadorActual(email);
+                imprimirMenuJugador(jugadorActual);
                 bandera = false;
                 break;
             }
@@ -310,7 +310,7 @@ void Sistema::publicarVideojuego(/*Sistema* s*/)
 
         std::cout << "\nDesea asignar otra categoria?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
         std::cin >> op2;
-        clearDeDatosDeEntrada();        
+        clearDeDatosDeEntrada();
 
         if (op2 == 1)
         {
@@ -332,7 +332,7 @@ void Sistema::publicarVideojuego(/*Sistema* s*/)
     int op3;
     std::cout << "\nDesea publicar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
     std::cin >> op3;
-    clearDeDatosDeEntrada();    
+    clearDeDatosDeEntrada();
 
     if (op3 == 1)
     {
@@ -418,7 +418,7 @@ void Sistema::suscribirseVideojuego()
                 int op2;
                 std::cout << "\n\e[1;33mDesea cancelar la suscripcion para el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> op2;
-                clearDeDatosDeEntrada();                
+                clearDeDatosDeEntrada();
 
                 jugadorActual->cancelarSuscripcion(GetUnVideojuego(key));
 
@@ -435,7 +435,7 @@ void Sistema::suscribirseVideojuego()
             std::cout << "\n\e[1;33mSeleccionar metodo de pago:\e[0m\n1- Tarjeta\n2- Paypal\n\nOpcion: \e[0;92m";
             std::cin >> op3;
             clearDeDatosDeEntrada();
-            
+
             MetodoPago metodo;
             if (op3 == 1)
             {
@@ -450,7 +450,7 @@ void Sistema::suscribirseVideojuego()
             std::cout << "\n\e[1;33mSeleccionar renovacion:\e[0m\n1- Vitalicia\n2- Mensual\n3- Trimestral\n4- Anual\n\nOpcion: \e[0;92m";
             std::cin >> op4;
             clearDeDatosDeEntrada();
-            
+
             Valor valor;
 
             switch (op4)
@@ -476,7 +476,7 @@ void Sistema::suscribirseVideojuego()
             std::cout << "\n\e[1;33mDesea confirmar la suscripcion?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
             std::cin >> op5;
             clearDeDatosDeEntrada();
-            
+
             if (op5 == 1)
             {
                 Suscripcion *susAux = new Suscripcion(fechaDelSistema, metodo, valor, false, dynamic_cast<Videojuego *>(videojuegos->find(key)), jugadorActual);
@@ -526,7 +526,6 @@ void Sistema::EliminarVideojuego(Desarrollador *d /*, Sistema* s*/)
     std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
     std::cin >> op3;
     clearDeDatosDeEntrada();
-    
 
     if (op3 == 1)
     {
@@ -542,7 +541,7 @@ void Sistema::imprimirMenuDesarrollador()
     while (bandera == true)
     {
         Sistema::imprimirTextoDelDesarrollador();
-        std::cin >> opcionUsuario;        
+        std::cin >> opcionUsuario;
         clearDeDatosDeEntrada();
 
         try
@@ -578,14 +577,15 @@ void Sistema::imprimirMenuDesarrollador()
     }
 }
 
-void Sistema::imprimirMenuJugador()
+void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
 {
     int opcionUsuario;
     bool bandera = true;
+
     while (bandera == true)
     {
         Sistema::imprimirTextoDelJugador();
-        std::cin >> opcionUsuario;        
+        std::cin >> opcionUsuario;
         clearDeDatosDeEntrada();
 
         try
@@ -602,6 +602,7 @@ void Sistema::imprimirMenuJugador()
             }
             case 3: // Finalizar partida
             {
+                finalizarPartida(jugadorActual);
                 break;
             }
             case 4: // Ver información de videojuego
@@ -626,7 +627,15 @@ void Sistema::imprimirMenuJugador()
         }
     }
 }
+void Sistema::finalizarPartida(Jugador *jugadorActual)
+{
+    while(jugadorActual->getPartidas()->getIterator()->hasCurrent())
+    {
+        
+    }
 
+
+}
 void Sistema::imprimirTextoPrincipal()
 {
     std::cout << "\e[0;92mBienvenido - Elija una opción\e[0m:";

@@ -16,7 +16,7 @@ private:
 	std::string descripcion;
 	ICollection *suscripcion; // Luego definir si esto es una colleccion o es un IDictionary
 							  // Va a cambiar el set, utilizando IKey
-	ICollection *partidas;
+	IDictionary *partidas;
 
 public:
 	Jugador();
@@ -26,6 +26,8 @@ public:
 	void Setnick(std::string val) { nick = val; }
 	std::string Getdescripcion() { return descripcion; }
 	void Setdescripcion(std::string val) { descripcion = val; }
+    void setPartidas(Partida *p, IKey *k);
+    IDictionary *getPartidas();
 
 	std::string getContrasenia();
 

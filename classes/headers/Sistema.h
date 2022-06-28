@@ -24,7 +24,7 @@ public:
 	void imprimirTextoDelDesarrollador();
 	void imprimirTextoDelJugador();
 	void imprimirMenuDesarrollador();
-	void imprimirMenuJugador();
+	void imprimirMenuJugador(Jugador *jugadorActual);
 	void clearDeDatosDeEntrada();
 
 	// CASO DE USO 1: ALTA USUARIO
@@ -51,6 +51,10 @@ public:
 	Videojuego *obtenerVideojuegodesarrollador(std::string videojuego);
 	void EliminarVideojuego(Desarrollador *d /*, Sistema* s*/);
 	void mostrarListaVideojuegos(List *lista);
+
+	// CASO DE USO : FINALIZAR PARTIDA
+	void Sistema::finalizarPartida(Jugador *jugadorActual);
+
 
 	virtual ~Sistema();
 };
