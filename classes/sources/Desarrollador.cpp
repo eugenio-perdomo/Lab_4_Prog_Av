@@ -17,6 +17,13 @@ void Desarrollador::mostrarVideojuegosDesarrollador()
         it->next();
     }
 }
+
+void Desarrollador::setVideoJuego(Videojuego *vj, IKey *id)
+{
+    this->videojuegosdesarrollador->add(id, vj);
+}
+
+
 void Desarrollador::EliminarEsteJuego(Videojuego *v)
 {
     v->eliminarme();

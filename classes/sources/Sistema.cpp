@@ -231,6 +231,14 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         fecha1 = new DtFecha(21, 12, 2020, 0, 00, 15);
         Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false, vj2, j2);
 
+        IKey *keyDesarrollador = new StringKey("ironhide@mail.com");
+        d1->setVideoJuego(vj1, keyDesarrollador);
+        keyDesarrollador = new StringKey("epic@mail.com");
+        d2->setVideoJuego(vj2, keyDesarrollador);
+        keyDesarrollador = new StringKey("mojang@mail.com");
+        d3->setVideoJuego(vj3, keyDesarrollador);
+        keyDesarrollador = new StringKey("ea@mail.com");
+        d4->setVideoJuego(vj4, keyDesarrollador);
         vj1->setCategoria(c1);
         vj1->setCategoria(c2);
         vj1->setCategoria(c6);
@@ -631,7 +639,7 @@ void Sistema::finalizarPartida(Jugador *jugadorActual)
 {
     while(jugadorActual->getPartidas()->getIterator()->hasCurrent())
     {
-        
+        break;
     }
 
 

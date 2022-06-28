@@ -53,7 +53,7 @@ public:
 	void mostrarListaVideojuegos(List *lista);
 
 	// CASO DE USO : FINALIZAR PARTIDA
-	void Sistema::finalizarPartida(Jugador *jugadorActual);
+	void finalizarPartida(Jugador *jugadorActual);
 
 
 	virtual ~Sistema();
