@@ -59,6 +59,7 @@ public:
 	void setSuscripcion(Suscripcion *s);
 	void Borrame();
 	void getCategorias();
+	bool tienepartidas();
 
 	void cancelarSuscripcion(std::string nick);
 

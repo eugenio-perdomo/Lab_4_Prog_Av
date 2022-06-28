@@ -13,7 +13,10 @@ void Desarrollador::mostrarVideojuegosDesarrollador()
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
+        bool tiene = aux->tienepartidas();
+        if(tiene = false){
         std::cout << aux->Getnombre();
+        }
         it->next();
     }
 }

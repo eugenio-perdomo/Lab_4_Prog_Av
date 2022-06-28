@@ -341,8 +341,7 @@ void Sistema::publicarVideojuego(/*Sistema* s*/)
     while (deseaAgregar == true)
     {
 
-        mostrarCategorias(); // ***Sin implementar***
-        std::cout << "\nmostrarCategorias() aun sin implementar\n";
+        mostrarCategorias();
         std::string cat;
         std::cout << "\nSeleccione una categoria: ";
         std::cin >> cat;
@@ -395,6 +394,13 @@ void Sistema::publicarVideojuego(/*Sistema* s*/)
 
 void Sistema::mostrarCategorias()
 {
+    IIterator *it = categorias->getIterator();
+    while (it->hasCurrent())
+    {
+        Categoria *aux = dynamic_cast<Categoria *>(it->getCurrent());
+        std::cout << aux->Getnombre();
+    }
+    delete it;
 }
 
 Categoria *Sistema::obtenerCategoria(std::string categoria)

@@ -95,6 +95,22 @@ void Videojuego::getCategorias()
     delete it;
 }
 
+bool Videojuego::tienepartidas(){
+    bool resultado = false;
+    IIterator *it = this->partidas->getIterator();
+    while (it->hasCurrent())
+    {
+        Partida *par = dynamic_cast<Partida *>(it->getCurrent());
+        bool finalizada = par->getFinalizado();
+        if(finalizada = false){
+            resultado = true;
+        }
+        else{it->next();}
+    }
+    delete it;
+    return resultado;
+}
+
 Videojuego::~Videojuego() {}
 
 void Videojuego::cancelarSuscripcion(std::string nick)
