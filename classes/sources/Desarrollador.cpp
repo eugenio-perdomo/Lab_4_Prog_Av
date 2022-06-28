@@ -14,9 +14,8 @@ void Desarrollador::mostrarVideojuegosDesarrollador()
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
         bool tiene = aux->tienepartidas();
-        if(tiene = false){
-        std::cout << aux->Getnombre();
-        }
+        if(tiene == false) std::cout << "\e[0;35m" << aux->Getnombre() << "\n\e[0m";
+
         it->next();
     }
 }

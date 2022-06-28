@@ -28,7 +28,7 @@ int main()
                 s->menuCaso1(/*sis*/);
                 break;
             }
-            case 2: // Iniciar sesión
+            case 2: // Iniciar sesion
             {
                 s->menuCaso2(/*sis*/);
                 break;

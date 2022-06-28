@@ -80,7 +80,7 @@ void Sistema::agregarDesarrollador(std::string email, std::string contrasenia, s
     }
 }
 
-// Iniciar sesión
+// Iniciar sesion
 void Sistema::menuCaso2(/*Sistema* s*/)
 {
     std::string email, contrasenia;
@@ -93,7 +93,7 @@ void Sistema::menuCaso2(/*Sistema* s*/)
             std::cout << "\nIngrese email: ";
             std::cin >> email;
             clearDeDatosDeEntrada();
-            std::cout << "Ingrese contraseña: ";
+            std::cout << "Ingrese contrasenia: ";
             std::cin >> contrasenia;
             clearDeDatosDeEntrada();
             opcionUsuario = iniciarSesion(email, contrasenia);
@@ -103,7 +103,7 @@ void Sistema::menuCaso2(/*Sistema* s*/)
             {
                 int op;
                 std::cout << "\e[1;33mLos datos de acceso son incorrectos.\e[0m\n";
-                std::cout << "¿Desea cancelar el inicio de sesion?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+                std::cout << "\e[1;35mDesea cancelar el inicio de sesion?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> op;
                 clearDeDatosDeEntrada();
 
@@ -149,7 +149,6 @@ int Sistema::iniciarSesion(std::string email, std::string contrasenia)
     // Verifica si ese email pertenece a un jugador o a un desarrollador
     bool validarJugador = jugadores->member(key);
     bool validarDesarrollador = desarrolladores->member(key);
-
     if (validarJugador == 1)
     {
         Jugador *auxJugador = dynamic_cast<Jugador *>(jugadores->find(key));
@@ -190,23 +189,70 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         Desarrollador *d2 = new Desarrollador("epic@mail.com", "123", "Epic Games");
         Desarrollador *d3 = new Desarrollador("mojang@mail.com", "123", "Mojang Studios");
         Desarrollador *d4 = new Desarrollador("ea@mail.com", "123", "EA Sports");
+
+        StringKey *key = new StringKey("ironhide@mail.com");
+        desarrolladores->add(key, d1);
+        key = new StringKey("epic@mail.com");
+        desarrolladores->add(key, d2);
+        key = new StringKey("mojang@mail.com");
+        desarrolladores->add(key, d3);
+        key = new StringKey("ea@mail.com");
+        desarrolladores->add(key, d4);
+
         Jugador *j1 = new Jugador("gamer@mail.com", "123", "gamer", "descripcionJ1");
         Jugador *j2 = new Jugador("ari@mail.com", "123", "ari", "descripcionJ2");
         Jugador *j3 = new Jugador("ibai@mail.com", "123", "ibai", "descripcionJ3");
         Jugador *j4 = new Jugador("camila@mail.com", "123", "camila", "descripcionJ4");
+
+        key = new StringKey("gamer@mail.com");
+        jugadores->add(key, j1);
+        key = new StringKey("ari@mail.com");
+        jugadores->add(key, j2);
+        key = new StringKey("ibai@mail.com");
+        jugadores->add(key, j3);
+        key = new StringKey("camila@mail.com");
+        jugadores->add(key, j4);
+
         Categoria *c1 = new Categoria("PC", "Descripcion Categoria PC", "Plataforma");
         Categoria *c2 = new Categoria("PS4", "Descripcion Categoria PS4", "Plataforma");
         Categoria *c3 = new Categoria("Xbox One", "Descripcion Categoria Xbox", "Plataforma");
-        Categoria *c4 = new Categoria("Deporte", "Descripcion Categoria Deporte", "Género");
-        Categoria *c5 = new Categoria("Supervivencia", "Descripcion Categoria Supervivencia", "Género");
-        Categoria *c6 = new Categoria("Estrategia", "Descripcion Categoria Estrategia", "Género");
-        Categoria *c7 = new Categoria("Teen", "Su contenido está dirigido a jóvenes de 13 años en adelante.", "Otro");
-        Categoria *c8 = new Categoria("E", "Su contenido está dirigido para todo público", "Otro");
-        Categoria *c9 = new Categoria("Acción", "Descripcion Categoria Acción", "Género");
-        Categoria *c10 = new Categoria("Aventura", "Descripcion Categoria Aventura", "Género");
+        Categoria *c4 = new Categoria("Deporte", "Descripcion Categoria Deporte", "Genero");
+        Categoria *c5 = new Categoria("Supervivencia", "Descripcion Categoria Supervivencia", "Genero");
+        Categoria *c6 = new Categoria("Estrategia", "Descripcion Categoria Estrategia", "Genero");
+        Categoria *c7 = new Categoria("Teen", "Su contenido esta dirigido a jovenes de 13 anios en adelante.", "Otro");
+        Categoria *c8 = new Categoria("E", "Su contenido esta dirigido para todo publico", "Otro");
+        Categoria *c9 = new Categoria("Accion", "Descripcion Categoria Accion", "Genero");
+        Categoria *c10 = new Categoria("Aventura", "Descripcion Categoria Aventura", "Genero");
         Categoria *c11 = new Categoria("Switch", "Descripcion Categoria Switch", "Plataforma");
         Categoria *c12 = new Categoria("Xbox", "Descripcion Categoria Xbox", "Plataforma");
         Categoria *c13 = new Categoria("PS5", "Descripcion Categoria PS5", "Plataforma");
+
+        key = new StringKey("PC");
+        categorias->add(key, c1);
+        key = new StringKey("PS4");
+        categorias->add(key, c2);
+        key = new StringKey("Xbox One");
+        categorias->add(key, c3);
+        key = new StringKey("Deporte");
+        categorias->add(key, c4);
+        key = new StringKey("Supervivencia");
+        categorias->add(key, c5);
+        key = new StringKey("Estrategia");
+        categorias->add(key, c6);
+        key = new StringKey("Teen");
+        categorias->add(key, c7);
+        key = new StringKey("E");
+        categorias->add(key, c8);
+        key = new StringKey("Accion");
+        categorias->add(key, c9);
+        key = new StringKey("Aventura");
+        categorias->add(key, c10);
+        key = new StringKey("Switch");
+        categorias->add(key, c11);
+        key = new StringKey("Xbox");
+        categorias->add(key, c12);
+        key = new StringKey("PS5");
+        categorias->add(key, c13);
 
         Estadistica *est1 = new Estadistica(4, 1); // TODO Hacer la cuenta de la duracionPartidaPorJugador
         Estadistica *est2 = new Estadistica(5, 1); // Revisar Los datos de prueba en "Puntajes a videojuegos"
@@ -217,6 +263,15 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         Videojuego *vj2 = new Videojuego("Fortnite", "Descripcion Fortnite", 3, 8, 30, 60, est2, d2);
         Videojuego *vj3 = new Videojuego("Minecraft", "Descripcion Minecraft", 2, 5, 20, 40, est3, d3);
         Videojuego *vj4 = new Videojuego("FIFA 21", "Descripcion FIFA 21", 3, 8, 28, 50, est4, d4);
+
+        key = new StringKey("KingdomRush");
+        videojuegos->add(key, vj1);
+        key = new StringKey("Fortnite");
+        videojuegos->add(key, vj2);
+        key = new StringKey("Minecraft");
+        videojuegos->add(key, vj3);
+        key = new StringKey("FIFA 21");
+        videojuegos->add(key, vj4);
 
         DtFecha *fecha1 = new DtFecha(01, 06, 2021, 0, 00, 9);
         DtFecha *fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
@@ -232,9 +287,7 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         fecha1 = new DtFecha(21, 12, 2020, 0, 00, 15);
         Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false, vj2, j2);
 
-        
-
-        //Ind
+        // Ind
         fecha1 = new DtFecha(02, 06, 2021, 0, 00, 9);
         fecha2 = new DtFecha(02, 06, 2021, 0, 00, 10);
         Individual *pI1 = new Individual(false, "gamer", "1", "KingdomRush", true, 60, fecha1, fecha2);
@@ -244,8 +297,8 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         fecha1 = new DtFecha(12, 06, 2021, 0, 00, 16);
         fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
         Individual *pI3 = new Individual(false, "gamer", "3", "Minecraft", true, 0, fecha1, fecha2);
-        
-        //MultiJ
+
+        // MultiJ
         fecha1 = new DtFecha(05, 06, 2021, 0, 00, 17);
         fecha2 = new DtFecha(05, 06, 2021, 0, 00, 19);
         Multijugador *pM1 = new Multijugador(true, 2, "4", "Fortnite", true, 120, fecha1, fecha2);
@@ -289,7 +342,6 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         vj2->setSuscripcion(sus5);
         vj3->setSuscripcion(sus6);
 
-
         Partida *part = dynamic_cast<Partida *>(pI1);
 
         IKey *keyJuego = new StringKey("KingdomRush");
@@ -304,7 +356,6 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         vj2->setPartidaParaVideojuego((Partida *)pM2, keyJuego);
         keyJuego = new StringKey("Minecraft");
         vj3->setPartidaParaVideojuego((Partida *)pM3, keyJuego);
-
     }
 }
 
@@ -388,7 +439,7 @@ void Sistema::publicarVideojuego(/*Sistema* s*/)
     {
         // Confirma publicar el videojuego
         Videojuego *videojuegoAux = new Videojuego(nom, desc, cMensual, cTristral, cAnual, cVitalicio, aux_categorias);
-        // TODO: aquí la lista videojuegos de desarrollador le hacemos un -> add(vidJAux);
+        // TODO: aqui la lista videojuegos de desarrollador le hacemos un -> add(vidJAux);
     }
 }
 
@@ -554,13 +605,14 @@ void Sistema::suscribirseVideojuego()
 void Sistema::mostrarVideojuegos()
 {
     IIterator *it = videojuegos->getIterator();
-
+    std::cout << "\e[0;35m";
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
-        std::cout << aux->Getnombre();
+        std::cout << aux->Getnombre() << std::endl;
         it->next();
     }
+    std::cout << "\e[0m";
 }
 
 Videojuego *Sistema::GetUnVideojuego(StringKey *nombreVideojuego)
@@ -569,24 +621,26 @@ Videojuego *Sistema::GetUnVideojuego(StringKey *nombreVideojuego)
     return aux;
 }
 
-void Sistema::VerInfoVideoJuego(){
-    std::string nom;
+void Sistema::VerInfoVideoJuego()
+{
+    std::string nom, nombreempresa;
     mostrarVideojuegos();
+
     std::cout << "\nIngrese nombre del videojuego: ";
     std::cin >> nom;
+    clearDeDatosDeEntrada();
+
     StringKey *key = new StringKey(nom);
     Videojuego *aux = GetUnVideojuego(key);
-    std::string nombreempresa;
     nombreempresa = aux->Getdesarrollador()->Getempresa();
-    std::cout << aux->Getnombre();
-    std::cout << aux->Getdescripcion();
-    std::cout << aux->GetcostoMensual();
-    std::cout << aux->GetcostoTrimestral();
-    std::cout << aux->GetcostoAnual();
-    std::cout << aux->GetcostoVitalicia();
-    std::cout << nombreempresa;
+    std::cout << "\n\e[0;34mNombre: " << aux->Getnombre();
+    std::cout << "\n\e[0;37mDescripcion: " << aux->Getdescripcion();
+    std::cout << "\n\e[0;34mCosto Mensual: " << aux->GetcostoMensual();
+    std::cout << "\n\e[0;37mCosto Trimestral: " << aux->GetcostoTrimestral();
+    std::cout << "\n\e[0;34mCosto Anual: " << aux->GetcostoAnual();
+    std::cout << "\n\e[0;37mCosto Vitalicia: " << aux->GetcostoVitalicia();
+    std::cout << "\n\e[0;34mEmpresa: " << nombreempresa << std::endl << "\e[0m\n";
     aux->getCategorias();
-
 }
 
 // Eliminar Videojuego
@@ -635,7 +689,7 @@ void Sistema::imprimirMenuDesarrollador()
                 EliminarVideojuego(desarrolladorActual /*, this*/);
                 break;
             }
-            case 3: //Ver Info Juego
+            case 3: // Ver Info Juego
             {
                 VerInfoVideoJuego();
                 break;
@@ -687,7 +741,7 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
                 finalizarPartida(jugadorActual);
                 break;
             }
-            case 4: // Ver información de videojuego
+            case 4: // Ver informacion de videojuego
             {
                 VerInfoVideoJuego();
                 break;
@@ -712,38 +766,36 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
 }
 void Sistema::finalizarPartida(Jugador *jugadorActual)
 {
-    while(jugadorActual->getPartidas()->getIterator()->hasCurrent())
+    while (jugadorActual->getPartidas()->getIterator()->hasCurrent())
     {
         break;
     }
-
-
 }
 void Sistema::imprimirTextoPrincipal()
 {
-    std::cout << "\e[0;92mBienvenido - Elija una opción\e[0m:";
+    std::cout << "\e[0;92mBienvenido - Elija una opcion\e[0m:";
     std::cout << "\n\e[0;92m1)\e[0m Alta de usuario.\n";
-    std::cout << "\e[0;92m2)\e[0m Iniciar sesión.\n";
+    std::cout << "\e[0;92m2)\e[0m Iniciar sesion.\n";
     std::cout << "\e[0;92m3)\e[0m Cargar datos de prueba.\n";
     std::cout << "Pulse \e[0;92m4\e[0m para salir.\n\nOpcion: \e[0;92m";
 }
 
 void Sistema::imprimirTextoDelDesarrollador()
 {
-    std::cout << "\e[0;92mMenú de Desarrollador - Elija una opción\e[0m:";
+    std::cout << "\e[0;92mMenu de Desarrollador - Elija una opcion\e[0m:";
     std::cout << "\n\e[0;92m1)\e[0m Publicar videojuego.\n";
     std::cout << "\e[0;92m2)\e[0m Eliminar videojuego.\n";
-    std::cout << "\e[0;92m3)\e[0m Ver Información de un videojuego.\n";
+    std::cout << "\e[0;92m3)\e[0m Ver Informacion de un videojuego.\n";
     std::cout << "Pulse \e[0;92m4\e[0m Para salir.\n\nOpcion: \e[0;92m";
 }
 
 void Sistema::imprimirTextoDelJugador()
 {
-    std::cout << "\e[0;92mMenú de Jugador - Elija una opción\e[0m:";
+    std::cout << "\e[0;92mMenu de Jugador - Elija una opcion\e[0m:";
     std::cout << "\n\e[0;92m1)\e[0m Suscribirse a videojuego.\n";
     std::cout << "\e[0;92m2)\e[0m Iniciar partida.\n";
     std::cout << "\e[0;92m3)\e[0m Finalizar partida.\n";
-    std::cout << "\e[0;92m4)\e[0m Ver información de un videojuego.\n";
+    std::cout << "\e[0;92m4)\e[0m Ver informacion de un videojuego.\n";
     std::cout << "Pulse \e[0;92m5\e[0m para salir.\n\nOpcion: \e[0;92m";
 }
 

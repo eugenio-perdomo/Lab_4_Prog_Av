@@ -86,12 +86,14 @@ void Videojuego::Borrame()
 void Videojuego::getCategorias()
 {
     IIterator *it = this->categoria->getIterator();
+    std::cout << "\e[0;36mCategorias: \n";
     while (it->hasCurrent())
     {
         Categoria *cat = dynamic_cast<Categoria *>(it->getCurrent());
-        std::cout << cat->Getnombre();
+        std::cout << cat->Getnombre() << std::endl;;
         it->next();
     }
+    std::cout << "\e[0m\n";
     delete it;
 }
 
@@ -102,10 +104,9 @@ bool Videojuego::tienepartidas(){
     {
         Partida *par = dynamic_cast<Partida *>(it->getCurrent());
         bool finalizada = par->getFinalizado();
-        if(finalizada = false){
-            resultado = true;
-        }
-        else{it->next();}
+        if(finalizada == false) resultado = true;
+        
+        else it->next();
     }
     delete it;
     return resultado;
