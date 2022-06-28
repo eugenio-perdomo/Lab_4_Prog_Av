@@ -219,6 +219,7 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         Videojuego *vj4 = new Videojuego("FIFA 21", "Descripcion FIFA 21", 3, 8, 28, 50, est4, d4);
 
         DtFecha *fecha1 = new DtFecha(01, 06, 2021, 0, 00, 9);
+        DtFecha *fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
         Suscripcion *sus1 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::TresMeses, false, vj1, j1);
         fecha1 = new DtFecha(02, 06, 2021, 0, 00, 11);
         Suscripcion *sus2 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::TresMeses, false, vj2, j2);
@@ -231,6 +232,30 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         fecha1 = new DtFecha(21, 12, 2020, 0, 00, 15);
         Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false, vj2, j2);
 
+        
+
+        //Ind
+        fecha1 = new DtFecha(02, 06, 2021, 0, 00, 9);
+        fecha2 = new DtFecha(02, 06, 2021, 0, 00, 10);
+        Individual *pI1 = new Individual(false, "gamer", "1", "KingdomRush", true, 60, fecha1, fecha2);
+        fecha1 = new DtFecha(03, 06, 2021, 0, 00, 15);
+        fecha2 = new DtFecha(03, 06, 2021, 0, 00, 16);
+        Individual *pI2 = new Individual(false, "gamer", "2", "KingdomRush", true, 60, fecha1, fecha2);
+        fecha1 = new DtFecha(12, 06, 2021, 0, 00, 16);
+        fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
+        Individual *pI3 = new Individual(false, "gamer", "3", "Minecraft", true, 0, fecha1, fecha2);
+        
+        //MultiJ
+        fecha1 = new DtFecha(05, 06, 2021, 0, 00, 17);
+        fecha2 = new DtFecha(05, 06, 2021, 0, 00, 19);
+        Multijugador *pM1 = new Multijugador(true, 2, "4", "Fortnite", true, 120, fecha1, fecha2);
+        fecha1 = new DtFecha(06, 06, 2021, 0, 00, 17);
+        fecha2 = new DtFecha(06, 06, 2021, 0, 00, 19);
+        Multijugador *pM2 = new Multijugador(true, 2, "5", "Fortnite", true, 120, fecha1, fecha2);
+        fecha1 = new DtFecha(12, 06, 2021, 0, 00, 20);
+        fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
+        Multijugador *pM3 = new Multijugador(false, 1, "6", "Minecraft", false, 0, fecha1, fecha2);
+
         IKey *keyDesarrollador = new StringKey("ironhide@mail.com");
         d1->setVideoJuego(vj1, keyDesarrollador);
         keyDesarrollador = new StringKey("epic@mail.com");
@@ -239,6 +264,7 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         d3->setVideoJuego(vj3, keyDesarrollador);
         keyDesarrollador = new StringKey("ea@mail.com");
         d4->setVideoJuego(vj4, keyDesarrollador);
+
         vj1->setCategoria(c1);
         vj1->setCategoria(c2);
         vj1->setCategoria(c6);
@@ -262,6 +288,23 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         vj3->setSuscripcion(sus4);
         vj2->setSuscripcion(sus5);
         vj3->setSuscripcion(sus6);
+
+
+        Partida *part = dynamic_cast<Partida *>(pI1);
+
+        IKey *keyJuego = new StringKey("KingdomRush");
+        vj1->setPartidaParaVideojuego(part, keyJuego);
+        keyJuego = new StringKey("KingdomRush");
+        vj1->setPartidaParaVideojuego((Partida *)pI2, keyJuego);
+        keyJuego = new StringKey("Minecraft");
+        vj3->setPartidaParaVideojuego((Partida *)pI3, keyJuego);
+        keyJuego = new StringKey("Fortnite");
+        vj2->setPartidaParaVideojuego((Partida *)pM1, keyJuego);
+        keyJuego = new StringKey("Fortnite");
+        vj2->setPartidaParaVideojuego((Partida *)pM2, keyJuego);
+        keyJuego = new StringKey("Minecraft");
+        vj3->setPartidaParaVideojuego((Partida *)pM3, keyJuego);
+
     }
 }
 

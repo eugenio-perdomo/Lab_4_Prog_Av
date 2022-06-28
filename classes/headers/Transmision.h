@@ -19,8 +19,8 @@ public:
 
 	DtFecha getFechaInicio();
 	void setFechaInicio(DtFecha *fechaInicio);
-	// void setComentario(Comentario *c);
-
+	
+	void eliminacionDeComentarios();
 	virtual ~Transmision();
 };
 

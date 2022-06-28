@@ -2,6 +2,7 @@
 #define VIDEOJUEGO_H
 
 class Suscripcion;
+class Desarrollador;
 
 #include "string"
 #include "Estadistica.h"
@@ -33,9 +34,11 @@ public:
 	Videojuego();
 
 	Videojuego(std::string nom, std::string desc, float costoM, float costoT, float costoA, float costoV, List *cat);
+	void setPartidaParaVideojuego(Partida *part, IKey *_id);
 
-	Videojuego(std::string nombre, std::string descripcion, float costoVitalicia, float costoMensual, float costoTrimestral,
-			   float costoAnual, Estadistica *est, Desarrollador * des);
+
+	Videojuego(std::string nombre, std::string descripcion, float costoVitalicia, float costoMensual, float costoTrimestral, float costoAnual, Estadistica *est, Desarrollador * des);
+
 	std::string Getnombre() { return nombre; }
 	void Setnombre(std::string val) { nombre = val; }
 	std::string Getdescripcion() { return descripcion; }

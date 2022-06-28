@@ -7,24 +7,33 @@ class Multijugador : public Partida
 {
 private:
 	bool transmitidaEnVivo;
-	DtFecha ultimaConexion;
+	//DtFecha *ultimaConexion;
 	int cantJugadores;
 	Transmision *transmision;
 
 public:
 	Multijugador();
-	Multijugador(bool transmitidaEnVivo, DtFecha ultimaConexion, int cantJugadores);
+	Multijugador(bool transmitidaEnVivo,
+				 //DtFecha ultimaConexion,
+				 int cantJugadores,
+				 std::string _id,
+				 std::string _nombreVideojuego,
+				 bool _finalizado,
+				 float _duracionPartida,
+				 DtFecha *_fechaInicio,
+				 DtFecha *_fechaFin);
 
 	bool getTransmitidaEnVivo();
-	DtFecha getUltimaConexion();
+	//DtFecha getUltimaConexion();
 	int getCantJugadores();
 
 	void setTransmitidaEnVivo(bool transmitidaEnVivo);
-	void setUltimaConexion(DtFecha ultimaConexion);
+	//void setUltimaConexion(DtFecha *ultimaConexion);
 	void setCantJugadores(int cantJugadores);
 
 	Transmision *Gettransmision() { return transmision; }
 	void Settransmision(Transmision *val) { transmision = val; }
+	void eliminarMisComentarios();
 
 	virtual ~Multijugador();
 };

@@ -21,9 +21,18 @@ void Transmision::setFechaInicio(DtFecha *fechaInicio)
     this->fechaInicio = fechaInicio;
 }
 
-/*void Transmision::setComentario(Comentario *c)
+void Transmision::eliminacionDeComentarios()
 {
-    comentarios->add(c);
-}*/
+    IIterator *it = this->comentarios->getIterator();
+    while (it->hasCurrent())
+    {
+        Comentario *com = dynamic_cast<Comentario *>(it->getCurrent());
+        comentarios->remove(com);
+        com->Eliminarme();
+        delete (com);
+        it->next();
+    }
+    delete it;
+}
 
 Transmision::~Transmision() {}

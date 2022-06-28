@@ -11,17 +11,13 @@ class Videojuego;
 
 class Partida : public ICollectible
 {
-public:
+protected:
 	std::string id;
 	std::string nombreVideojuego;
 	bool finalizado;
 	float duracionPartida; // En Minutos, el set va a ser un date.fin - date.inicio
-	DtFecha fechaInicio;
-	DtFecha fechaFin;
-	ICollection *comentarios;
-
-protected:
-	Videojuego *juego;
+	DtFecha *fechaInicio;
+	DtFecha *fechaFin;
 
 public:
 	Partida();
@@ -29,9 +25,8 @@ public:
 			std::string nombreVideojuego,
 			bool finalizado,
 			float duracionPartida,
-			DtFecha fechaInicio,
-			DtFecha fechaFin,
-			Videojuego *juego);
+			DtFecha *fechaInicio,
+			DtFecha *fechaFin);
 
 	std::string getId();
 	std::string getNombreVideojuego();
@@ -44,11 +39,10 @@ public:
 	void setNombreVideojuego(std::string nombreVideojuego);
 	void setFinalizado(bool finalizado);
 	void setDuracionPartida(float duracionPartida);
-	void setFechaInicio(DtFecha fechaInicio);
-	void setFechaFin(DtFecha fechaFin);
+	void setFechaInicio(DtFecha *fechaInicio);
+	void setFechaFin(DtFecha *fechaFin);
 
 	void TerminarPartida(std::string id);
-	void eliminarme();
 	virtual ~Partida();
 };
 

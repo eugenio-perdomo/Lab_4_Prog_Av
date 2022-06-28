@@ -2,7 +2,14 @@
 
 Individual::Individual() {}
 
-Individual::Individual(bool esContinuacion, std::string nickJugador)
+Individual::Individual(bool esContinuacion,
+                       std::string nickJugador,
+                       std::string _id,
+                       std::string _nombreVideojuego,
+                       bool _finalizado,
+                       float _duracionPartida,
+                       DtFecha *_fechaInicio,
+                       DtFecha *_fechaFin) : Partida(_id, _nombreVideojuego, _finalizado, _duracionPartida, _fechaInicio, _fechaFin)
 {
     this->esContinuacion = esContinuacion;
     this->nickJugador = nickJugador;

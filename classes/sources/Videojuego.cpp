@@ -45,6 +45,11 @@ void Videojuego::setSuscripcion(Suscripcion *s)
     this->suscripcion->add(s);
 }
 
+void Videojuego::setPartidaParaVideojuego(Partida *part, IKey *_id)
+{
+    this->partidas->add(_id, part);
+}
+
 void Videojuego::eliminarme()
 {
     delete (this->est);
@@ -64,7 +69,9 @@ void Videojuego::eliminarme()
         Partida *part = dynamic_cast<Partida *>(it->getCurrent());
         StringKey *key = new StringKey(part->getId());
         partidas->remove(key);
-        part->eliminarme();
+        // part->eliminarme(); TODO Este no va mas a partidas, va a multijugador
+        // dentro de 'partidas' hay que ver si existen multis
+        // Así como está va a remover las individuales y las multis, sin pasar por Transmision ni Comentarios.
         delete (part);
         it->next();
     }
@@ -76,7 +83,8 @@ void Videojuego::Borrame()
     delete (this);
 }
 
-void Videojuego::getCategorias(){
+void Videojuego::getCategorias()
+{
     IIterator *it = this->categoria->getIterator();
     while (it->hasCurrent())
     {
