@@ -81,6 +81,9 @@ public:
 	// CASO DE USO : FINALIZAR PARTIDA
 	virtual void finalizarPartida(Jugador *jugadorActual) = 0;
 
+	//CASO DE USO : VER INFO VIDEOJUEGO
+	virtual void VerInfoVideoJuego() = 0;
+
 	virtual ~ISistema();
 };
 

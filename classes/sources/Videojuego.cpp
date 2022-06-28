@@ -1,7 +1,7 @@
 #include "../headers/Videojuego.h"
 
 Videojuego::Videojuego(std::string _nombre, std::string _descripcion, float _costoVitalicia, float _costoMensual, float _costoTrimestral,
-                       float _costoAnual, Estadistica *_est)
+                       float _costoAnual, Estadistica *_est, Desarrollador *_des)
 {
     this->nombre = _nombre;
     this->descripcion = _descripcion;
@@ -10,6 +10,7 @@ Videojuego::Videojuego(std::string _nombre, std::string _descripcion, float _cos
     this->costoTrimestral = _costoTrimestral;
     this->costoAnual = _costoAnual;
     this->est = _est;
+    this->desarrollador = _des;
     this->categoria = new List();
     this->suscripcion = new List();
     this->partidas = new OrderedDictionary;
@@ -74,6 +75,18 @@ void Videojuego::Borrame()
 {
     delete (this);
 }
+
+void Videojuego::getCategorias(){
+    IIterator *it = this->categoria->getIterator();
+    while (it->hasCurrent())
+    {
+        Categoria *cat = dynamic_cast<Categoria *>(it->getCurrent());
+        std::cout << cat->Getnombre();
+        it->next();
+    }
+    delete it;
+}
+
 Videojuego::~Videojuego() {}
 
 void Videojuego::cancelarSuscripcion(std::string nick)

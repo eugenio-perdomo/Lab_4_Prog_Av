@@ -8,6 +8,7 @@ class Suscripcion;
 #include "Categoria.h"
 #include "Partida.h"
 #include "Suscripcion.h"
+#include "Desarrollador.h"
 #include "../../ICollection/interfaces/ICollection.h"
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/collections/OrderedDictionary.h"
@@ -23,17 +24,18 @@ private:
 	float costoTrimestral;
 	float costoAnual;
 	Estadistica *est;
+	Desarrollador *desarrollador;
 	ICollection *categoria;
 	ICollection *suscripcion;
 	IDictionary *partidas;
-
+	
 public:
 	Videojuego();
 
 	Videojuego(std::string nom, std::string desc, float costoM, float costoT, float costoA, float costoV, List *cat);
 
 	Videojuego(std::string nombre, std::string descripcion, float costoVitalicia, float costoMensual, float costoTrimestral,
-			   float costoAnual, Estadistica *est);
+			   float costoAnual, Estadistica *est, Desarrollador * des);
 	std::string Getnombre() { return nombre; }
 	void Setnombre(std::string val) { nombre = val; }
 	std::string Getdescripcion() { return descripcion; }
@@ -47,11 +49,13 @@ public:
 	float GetcostoAnual() { return costoAnual; }
 	void SetcostoAnual(float val) { costoAnual = val; }
 	Estadistica *Getestadistica() { return est; }
+	Desarrollador *Getdesarrollador() { return desarrollador; }
 	void Setestadistica(Estadistica *val) { est = val; }
 	void eliminarme();
 	void setCategoria(Categoria *c);
 	void setSuscripcion(Suscripcion *s);
 	void Borrame();
+	void getCategorias();
 
 	void cancelarSuscripcion(std::string nick);
 

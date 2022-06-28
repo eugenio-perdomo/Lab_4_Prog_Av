@@ -213,10 +213,10 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
         Estadistica *est3 = new Estadistica(5, 1);
         Estadistica *est4 = new Estadistica(3, 1);
 
-        Videojuego *vj1 = new Videojuego("KingdomRush", "Descripcion KingdomRush", 1, 2, 7, 14, est1);
-        Videojuego *vj2 = new Videojuego("Fortnite", "Descripcion Fortnite", 3, 8, 30, 60, est2);
-        Videojuego *vj3 = new Videojuego("Minecraft", "Descripcion Minecraft", 2, 5, 20, 40, est3);
-        Videojuego *vj4 = new Videojuego("FIFA 21", "Descripcion FIFA 21", 3, 8, 28, 50, est4);
+        Videojuego *vj1 = new Videojuego("KingdomRush", "Descripcion KingdomRush", 1, 2, 7, 14, est1, d1);
+        Videojuego *vj2 = new Videojuego("Fortnite", "Descripcion Fortnite", 3, 8, 30, 60, est2, d2);
+        Videojuego *vj3 = new Videojuego("Minecraft", "Descripcion Minecraft", 2, 5, 20, 40, est3, d3);
+        Videojuego *vj4 = new Videojuego("FIFA 21", "Descripcion FIFA 21", 3, 8, 28, 50, est4, d4);
 
         DtFecha *fecha1 = new DtFecha(01, 06, 2021, 0, 00, 9);
         Suscripcion *sus1 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::TresMeses, false, vj1, j1);
@@ -520,6 +520,26 @@ Videojuego *Sistema::GetUnVideojuego(StringKey *nombreVideojuego)
     return aux;
 }
 
+void Sistema::VerInfoVideoJuego(){
+    std::string nom;
+    mostrarVideojuegos();
+    std::cout << "\nIngrese nombre del videojuego: ";
+    std::cin >> nom;
+    StringKey *key = new StringKey(nom);
+    Videojuego *aux = GetUnVideojuego(key);
+    std::string nombreempresa;
+    nombreempresa = aux->Getdesarrollador()->Getempresa();
+    std::cout << aux->Getnombre();
+    std::cout << aux->Getdescripcion();
+    std::cout << aux->GetcostoMensual();
+    std::cout << aux->GetcostoTrimestral();
+    std::cout << aux->GetcostoAnual();
+    std::cout << aux->GetcostoVitalicia();
+    std::cout << nombreempresa;
+    aux->getCategorias();
+
+}
+
 // Eliminar Videojuego
 void Sistema::EliminarVideojuego(Desarrollador *d /*, Sistema* s*/)
 {
@@ -566,8 +586,13 @@ void Sistema::imprimirMenuDesarrollador()
                 EliminarVideojuego(desarrolladorActual /*, this*/);
                 break;
             }
+            case 3: //Ver Info Juego
+            {
+                VerInfoVideoJuego();
+                break;
+            }
 
-            case 3: // CASO SALIDA DE SISTEMA
+            case 4: // CASO SALIDA DE SISTEMA
             {
                 bandera = false;
                 break;
@@ -615,6 +640,7 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
             }
             case 4: // Ver información de videojuego
             {
+                VerInfoVideoJuego();
                 break;
             }
 
@@ -658,7 +684,8 @@ void Sistema::imprimirTextoDelDesarrollador()
     std::cout << "\e[0;92mMenú de Desarrollador - Elija una opción\e[0m:";
     std::cout << "\n\e[0;92m1)\e[0m Publicar videojuego.\n";
     std::cout << "\e[0;92m2)\e[0m Eliminar videojuego.\n";
-    std::cout << "Pulse \e[0;92m3\e[0m Para salir.\n\nOpcion: \e[0;92m";
+    std::cout << "\e[0;92m3)\e[0m Ver Información de un videojuego.\n";
+    std::cout << "Pulse \e[0;92m4\e[0m Para salir.\n\nOpcion: \e[0;92m";
 }
 
 void Sistema::imprimirTextoDelJugador()
@@ -667,7 +694,7 @@ void Sistema::imprimirTextoDelJugador()
     std::cout << "\n\e[0;92m1)\e[0m Suscribirse a videojuego.\n";
     std::cout << "\e[0;92m2)\e[0m Iniciar partida.\n";
     std::cout << "\e[0;92m3)\e[0m Finalizar partida.\n";
-    std::cout << "\e[0;92m4)\e[0m Ver información de videojuego.\n";
+    std::cout << "\e[0;92m4)\e[0m Ver información de un videojuego.\n";
     std::cout << "Pulse \e[0;92m5\e[0m para salir.\n\nOpcion: \e[0;92m";
 }
 
