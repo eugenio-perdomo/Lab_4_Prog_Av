@@ -39,6 +39,13 @@ public:
 	bool verificarEsVitalicia(std::string nombreJuego);
 	void cancelarSuscripcion(Videojuego *vj);
 
+
+
+	void listarVideojuegosDeJugador();
+
+	void listarPartidas();
+
+
 	virtual ~Jugador();
 };
 

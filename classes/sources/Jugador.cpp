@@ -107,3 +107,21 @@ void Jugador::cancelarSuscripcion(Videojuego *vj)
 
     // suscripcion->remove(vj);
 }
+
+
+void Jugador::listarVideojuegosDeJugador(){
+
+    IIterator *it = suscripcion->getIterator();
+
+    while (it->hasCurrent()){
+        Suscripcion *aux = dynamic_cast<Suscripcion*>(it->getCurrent());
+
+        if (aux->Getcancelada()==false){
+            std::cout << aux->GetNombreVideojuego();
+        }
+
+        it->next();
+    }
+}
+
+void Jugador::listarPartidas(){}

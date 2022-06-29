@@ -52,6 +52,11 @@ public:
 	void EliminarVideojuego(Desarrollador *d /*, Sistema* s*/);
 	void mostrarListaVideojuegos(List *lista);
 
+	// CASO DE USO : INICIAR PARTIDA
+	void iniciarPartida();
+	void listarJugadoresPorSuscripcion(std::string videojuego, std::string host);
+	bool confirmarJugadoresPorSuscripcion(std::string jugador, std::string videojuego);
+
 	// CASO DE USO : FINALIZAR PARTIDA
 	void finalizarPartida(Jugador *jugadorActual);
 

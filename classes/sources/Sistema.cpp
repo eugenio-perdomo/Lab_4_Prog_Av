@@ -643,6 +643,147 @@ void Sistema::VerInfoVideoJuego()
     aux->getCategorias();
 }
 
+// Iniciar partida
+
+void Sistema::iniciarPartida(){
+
+    jugadorActual->listarVideojuegosDeJugador();
+
+    std::string nombreVideojuego;
+    std::cout << "\nIndicar el nombre del videojuego:";
+    std::cin >> nombreVideojuego;
+    clearDeDatosDeEntrada();
+
+    if (jugadorActual->verificarSuscripcion(nombreVideojuego)){
+        //Tiene una suscripcion activa para ese videojuego
+
+        int tipoPartida;
+        std::cout << "\nSelecciona el tipo de partida:";
+        std::cout << "\n1- Individual";
+        std::cout << "\n2- Multijugador";
+        std::cin >> tipoPartida;
+
+        if (tipoPartida==1){
+            //Partida individual
+            int esContinuacion;
+
+            std::cout << "\nConfirmar si la partida es una continuación:";
+            std::cout << "\n1- Si";
+            std::cout << "\n2- No";
+            std::cin >> esContinuacion;
+
+            if (esContinuacion==1){
+                //Es una continuacion
+
+                //[sin implementar] lista las partidas individuales finalizadas
+                jugadorActual->listarPartidas();
+
+                //[sin implementar] selecciona la partida por su ID
+
+            } else {
+                //No es una continuacion
+
+            }
+
+            //[sin implementar] confirmar partida individual, 
+            //se da de alta la nueva partida con los datos ingresados, 
+            //asignándole un identificador numérico autogenerado internamente por el sistema y la fecha y hora actual del mismo. 
+
+
+
+        } else {
+            //Partida multijugador
+            int enVivo;
+
+            std::cout << "\nConfirmar si la partida será transmitida en vivo";
+            std::cout << "\n1- Si";
+            std::cout << "\n2- No";
+            std::cin >> enVivo;
+
+            listarJugadoresPorSuscripcion(nombreVideojuego, jugadorActual->Getnick());
+
+            List* listaJugadores = new List();
+
+            int dejarAgregarNicks=1;
+
+            while (dejarAgregarNicks==1){
+                std::string nick;
+                std::cout << "\nIndicar nick del jugador";
+                std::cin >> nick;
+                clearDeDatosDeEntrada();
+
+                StringKey* key = new StringKey(nick);
+
+                if (confirmarJugadoresPorSuscripcion(nick, nombreVideojuego)){
+                    //Existe el jugador y tiene una suscripcion activa
+
+                    Jugador* aux = dynamic_cast<Jugador*>(jugadores->find(key));
+
+                    if (listaJugadores->member(aux)){
+                        std::cout << "\nEl jugador ya se encuentra en la lista de selección";
+                    } else {
+                        listaJugadores->add(aux);
+                    }
+
+                } else {
+                    std::cout << "\nEl jugador no existe o no cuenta con una suscripción activa para el videojuego";
+                }
+
+                std::cout << "\nDesea agregar otro jugador?";
+                std::cout << "\n1- Si";
+                std::cout << "\n2- No";
+                std::cin >> dejarAgregarNicks;
+            }
+
+
+            //[sin implementar] confirmar partida multijugador, 
+            //se da de alta la nueva partida con los datos ingresados, 
+            //asignándole un identificador numérico autogenerado internamente por el sistema y la fecha y hora actual del mismo. 
+        
+
+        }
+
+        
+    } else {
+        std::cout << "\nEs necesario contar con una suscripción activa para ese videojuego";
+    }
+
+}
+
+void Sistema::listarJugadoresPorSuscripcion(std::string videojuego, std::string host){
+    IIterator* it = jugadores->getIterator();
+
+    while (it->hasCurrent()){
+        Jugador* aux = dynamic_cast<Jugador*>(it->getCurrent());
+
+        if (aux->Getnick()!=host && aux->verificarSuscripcion(videojuego)){
+            //Mostrar todos los jugadores que no sean host y tengan una suscripcion activa
+            std::cout << aux->Getnick();
+        }
+
+        it->next();
+    }
+}
+
+bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string videojuego){
+    IIterator* it = jugadores->getIterator();
+    bool resultado= false;
+
+    while (it->hasCurrent()){
+        Jugador* aux = dynamic_cast<Jugador*>(it->getCurrent());
+
+        if (aux->Getnick()==jugador && aux->verificarSuscripcion(videojuego)){     
+            resultado=true;
+        }
+
+        it->next();
+    }
+    return resultado;
+}
+
+
+
+
 // Eliminar Videojuego
 void Sistema::EliminarVideojuego(Desarrollador *d /*, Sistema* s*/)
 {
