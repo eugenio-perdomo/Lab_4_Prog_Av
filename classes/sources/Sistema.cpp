@@ -371,7 +371,6 @@ void Sistema::publicarVideojuego(/*Sistema* s*/)
     std::cout << "\nIngrese descripcion: ";
     std::cin >> desc;
     clearDeDatosDeEntrada();
-
     std::cout << "\nIngrese costo menusal: ";
     std::cin >> cMensual;
     clearDeDatosDeEntrada();
@@ -419,15 +418,14 @@ void Sistema::publicarVideojuego(/*Sistema* s*/)
         }
     }
 
-    // MOSTRAR LOS DATOS:
-    std::cout << "\nDatos del videojuego:\n";
-    std::cout << "\nNombre: " << nom;
-    std::cout << "\nDescripcion: " << desc;
-    std::cout << "\nCosto mensual: " << cMensual;
-    std::cout << "\nCosto trimestral: " << cTristral;
-    std::cout << "\nCosto anual: " << cAnual;
-    std::cout << "\nCosto vitalicio: " << cVitalicio;
-    std::cout << "\nCategorias: ";
+    std::cout << "\n\e[0;35mDatos del videojuego:";
+    std::cout << "\n\e[0;34mNombre: " << nom;
+    std::cout << "\n\e[0;37mDescripcion: " << desc;
+    std::cout << "\n\e[0;34mCosto Mensual: " << cMensual;
+    std::cout << "\n\e[0;37mCosto Trimestral: " << cTristral;
+    std::cout << "\n\e[0;34mCosto Anual: " << cAnual;
+    std::cout << "\n\e[0;37mCosto Vitalicia: " << cVitalicio;
+
     mostrarListaCategorias(aux_categorias);
 
     int op3;
@@ -464,15 +462,14 @@ Categoria *Sistema::obtenerCategoria(std::string categoria)
 void Sistema::mostrarListaCategorias(List *lista)
 {
     IIterator *it = lista->getIterator();
-
+    std::cout << "\n\e[0;36mCategorias: \n";
     while (it->hasCurrent())
     {
         Categoria *aux = dynamic_cast<Categoria *>(it->getCurrent());
-
-        std::cout << aux->Getnombre();
-
+        std::cout << aux->Getnombre() << std::endl;
         it->next();
     }
+    std::cout << "\e[0m\n";
 }
 
 Videojuego *Sistema::obtenerVideojuegodesarrollador(std::string videojuego)
@@ -907,6 +904,7 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
 }
 void Sistema::finalizarPartida(Jugador *jugadorActual)
 {
+    std::cout << "\nFinalizar Partida sin implementar\n";
     while (jugadorActual->getPartidas()->getIterator()->hasCurrent())
     {
         break;

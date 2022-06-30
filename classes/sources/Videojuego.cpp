@@ -90,7 +90,7 @@ void Videojuego::getCategorias()
     while (it->hasCurrent())
     {
         Categoria *cat = dynamic_cast<Categoria *>(it->getCurrent());
-        std::cout << cat->Getnombre() << std::endl;;
+        std::cout << cat->Getnombre() << std::endl;
         it->next();
     }
     std::cout << "\e[0m\n";
