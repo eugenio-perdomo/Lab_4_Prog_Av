@@ -9,7 +9,7 @@ Sistema::Sistema()
 }
 
 // Alta de usuario
-void Sistema::menuCaso1(/*Sistema* s*/)
+void Sistema::menuCaso1()
 {
     int tipo;
     bool bandera = true;
@@ -81,7 +81,7 @@ void Sistema::agregarDesarrollador(std::string email, std::string contrasenia, s
 }
 
 // Iniciar sesion
-void Sistema::menuCaso2(/*Sistema* s*/)
+void Sistema::menuCaso2()
 {
     std::string email, contrasenia;
     bool bandera = true;
@@ -181,7 +181,7 @@ Desarrollador *Sistema::obtenerDesarrolladorActual(std::string email)
 }
 
 // Cargar datos de prueba
-void Sistema::menuCaso3(int i /*, Sistema* s*/)
+void Sistema::menuCaso3(int i)
 {
     if (i == 0)
     {
@@ -360,7 +360,7 @@ void Sistema::menuCaso3(int i /*, Sistema* s*/)
 }
 
 // Publicar videojuego
-void Sistema::publicarVideojuego(/*Sistema* s*/)
+void Sistema::publicarVideojuego()
 {
     std::string nom, desc;
     float cMensual, cTristral, cAnual, cVitalicio;
@@ -435,9 +435,9 @@ void Sistema::publicarVideojuego(/*Sistema* s*/)
 
     if (op3 == 1)
     {
-        // Confirma publicar el videojuego
+        StringKey *key = new StringKey(nom);
         Videojuego *videojuegoAux = new Videojuego(nom, desc, cMensual, cTristral, cAnual, cVitalicio, aux_categorias);
-        // TODO: aqui la lista videojuegos de desarrollador le hacemos un -> add(vidJAux);
+        videojuegos->add(key, videojuegoAux);
     }
 }
 
@@ -472,16 +472,8 @@ void Sistema::mostrarListaCategorias(List *lista)
     std::cout << "\e[0m\n";
 }
 
-Videojuego *Sistema::obtenerVideojuegodesarrollador(std::string videojuego)
-{
-    StringKey *key = new StringKey(videojuego);
-    Videojuego *aux = dynamic_cast<Videojuego *>(videojuegos->find(key));
-    return aux;
-}
-
 void Sistema::mostrarListaVideojuegos(List *lista)
 {
-
     IIterator *it = lista->getIterator();
 
     while (it->hasCurrent())
@@ -629,20 +621,29 @@ void Sistema::VerInfoVideoJuego()
 
     StringKey *key = new StringKey(nom);
     Videojuego *aux = GetUnVideojuego(key);
-    nombreempresa = aux->Getdesarrollador()->Getempresa();
-    std::cout << "\n\e[0;34mNombre: " << aux->Getnombre();
-    std::cout << "\n\e[0;37mDescripcion: " << aux->Getdescripcion();
-    std::cout << "\n\e[0;34mCosto Mensual: " << aux->GetcostoMensual();
-    std::cout << "\n\e[0;37mCosto Trimestral: " << aux->GetcostoTrimestral();
-    std::cout << "\n\e[0;34mCosto Anual: " << aux->GetcostoAnual();
-    std::cout << "\n\e[0;37mCosto Vitalicia: " << aux->GetcostoVitalicia();
-    std::cout << "\n\e[0;34mEmpresa: " << nombreempresa << std::endl << "\e[0m\n";
-    aux->getCategorias();
+
+    if (aux != 0)
+    {
+        nombreempresa = aux->Getdesarrollador()->Getempresa();
+        std::cout << "\n\e[0;34mNombre: " << aux->Getnombre();
+        std::cout << "\n\e[0;37mDescripcion: " << aux->Getdescripcion();
+        std::cout << "\n\e[0;34mCosto Mensual: " << aux->GetcostoMensual();
+        std::cout << "\n\e[0;37mCosto Trimestral: " << aux->GetcostoTrimestral();
+        std::cout << "\n\e[0;34mCosto Anual: " << aux->GetcostoAnual();
+        std::cout << "\n\e[0;37mCosto Vitalicia: " << aux->GetcostoVitalicia();
+        std::cout << "\n\e[0;34mEmpresa: " << nombreempresa << std::endl
+                  << "\e[0m\n";
+        aux->getCategorias();
+    }
+    else
+    {
+        std::cout << "\n\e[1;33mNombre del videojuego no esta en la lista.\e[1;33m\n";
+    }
 }
 
 // Iniciar partida
-
-void Sistema::iniciarPartida(){
+void Sistema::iniciarPartida()
+{
 
     jugadorActual->listarVideojuegosDeJugador();
 
@@ -651,8 +652,9 @@ void Sistema::iniciarPartida(){
     std::cin >> nombreVideojuego;
     clearDeDatosDeEntrada();
 
-    if (jugadorActual->verificarSuscripcion(nombreVideojuego)){
-        //Tiene una suscripcion activa para ese videojuego
+    if (jugadorActual->verificarSuscripcion(nombreVideojuego))
+    {
+        // Tiene una suscripcion activa para ese videojuego
 
         int tipoPartida;
         std::cout << "\nSelecciona el tipo de partida:";
@@ -660,8 +662,9 @@ void Sistema::iniciarPartida(){
         std::cout << "\n2- Multijugador";
         std::cin >> tipoPartida;
 
-        if (tipoPartida==1){
-            //Partida individual
+        if (tipoPartida == 1)
+        {
+            // Partida individual
             int esContinuacion;
 
             std::cout << "\nConfirmar si la partida es una continuación:";
@@ -669,27 +672,27 @@ void Sistema::iniciarPartida(){
             std::cout << "\n2- No";
             std::cin >> esContinuacion;
 
-            if (esContinuacion==1){
-                //Es una continuacion
+            if (esContinuacion == 1)
+            {
+                // Es una continuacion
 
                 //[sin implementar] lista las partidas individuales finalizadas
                 jugadorActual->listarPartidas();
 
                 //[sin implementar] selecciona la partida por su ID
-
-            } else {
-                //No es una continuacion
-
+            }
+            else
+            {
+                // No es una continuacion
             }
 
-            //[sin implementar] confirmar partida individual, 
-            //se da de alta la nueva partida con los datos ingresados, 
-            //asignándole un identificador numérico autogenerado internamente por el sistema y la fecha y hora actual del mismo. 
-
-
-
-        } else {
-            //Partida multijugador
+            //[sin implementar] confirmar partida individual,
+            // se da de alta la nueva partida con los datos ingresados,
+            // asignándole un identificador numérico autogenerado internamente por el sistema y la fecha y hora actual del mismo.
+        }
+        else
+        {
+            // Partida multijugador
             int enVivo;
 
             std::cout << "\nConfirmar si la partida será transmitida en vivo";
@@ -699,30 +702,36 @@ void Sistema::iniciarPartida(){
 
             listarJugadoresPorSuscripcion(nombreVideojuego, jugadorActual->Getnick());
 
-            List* listaJugadores = new List();
+            List *listaJugadores = new List();
 
-            int dejarAgregarNicks=1;
+            int dejarAgregarNicks = 1;
 
-            while (dejarAgregarNicks==1){
+            while (dejarAgregarNicks == 1)
+            {
                 std::string nick;
                 std::cout << "\nIndicar nick del jugador";
                 std::cin >> nick;
                 clearDeDatosDeEntrada();
 
-                StringKey* key = new StringKey(nick);
+                StringKey *key = new StringKey(nick);
 
-                if (confirmarJugadoresPorSuscripcion(nick, nombreVideojuego)){
-                    //Existe el jugador y tiene una suscripcion activa
+                if (confirmarJugadoresPorSuscripcion(nick, nombreVideojuego))
+                {
+                    // Existe el jugador y tiene una suscripcion activa
 
-                    Jugador* aux = dynamic_cast<Jugador*>(jugadores->find(key));
+                    Jugador *aux = dynamic_cast<Jugador *>(jugadores->find(key));
 
-                    if (listaJugadores->member(aux)){
+                    if (listaJugadores->member(aux))
+                    {
                         std::cout << "\nEl jugador ya se encuentra en la lista de selección";
-                    } else {
+                    }
+                    else
+                    {
                         listaJugadores->add(aux);
                     }
-
-                } else {
+                }
+                else
+                {
                     std::cout << "\nEl jugador no existe o no cuenta con una suscripción activa para el videojuego";
                 }
 
@@ -732,29 +741,28 @@ void Sistema::iniciarPartida(){
                 std::cin >> dejarAgregarNicks;
             }
 
-
-            //[sin implementar] confirmar partida multijugador, 
-            //se da de alta la nueva partida con los datos ingresados, 
-            //asignándole un identificador numérico autogenerado internamente por el sistema y la fecha y hora actual del mismo. 
-        
-
+            //[sin implementar] confirmar partida multijugador,
+            // se da de alta la nueva partida con los datos ingresados,
+            // asignándole un identificador numérico autogenerado internamente por el sistema y la fecha y hora actual del mismo.
         }
-
-        
-    } else {
+    }
+    else
+    {
         std::cout << "\nEs necesario contar con una suscripción activa para ese videojuego";
     }
-
 }
 
-void Sistema::listarJugadoresPorSuscripcion(std::string videojuego, std::string host){
-    IIterator* it = jugadores->getIterator();
+void Sistema::listarJugadoresPorSuscripcion(std::string videojuego, std::string host)
+{
+    IIterator *it = jugadores->getIterator();
 
-    while (it->hasCurrent()){
-        Jugador* aux = dynamic_cast<Jugador*>(it->getCurrent());
+    while (it->hasCurrent())
+    {
+        Jugador *aux = dynamic_cast<Jugador *>(it->getCurrent());
 
-        if (aux->Getnick()!=host && aux->verificarSuscripcion(videojuego)){
-            //Mostrar todos los jugadores que no sean host y tengan una suscripcion activa
+        if (aux->Getnick() != host && aux->verificarSuscripcion(videojuego))
+        {
+            // Mostrar todos los jugadores que no sean host y tengan una suscripcion activa
             std::cout << aux->Getnick();
         }
 
@@ -762,15 +770,18 @@ void Sistema::listarJugadoresPorSuscripcion(std::string videojuego, std::string 
     }
 }
 
-bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string videojuego){
-    IIterator* it = jugadores->getIterator();
-    bool resultado= false;
+bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string videojuego)
+{
+    IIterator *it = jugadores->getIterator();
+    bool resultado = false;
 
-    while (it->hasCurrent()){
-        Jugador* aux = dynamic_cast<Jugador*>(it->getCurrent());
+    while (it->hasCurrent())
+    {
+        Jugador *aux = dynamic_cast<Jugador *>(it->getCurrent());
 
-        if (aux->Getnick()==jugador && aux->verificarSuscripcion(videojuego)){     
-            resultado=true;
+        if (aux->Getnick() == jugador && aux->verificarSuscripcion(videojuego))
+        {
+            resultado = true;
         }
 
         it->next();
@@ -778,28 +789,34 @@ bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string 
     return resultado;
 }
 
-
-
-
 // Eliminar Videojuego
-void Sistema::EliminarVideojuego(Desarrollador *d /*, Sistema* s*/)
+void Sistema::EliminarVideojuego(Desarrollador *d)
 {
     std::string nom;
     d->mostrarVideojuegosDesarrollador();
     std::cout << "\nIngrese nombre del videojuego a eliminar: ";
     std::cin >> nom;
     clearDeDatosDeEntrada();
-    Videojuego *aux = obtenerVideojuegodesarrollador(nom);
+    Videojuego *aux = d->obtenerVideojuegodesarrollador(nom);
+    std::cout << aux;
 
-    int op3;
-    std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
-    std::cin >> op3;
-    clearDeDatosDeEntrada();
-
-    if (op3 == 1)
+    if (aux != 0)
     {
-        // Confirma eliminar el videojuego
-        d->EliminarEsteJuego(aux);
+        int op3;
+        std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+        std::cin >> op3;
+        clearDeDatosDeEntrada();
+
+        if (op3 == 1)
+        {
+            // Confirma eliminar el videojuego
+            d->EliminarEsteJuego(aux);
+            std::cout << "\n\e[1;33mVideojuego Eliminado.\e[1;33m\n";
+        }
+    }
+    else
+    {
+        std::cout << "\n\e[1;33mNombre del videojuego no esta en tu lista.\e[1;33m\n";
     }
 }
 
@@ -819,12 +836,12 @@ void Sistema::imprimirMenuDesarrollador()
             {
             case 1: // Publicar Videojuego
             {
-                publicarVideojuego(/*this*/);
+                publicarVideojuego();
                 break;
             }
             case 2: // Eliminar Videojuego
             {
-                EliminarVideojuego(desarrolladorActual /*, this*/);
+                EliminarVideojuego(desarrolladorActual);
                 break;
             }
             case 3: // Ver Info Juego
@@ -868,10 +885,12 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
             {
             case 1: // Suscribirse a videojuego
             {
+                suscribirseVideojuego();
                 break;
             }
             case 2: // Iniciar partida
             {
+                std::cout << "\nIniciar Partida sin implementar\n";
                 break;
             }
             case 3: // Finalizar partida
@@ -902,6 +921,7 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
         }
     }
 }
+
 void Sistema::finalizarPartida(Jugador *jugadorActual)
 {
     std::cout << "\nFinalizar Partida sin implementar\n";
@@ -910,6 +930,7 @@ void Sistema::finalizarPartida(Jugador *jugadorActual)
         break;
     }
 }
+
 void Sistema::imprimirTextoPrincipal()
 {
     std::cout << "\e[0;92mBienvenido - Elija una opcion\e[0m:";

@@ -23,6 +23,8 @@ public:
 	std::string getContrasenia() { return contrasenia; }
 	void mostrarVideojuegosDesarrollador();
 	void EliminarEsteJuego(Videojuego *v);
+	Videojuego *obtenerVideojuegodesarrollador(std::string _videojuego);
+
 
 	virtual ~Desarrollador();
 };

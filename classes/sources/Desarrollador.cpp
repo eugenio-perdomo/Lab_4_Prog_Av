@@ -20,6 +20,13 @@ void Desarrollador::mostrarVideojuegosDesarrollador()
     }
 }
 
+Videojuego *Desarrollador::obtenerVideojuegodesarrollador(std::string _videojuego)
+{
+    StringKey *key = new StringKey(_videojuego);
+    Videojuego *aux = dynamic_cast<Videojuego *>(videojuegosdesarrollador->find(key));
+    return aux;
+}
+
 void Desarrollador::setVideoJuego(Videojuego *vj, IKey *id)
 {
     this->videojuegosdesarrollador->add(id, vj);

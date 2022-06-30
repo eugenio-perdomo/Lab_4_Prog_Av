@@ -74,7 +74,6 @@ public:
 	virtual void mostrarVideojuegos() = 0;
 
 	// CASO DE USO : ELIMINAR VIDEOJUEGO
-	virtual Videojuego *obtenerVideojuegodesarrollador(std::string videojuego) = 0;
 	virtual void EliminarVideojuego(Desarrollador *d /*, Sistema* s*/) = 0;
 	virtual void mostrarListaVideojuegos(List *lista) = 0;
 

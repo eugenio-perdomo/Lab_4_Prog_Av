@@ -48,7 +48,6 @@ public:
 	Videojuego *GetUnVideojuego(StringKey *nombreVideojuego);
 
 	// CASO DE USO : ELIMINAR VIDEOJUEGO
-	Videojuego *obtenerVideojuegodesarrollador(std::string videojuego);
 	void EliminarVideojuego(Desarrollador *d /*, Sistema* s*/);
 	void mostrarListaVideojuegos(List *lista);
 
