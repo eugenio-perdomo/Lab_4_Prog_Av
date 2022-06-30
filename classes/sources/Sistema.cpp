@@ -486,6 +486,10 @@ void Sistema::mostrarListaVideojuegos(List *lista)
 // Suscribirse a videojuego
 void Sistema::suscribirseVideojuego()
 {
+    int op2, op3, op4, op5;
+    bool bandera = true;
+    Valor valor;
+    MetodoPago metodo;
     mostrarVideojuegos();
 
     std::string nombreVideojuego;
@@ -510,7 +514,6 @@ void Sistema::suscribirseVideojuego()
             else
             {
                 // La suscripcion no es vitalicia
-                int op2;
                 std::cout << "\n\e[1;33mDesea cancelar la suscripcion para el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> op2;
                 clearDeDatosDeEntrada();
@@ -525,49 +528,54 @@ void Sistema::suscribirseVideojuego()
         else
         {
             // No tiene una suscripcion para ese videojuego.
-
-            int op3;
-            std::cout << "\n\e[1;33mSeleccionar metodo de pago:\e[0m\n1- Tarjeta\n2- Paypal\n\nOpcion: \e[0;92m";
-            std::cin >> op3;
-            clearDeDatosDeEntrada();
-
-            MetodoPago metodo;
-            if (op3 == 1)
+            while (true)
             {
-                metodo = Tarjeta;
-            }
-            else
-            {
-                metodo = Paypal;
-            }
+                std::cout << "\n\e[1;33mSeleccionar metodo de pago:\e[0m\n1- Tarjeta\n2- Paypal\n\nOpcion: \e[0;92m";
+                std::cin >> op3;
+                clearDeDatosDeEntrada();
 
-            int op4;
-            std::cout << "\n\e[1;33mSeleccionar renovacion:\e[0m\n1- Vitalicia\n2- Mensual\n3- Trimestral\n4- Anual\n\nOpcion: \e[0;92m";
-            std::cin >> op4;
-            clearDeDatosDeEntrada();
-
-            Valor valor;
-
-            switch (op4)
-            {
-            case 1:
-                valor = Vitalicia;
-                break;
-
-            case 2:
-                valor = UnMes;
-                break;
-
-            case 3:
-                valor = TresMeses;
-                break;
-
-            case 4:
-                valor = Anio;
-                break;
+                if (op3 == 1)
+                {
+                    metodo = Tarjeta;
+                    break;
+                }
+                if (op3 == 2)
+                {
+                    metodo = Paypal;
+                    break;
+                }
             }
 
-            int op5;
+            while (bandera)
+            {
+                std::cout << "\n\e[1;33mSeleccionar renovacion:\e[0m\n1- Vitalicia\n2- Mensual\n3- Trimestral\n4- Anual\n\nOpcion: \e[0;92m";
+                std::cin >> op4;
+                clearDeDatosDeEntrada();
+
+                switch (op4)
+                {
+                case 1:
+                    valor = Vitalicia;
+                    bandera = false;
+                    break;
+
+                case 2:
+                    valor = UnMes;
+                    bandera = false;
+                    break;
+
+                case 3:
+                    valor = TresMeses;
+                    bandera = false;
+                    break;
+
+                case 4:
+                    valor = Anio;
+                    bandera = false;
+                    break;
+                }
+            }
+
             std::cout << "\n\e[1;33mDesea confirmar la suscripcion?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
             std::cin >> op5;
             clearDeDatosDeEntrada();
@@ -585,7 +593,7 @@ void Sistema::suscribirseVideojuego()
     }
     else
     {
-        std::cout << "\n\e[1;31mEl videojuego no existe.\n\e[0m";
+        std::cout << "\n\e[1;31mEse videojuego no esta en la lista.\n\e[0m";
     }
 }
 
@@ -768,7 +776,6 @@ void Sistema::listarJugadoresPorSuscripcion(std::string videojuego, std::string 
         it->next();
     }
     delete it;
-
 }
 
 bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string videojuego)
