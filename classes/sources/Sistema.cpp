@@ -364,33 +364,31 @@ void Sistema::publicarVideojuego()
 {
     std::string nom, desc;
     float cMensual, cTristral, cAnual, cVitalicio;
+    bool deseaAgregar = true;
+    int opcionUsuario;
+    List *aux_categorias = new List();
 
-    std::cout << "\nIngrese nombre: ";
+    std::cout << "\nIngrese nombre: \e[0;92m";
     std::cin >> nom;
     clearDeDatosDeEntrada();
-    std::cout << "\nIngrese descripcion: ";
+    std::cout << "\nIngrese descripcion: \e[0;92m";
     std::cin >> desc;
     clearDeDatosDeEntrada();
-    std::cout << "\nIngrese costo menusal: ";
+    std::cout << "\nIngrese costo menusal: \e[0;92m";
     std::cin >> cMensual;
     clearDeDatosDeEntrada();
-    std::cout << "\nIngrese costo trimestral: ";
+    std::cout << "\nIngrese costo trimestral: \e[0;92m";
     std::cin >> cTristral;
     clearDeDatosDeEntrada();
-    std::cout << "\nIngrese costo anual: ";
+    std::cout << "\nIngrese costo anual: \e[0;92m";
     std::cin >> cAnual;
     clearDeDatosDeEntrada();
-    std::cout << "\nIngrese costo vitalicio: ";
+    std::cout << "\nIngrese costo vitalicio: \e[0;92m";
     std::cin >> cVitalicio;
     clearDeDatosDeEntrada();
 
-    bool deseaAgregar = true;
-    int op2 = 1;
-    List *aux_categorias = new List();
-
     while (deseaAgregar == true)
     {
-
         mostrarCategorias();
         std::string cat;
         std::cout << "\nSeleccione una categoria: ";
@@ -398,24 +396,18 @@ void Sistema::publicarVideojuego()
         clearDeDatosDeEntrada();
         Categoria *aux = obtenerCategoria(cat);
 
+        // TODO: Este member simpre dará false y siempre entra en el else
         if (aux_categorias->member(aux) == 1)
-        {
             aux_categorias->add(aux);
-        }
-        else
-        {
-            // La categoria ya habia sido agregada a la lista auxiliar anteriormente
+        else // La categoria ya habia sido agregada a la lista auxiliar anteriormente
             std::cout << "\n\e[0;31mEsa categoria ya fue seleccionada anteriormente\e[0m";
-        }
 
         std::cout << "\nDesea asignar otra categoria?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
-        std::cin >> op2;
+        std::cin >> opcionUsuario;
         clearDeDatosDeEntrada();
 
-        if (op2 == 1)
-        {
+        if (opcionUsuario == 2)
             deseaAgregar = false;
-        }
     }
 
     std::cout << "\n\e[0;35mDatos del videojuego:";
@@ -428,13 +420,14 @@ void Sistema::publicarVideojuego()
 
     mostrarListaCategorias(aux_categorias);
 
-    int op3;
     std::cout << "\nDesea publicar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
-    std::cin >> op3;
+    std::cin >> opcionUsuario;
     clearDeDatosDeEntrada();
 
-    if (op3 == 1)
+    if (opcionUsuario == 1)
     {
+        // TODO: Aunque se agregue un videoJuego, no se añadieron las categorias, entonces falla en
+        // ver info de videojuego
         StringKey *key = new StringKey(nom);
         Videojuego *videojuegoAux = new Videojuego(nom, desc, cMensual, cTristral, cAnual, cVitalicio, aux_categorias);
         videojuegos->add(key, videojuegoAux);
@@ -444,12 +437,15 @@ void Sistema::publicarVideojuego()
 void Sistema::mostrarCategorias()
 {
     IIterator *it = categorias->getIterator();
+    std::cout << "\n\e[0;36mCategorias: \n";
     while (it->hasCurrent())
     {
         Categoria *aux = dynamic_cast<Categoria *>(it->getCurrent());
-        std::cout << aux->Getnombre();
+        std::cout << aux->Getnombre() << std::endl;
+        it->next();
     }
     delete it;
+    std::cout << "\e[0m\n";
 }
 
 Categoria *Sistema::obtenerCategoria(std::string categoria)
@@ -469,9 +465,11 @@ void Sistema::mostrarListaCategorias(List *lista)
         std::cout << aux->Getnombre() << std::endl;
         it->next();
     }
+    delete it;
     std::cout << "\e[0m\n";
 }
 
+// TODO: Funcion no es llamada ninguna vez
 void Sistema::mostrarListaVideojuegos(List *lista)
 {
     IIterator *it = lista->getIterator();
@@ -482,10 +480,10 @@ void Sistema::mostrarListaVideojuegos(List *lista)
         std::cout << aux->Getnombre();
         it->next();
     }
+    delete it;
 }
 
 // Suscribirse a videojuego
-
 void Sistema::suscribirseVideojuego()
 {
     mostrarVideojuegos();
@@ -594,7 +592,7 @@ void Sistema::suscribirseVideojuego()
 void Sistema::mostrarVideojuegos()
 {
     IIterator *it = videojuegos->getIterator();
-    std::cout << "\e[0;35m";
+    std::cout << "\e[0;35mVideojuegos: \n";
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
@@ -602,6 +600,7 @@ void Sistema::mostrarVideojuegos()
         it->next();
     }
     std::cout << "\e[0m";
+    delete it;
 }
 
 Videojuego *Sistema::GetUnVideojuego(StringKey *nombreVideojuego)
@@ -768,6 +767,8 @@ void Sistema::listarJugadoresPorSuscripcion(std::string videojuego, std::string 
 
         it->next();
     }
+    delete it;
+
 }
 
 bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string videojuego)
@@ -786,6 +787,7 @@ bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string 
 
         it->next();
     }
+    delete it;
     return resultado;
 }
 
