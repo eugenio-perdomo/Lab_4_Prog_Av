@@ -144,10 +144,12 @@ void Videojuego::agregarIndividual(Individual* aux){
     StringKey* key = new StringKey(aux->getId());
 
     partidasIndividuales->add(key,aux); 
+    partidas->add(key,aux);
 }
 
 void Videojuego::agregarMultijugador(Multijugador* aux){
     StringKey* key = new StringKey(aux->getId());
 
     partidasMultijugador->add(key,aux); 
+    partidas->add(key,aux);
 }
