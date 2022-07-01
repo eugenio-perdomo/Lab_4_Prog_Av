@@ -10,7 +10,6 @@ class Desarrollador : public Usuario
 {
 private:
 	std::string empresa;
-	// TODO El order Dictionary para Videojuegos
 	IDictionary *videojuegosdesarrollador;
 
 public:

@@ -39,7 +39,7 @@ public:
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	void mostrarCategorias();
 	Categoria *obtenerCategoria(std::string categoria);
-	void publicarVideojuego(/*Sistema* s*/);
+	void publicarVideojuego(Desarrollador *d);
 	void mostrarListaCategorias(List *lista);
 
 	// CASO DE USO 4: SUSCRIBIRSE A VIDEOJUEGO

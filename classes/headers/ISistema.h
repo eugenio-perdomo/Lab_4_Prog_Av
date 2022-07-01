@@ -66,7 +66,7 @@ public:
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	virtual void mostrarCategorias() = 0;
 	virtual Categoria *obtenerCategoria(std::string categoria) = 0;
-	virtual void publicarVideojuego(/*Sistema* s*/) = 0;
+	virtual void publicarVideojuego(Desarrollador *d) = 0;
 	virtual void mostrarListaCategorias(List *lista) = 0;
 
 	// CASO DE USO 4: SUSCRIBIRSE A VIDEOJUEGO

@@ -309,13 +309,13 @@ void Sistema::menuCaso3(int i)
         fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
         Multijugador *pM3 = new Multijugador(false, 1, "6", "Minecraft", false, 0, fecha1, fecha2);
 
-        IKey *keyDesarrollador = new StringKey("ironhide@mail.com");
+        IKey *keyDesarrollador = new StringKey("KingdomRush");
         d1->setVideoJuego(vj1, keyDesarrollador);
-        keyDesarrollador = new StringKey("epic@mail.com");
+        keyDesarrollador = new StringKey("Fortnite");
         d2->setVideoJuego(vj2, keyDesarrollador);
-        keyDesarrollador = new StringKey("mojang@mail.com");
+        keyDesarrollador = new StringKey("Minecraft");
         d3->setVideoJuego(vj3, keyDesarrollador);
-        keyDesarrollador = new StringKey("ea@mail.com");
+        keyDesarrollador = new StringKey("FIFA 21");
         d4->setVideoJuego(vj4, keyDesarrollador);
 
         vj1->setCategoria(c1);
@@ -360,7 +360,7 @@ void Sistema::menuCaso3(int i)
 }
 
 // Publicar videojuego
-void Sistema::publicarVideojuego()
+void Sistema::publicarVideojuego(Desarrollador *d)
 {
     std::string nom, desc;
     float cMensual, cTristral, cAnual, cVitalicio;
@@ -431,6 +431,7 @@ void Sistema::publicarVideojuego()
         StringKey *key = new StringKey(nom);
         Videojuego *videojuegoAux = new Videojuego(nom, desc, cMensual, cTristral, cAnual, cVitalicio, aux_categorias);
         videojuegos->add(key, videojuegoAux);
+        d->setVideoJuego(videojuegoAux, key);
     }
 }
 
@@ -803,12 +804,10 @@ void Sistema::EliminarVideojuego(Desarrollador *d)
 {
     std::string nom;
     d->mostrarVideojuegosDesarrollador();
-    std::cout << "\nIngrese nombre del videojuego a eliminar: ";
+    std::cout << "\nIngrese nombre del videojuego a eliminar: \e[0;92m";
     std::cin >> nom;
     clearDeDatosDeEntrada();
     Videojuego *aux = d->obtenerVideojuegodesarrollador(nom);
-    std::cout << aux;
-
     if (aux != 0)
     {
         int op3;
@@ -820,6 +819,8 @@ void Sistema::EliminarVideojuego(Desarrollador *d)
         {
             // Confirma eliminar el videojuego
             d->EliminarEsteJuego(aux);
+            StringKey *key = new StringKey(nom);
+            videojuegos->remove(key);
             std::cout << "\n\e[1;33mVideojuego Eliminado.\e[1;33m\n";
         }
     }
@@ -845,7 +846,7 @@ void Sistema::imprimirMenuDesarrollador()
             {
             case 1: // Publicar Videojuego
             {
-                publicarVideojuego();
+                publicarVideojuego(desarrolladorActual);
                 break;
             }
             case 2: // Eliminar Videojuego
