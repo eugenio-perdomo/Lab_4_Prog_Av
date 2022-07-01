@@ -13,15 +13,8 @@ private:
 
 public:
 	Multijugador();
-	Multijugador(bool transmitidaEnVivo,
-				 //DtFecha ultimaConexion,
-				 int cantJugadores,
-				 std::string _id,
-				 std::string _nombreVideojuego,
-				 bool _finalizado,
-				 float _duracionPartida,
-				 DtFecha *_fechaInicio,
-				 DtFecha *_fechaFin);
+	Multijugador(bool transmitidaEnVivo,int cantJugadores,std::string _id,std::string _nombreVideojuego,bool _finalizado,float _duracionPartida,DtFecha *_fechaInicio,DtFecha *_fechaFin);
+	Multijugador(bool transmitidaEnVivo,int cantJugadores,std::string _id,std::string _nombreVideojuego,bool _finalizado,float _duracionPartida,DtFecha *_fechaInicio);
 
 	bool getTransmitidaEnVivo();
 	//DtFecha getUltimaConexion();

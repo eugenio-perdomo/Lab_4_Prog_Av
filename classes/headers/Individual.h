@@ -11,14 +11,9 @@ private:
 
 public:
 	Individual();
-	Individual(bool esContinuacion,
-			   std::string nickJugador,
-			   std::string id,
-			   std::string nombreVideojuego,
-			   bool finalizado,
-			   float duracionPartida,
-			   DtFecha *fechaInicio,
-			   DtFecha *fechaFin);
+	Individual(bool esContinuacion,std::string nickJugador,std::string id,std::string nombreVideojuego,bool finalizado,float duracionPartida,DtFecha *fechaInicio,DtFecha *fechaFin);
+	
+	Individual(bool esContinuacion, std::string nickJugador,std::string id,std::string nombreVideojuego,bool finalizado,float duracionPartida,DtFecha *fechaInicio);
 
 	bool getEsContinuacion();
 	std::string getNickJugador();

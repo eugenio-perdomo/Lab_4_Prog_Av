@@ -13,6 +13,7 @@ private:
 	Usuario *usuarioActual;
 	Desarrollador *desarrolladorActual;
 	Jugador *jugadorActual;
+	int ultimaPartida=0;
 
 public:
 	Sistema();
@@ -55,6 +56,7 @@ public:
 	void iniciarPartida();
 	void listarJugadoresPorSuscripcion(std::string videojuego, std::string host);
 	bool confirmarJugadoresPorSuscripcion(std::string jugador, std::string videojuego);
+	std::string generarIdPartida();
 
 	// CASO DE USO : FINALIZAR PARTIDA
 	void finalizarPartida(Jugador *jugadorActual);

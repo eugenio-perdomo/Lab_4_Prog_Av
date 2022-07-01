@@ -28,8 +28,12 @@ private:
 	Desarrollador *desarrollador;
 	ICollection *categoria;
 	ICollection *suscripcion;
+
 	IDictionary *partidas;
+	IDictionary *partidasIndividuales;
+	IDictionary *partidasMultijugador;
 	
+
 public:
 	Videojuego();
 
@@ -62,6 +66,9 @@ public:
 	bool tienepartidas();
 
 	void cancelarSuscripcion(std::string nick);
+
+	void agregarIndividual(Individual* aux);
+	void agregarMultijugador(Multijugador* aux);
 
 	virtual ~Videojuego();
 };

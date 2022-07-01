@@ -13,7 +13,9 @@ Videojuego::Videojuego(std::string _nombre, std::string _descripcion, float _cos
     this->desarrollador = _des;
     this->categoria = new List();
     this->suscripcion = new List();
-    this->partidas = new OrderedDictionary;
+    this->partidas = new OrderedDictionary();
+    this->partidasIndividuales = new OrderedDictionary();
+    this->partidasMultijugador = new OrderedDictionary();
 }
 
 Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float costoT, float costoA, float costoV, List *cat)
@@ -26,6 +28,9 @@ Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float co
     this->costoVitalicia = costoV;
     this->suscripcion = new List();
     this->categoria = new List();
+    this->partidas = new OrderedDictionary();
+    this->partidasIndividuales = new OrderedDictionary();
+    this->partidasMultijugador = new OrderedDictionary();
     this->categoria = cat;
 }
 
@@ -33,6 +38,9 @@ Videojuego::Videojuego()
 {
     this->categoria = new List();
     this->suscripcion = new List();
+    this->partidas = new OrderedDictionary();
+    this->partidasIndividuales = new OrderedDictionary();
+    this->partidasMultijugador = new OrderedDictionary();
 }
 
 void Videojuego::setCategoria(Categoria *c)
@@ -130,4 +138,16 @@ void Videojuego::cancelarSuscripcion(std::string nick)
             }
         }
     }
+}
+
+void Videojuego::agregarIndividual(Individual* aux){
+    StringKey* key = new StringKey(aux->getId());
+
+    partidasIndividuales->add(key,aux); 
+}
+
+void Videojuego::agregarMultijugador(Multijugador* aux){
+    StringKey* key = new StringKey(aux->getId());
+
+    partidasMultijugador->add(key,aux); 
 }

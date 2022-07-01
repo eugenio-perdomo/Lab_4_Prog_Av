@@ -33,13 +33,13 @@ float Partida::getDuracionPartida()
 {
     return this->duracionPartida;
 }
-DtFecha Partida::getFechaInicio()
+DtFecha* Partida::getFechaInicio()
 {
-    return *fechaInicio;
+    return fechaInicio;
 }
-DtFecha Partida::getFechaFin()
+DtFecha* Partida::getFechaFin()
 {
-    return *fechaFin;
+    return fechaFin;
 }
 
 void Partida::setId(std::string id)

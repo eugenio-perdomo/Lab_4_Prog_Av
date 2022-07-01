@@ -7,7 +7,11 @@ class Suscripcion;
 #include "Usuario.h"
 #include "Suscripcion.h"
 #include "Partida.h"
+#include "Individual.h"
+#include "Multijugador.h"
+#include "DtFecha.h"
 #include "../../ICollection/collections/List.h"
+#include "../../ICollection/Integer.h"
 
 class Jugador : public Usuario
 {
@@ -17,6 +21,8 @@ private:
 	ICollection *suscripcion; // Luego definir si esto es una colleccion o es un IDictionary
 							  // Va a cambiar el set, utilizando IKey
 	IDictionary *partidas;
+	IDictionary *partidasIndividuales;
+	IDictionary *partidasMultijugador;
 
 public:
 	Jugador();
@@ -43,7 +49,11 @@ public:
 
 	void listarVideojuegosDeJugador();
 
-	void listarPartidas();
+	void listarPartidasIndividualesFinalizadas(std::string nombreVideojuego);
+	bool comprobarContinuacion(int id, std::string nombreVideojuego);
+
+	void agregarIndividual(Individual* aux);
+	void agregarMultijugador(Multijugador* aux);
 
 
 	virtual ~Jugador();
