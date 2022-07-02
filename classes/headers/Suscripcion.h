@@ -1,17 +1,16 @@
 #ifndef SUSCRIPCION_H
 #define SUSCRIPCION_H
 
-class Jugador;
 class Videojuego;
-class Partida;
+class Jugador;
 
 #include "string.h"
 #include "../../ICollection/interfaces/ICollection.h"
 #include "../../datatypes/headers/DtFecha.h"
-#include "Jugador.h"
 #include "Videojuego.h"
 #include "MetodoPago.h"
 #include "Valor.h"
+#include "Jugador.h"
 
 class Suscripcion : public ICollectible
 {

@@ -12,12 +12,11 @@ void Desarrollador::mostrarVideojuegosDesarrollador()
 {
     IIterator *it = this->videojuegosdesarrollador->getIterator();
     std::cout << "\e[0;35mVideojuego con partidas finalizadas: \n\e[0m";
-
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
         bool tiene = aux->tienepartidas();
-
+        
         if (tiene == false)
             std::cout << "\e[0;35m" << aux->Getnombre() << "\n\e[0m";
 
@@ -40,9 +39,11 @@ void Desarrollador::setVideoJuego(Videojuego *vj, IKey *id)
 
 void Desarrollador::EliminarEsteJuego(Videojuego *v)
 {
+    std::cout << v->Getnombre();
     v->eliminarme();
-    StringKey *key = new StringKey(v->Getnombre());
-    videojuegosdesarrollador->remove(key);
+    StringKey *keyVidj = new StringKey(v->Getnombre());
+    videojuegosdesarrollador->remove(keyVidj);
+    std::cout << "\n3. \n";
     v->Borrame();
 }
 

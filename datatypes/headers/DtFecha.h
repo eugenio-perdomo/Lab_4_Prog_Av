@@ -24,12 +24,12 @@ public:
     int getMes();
     int getAnio();
 
-    int setSegundo(int v);
-    int setMinuto(int v);
-    int setHora(int v);
-    int setDia(int v);
-    int setMes(int v);
-    int setAnio(int v);
+    void setSegundo(int v);
+    void setMinuto(int v);
+    void setHora(int v);
+    void setDia(int v);
+    void setMes(int v);
+    void setAnio(int v);
 
     bool operator==(const DtFecha &df) const;
     bool operator<(const DtFecha &df) const;

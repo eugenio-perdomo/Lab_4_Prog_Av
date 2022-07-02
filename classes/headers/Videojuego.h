@@ -1,15 +1,16 @@
 #ifndef VIDEOJUEGO_H
 #define VIDEOJUEGO_H
 
+class Partida;
 class Suscripcion;
 class Individual;
 class Multijugador;
 class Desarrollador;
 
 #include "string"
+#include "Partida.h"
 #include "Estadistica.h"
 #include "Categoria.h"
-#include "Partida.h"
 #include "Suscripcion.h"
 #include "Desarrollador.h"
 #include "../../ICollection/interfaces/ICollection.h"
@@ -30,11 +31,9 @@ private:
 	Desarrollador *desarrollador;
 	ICollection *categoria;
 	ICollection *suscripcion;
-
 	IDictionary *partidas;
 	IDictionary *partidasIndividuales;
-	IDictionary *partidasMultijugador;
-	
+	IDictionary *partidasMultijugador;	
 
 public:
 	Videojuego();
@@ -45,7 +44,7 @@ public:
 
 	Videojuego(std::string nombre, std::string descripcion, float costoVitalicia, float costoMensual, float costoTrimestral, float costoAnual, Estadistica *est, Desarrollador * des);
 
-	std::string Getnombre() { return nombre; }
+	std::string Getnombre();
 	void Setnombre(std::string val) { nombre = val; }
 	std::string Getdescripcion() { return descripcion; }
 	void Setdescripcion(std::string val) { descripcion = val; }

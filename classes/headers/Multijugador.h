@@ -1,7 +1,6 @@
 #ifndef MULTIJUGADOR_H
 #define MULTIJUGADOR_H
 
-class Partida;
 #include "Partida.h"
 #include "Transmision.h"
 

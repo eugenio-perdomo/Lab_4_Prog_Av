@@ -41,27 +41,27 @@ int DtFecha::getAnio()
 }
 
 
-int DtFecha::setSegundo(int v){
+void DtFecha::setSegundo(int v){
 	this->segundo=v;
 }
 
-int DtFecha::setMinuto(int v){
+void DtFecha::setMinuto(int v){
 	this->minuto=v;
 }
 
-int DtFecha::setHora(int v){
+void DtFecha::setHora(int v){
 	this->hora=v;
 }
 
-int DtFecha::setDia(int v){
+void DtFecha::setDia(int v){
 	this->dia=v;
 }
 
-int DtFecha::setMes(int v){
+void DtFecha::setMes(int v){
 	this->mes=v;
 }
 
-int DtFecha::setAnio(int v){
+void DtFecha::setAnio(int v){
 	this->anio=v;
 }
 

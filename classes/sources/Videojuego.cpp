@@ -94,6 +94,8 @@ void Videojuego::Borrame()
     delete (this);
 }
 
+std::string Videojuego::Getnombre() { return this->nombre; }
+
 void Videojuego::getCategorias()
 {
     IIterator *it = this->categoria->getIterator();
@@ -110,26 +112,26 @@ void Videojuego::getCategorias()
 
 bool Videojuego::tienepartidas()
 {
-    bool resultado = false;
+    bool finalizada = false;
     IIterator *it = this->partidas->getIterator();
+
     while (it->hasCurrent())
     {
         Partida *par = dynamic_cast<Partida *>(it->getCurrent());
+
         if (par != 0)
         {
-            bool finalizada = par->getFinalizado();
+            finalizada = par->getFinalizado();
             if (finalizada == false)
             {
-                resultado = true;
-                break;
+                return true;
             }
         }
-        else
-            it->next();
+        it->next();
     }
 
     delete it;
-    return resultado;
+    return false;
 }
 
 void Videojuego::cancelarSuscripcion(std::string nick)
@@ -150,18 +152,20 @@ void Videojuego::cancelarSuscripcion(std::string nick)
     }
 }
 
-void Videojuego::agregarIndividual(Individual* aux){
-    StringKey* key = new StringKey(aux->getId());
+void Videojuego::agregarIndividual(Individual *aux)
+{
+    StringKey *key = new StringKey(aux->getId());
 
-    partidasIndividuales->add(key,aux); 
-    partidas->add(key,aux);
+    partidasIndividuales->add(key, aux);
+    partidas->add(key, aux);
 }
 
-void Videojuego::agregarMultijugador(Multijugador* aux){
-    StringKey* key = new StringKey(aux->getId());
+void Videojuego::agregarMultijugador(Multijugador *aux)
+{
+    StringKey *key = new StringKey(aux->getId());
 
-    partidasMultijugador->add(key,aux); 
-    partidas->add(key,aux);
+    partidasMultijugador->add(key, aux);
+    partidas->add(key, aux);
 }
 
 void Videojuego::setDesarrollador(Desarrollador *d)

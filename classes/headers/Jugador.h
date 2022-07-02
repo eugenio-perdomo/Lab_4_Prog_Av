@@ -2,14 +2,16 @@
 #define JUGADOR_H
 
 class Partida;
-class Individual;
 class Suscripcion;
+class Videojuego;
+class Individual;
+class Multijugador;
 
-#include "Usuario.h"
-#include "Suscripcion.h"
 #include "Partida.h"
 #include "Individual.h"
 #include "Multijugador.h"
+#include "Usuario.h"
+#include "Suscripcion.h"
 #include "../../datatypes/headers/DtFecha.h"
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/Integer.h"
