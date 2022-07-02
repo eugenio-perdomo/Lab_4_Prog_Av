@@ -1,5 +1,7 @@
 #include "../headers/Sistema.h"
 #include <sstream>
+#include <iomanip>
+#include <ctime>
 
 Sistema::Sistema()
 {
@@ -8,6 +10,34 @@ Sistema::Sistema()
     this->jugadores = new OrderedDictionary;
     this->desarrolladores = new OrderedDictionary;
     this->fechaDelSistema = new DtFecha(03, 07, 2022, 00, 30, 10);
+}
+
+DtFecha* Sistema::obtenerFecha(){
+
+    auto t = time(nullptr); //Auxiliar para obtener la fecha y hora del sistema
+    auto tm = *localtime(&t); //Guarda todos los campos de fecha y hora
+
+    fechaDelSistema->setAnio(tm.tm_year+1900);
+    fechaDelSistema->setMes(tm.tm_mon);
+    fechaDelSistema->setDia(tm.tm_mday);
+    fechaDelSistema->setHora(tm.tm_hour);
+    fechaDelSistema->setMinuto(tm.tm_min);
+    fechaDelSistema->setSegundo(tm.tm_sec);
+
+    return fechaDelSistema;
+
+/*
+
+auto t = time(nullptr); //Auxiliar para obtener la fecha y hora del sistema
+auto tm = *localtime(&t); //Guarda todos los cambos de fecha y hora
+int prueba = tm.tm_hour; //Ejemplo de carga
+
+--- --- ---
+
+DtFecha *fecha = new DtFecha(tm.tm_year+1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min);
+*/
+
+
 }
 
 // Alta de usuario
@@ -311,13 +341,13 @@ void Sistema::menuCaso3(int i)
         fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
         Multijugador *pM3 = new Multijugador(false, 1, "6", "Minecraft", false, 0, fecha1, fecha2);
 
-        IKey *keyDesarrollador = new StringKey("ironhide@mail.com");
+        IKey *keyDesarrollador = new StringKey("KingdomRush");
         d1->setVideoJuego(vj1, keyDesarrollador);
-        keyDesarrollador = new StringKey("epic@mail.com");
+        keyDesarrollador = new StringKey("Fortnite");
         d2->setVideoJuego(vj2, keyDesarrollador);
-        keyDesarrollador = new StringKey("mojang@mail.com");
+        keyDesarrollador = new StringKey("Minecraft");
         d3->setVideoJuego(vj3, keyDesarrollador);
-        keyDesarrollador = new StringKey("ea@mail.com");
+        keyDesarrollador = new StringKey("FIFA 21");
         d4->setVideoJuego(vj4, keyDesarrollador);
 
         vj1->setCategoria(c1);
@@ -348,21 +378,26 @@ void Sistema::menuCaso3(int i)
 
         IKey *keyJuego = new StringKey("KingdomRush");
         vj1->setPartidaParaVideojuego(part, keyJuego);
+
         keyJuego = new StringKey("KingdomRush");
         vj1->setPartidaParaVideojuego((Partida *)pI2, keyJuego);
+
         keyJuego = new StringKey("Minecraft");
         vj3->setPartidaParaVideojuego((Partida *)pI3, keyJuego);
+
         keyJuego = new StringKey("Fortnite");
         vj2->setPartidaParaVideojuego((Partida *)pM1, keyJuego);
+
         keyJuego = new StringKey("Fortnite");
         vj2->setPartidaParaVideojuego((Partida *)pM2, keyJuego);
+
         keyJuego = new StringKey("Minecraft");
         vj3->setPartidaParaVideojuego((Partida *)pM3, keyJuego);
     }
 }
 
 // Publicar videojuego
-void Sistema::publicarVideojuego()
+void Sistema::publicarVideojuego(Desarrollador *d)
 {
     std::string nom, desc;
     float cMensual, cTristral, cAnual, cVitalicio;
@@ -373,66 +408,84 @@ void Sistema::publicarVideojuego()
     std::cout << "\nIngrese nombre: \e[0;92m";
     std::cin >> nom;
     clearDeDatosDeEntrada();
-    std::cout << "\nIngrese descripcion: \e[0;92m";
-    std::cin >> desc;
-    clearDeDatosDeEntrada();
-    std::cout << "\nIngrese costo menusal: \e[0;92m";
-    std::cin >> cMensual;
-    clearDeDatosDeEntrada();
-    std::cout << "\nIngrese costo trimestral: \e[0;92m";
-    std::cin >> cTristral;
-    clearDeDatosDeEntrada();
-    std::cout << "\nIngrese costo anual: \e[0;92m";
-    std::cin >> cAnual;
-    clearDeDatosDeEntrada();
-    std::cout << "\nIngrese costo vitalicio: \e[0;92m";
-    std::cin >> cVitalicio;
-    clearDeDatosDeEntrada();
-
-    while (deseaAgregar == true)
+    StringKey *key = new StringKey(nom);
+    if (videojuegos->member(key) == 1)
     {
-        mostrarCategorias();
-        std::string cat;
-        std::cout << "\nSeleccione una categoria: ";
-        std::cin >> cat;
+        std::cout << "\n\e[0;31mEse nombre ya fue seleccionado anteriormente\n\n\e[0m";
+    }
+    else
+    {
+        std::cout << "\nIngrese descripcion: \e[0;92m";
+        std::cin >> desc;
         clearDeDatosDeEntrada();
-        Categoria *aux = obtenerCategoria(cat);
+        std::cout << "\nIngrese costo menusal: \e[0;92m";
+        std::cin >> cMensual;
+        clearDeDatosDeEntrada();
+        std::cout << "\nIngrese costo trimestral: \e[0;92m";
+        std::cin >> cTristral;
+        clearDeDatosDeEntrada();
+        std::cout << "\nIngrese costo anual: \e[0;92m";
+        std::cin >> cAnual;
+        clearDeDatosDeEntrada();
+        std::cout << "\nIngrese costo vitalicio: \e[0;92m";
+        std::cin >> cVitalicio;
+        clearDeDatosDeEntrada();
 
-        // TODO: Este member simpre dará false y siempre entra en el else
-        if (aux_categorias->member(aux) == 1)
-            aux_categorias->add(aux);
-        else // La categoria ya habia sido agregada a la lista auxiliar anteriormente
-            std::cout << "\n\e[0;31mEsa categoria ya fue seleccionada anteriormente\e[0m";
+        mostrarCategorias();
 
-        std::cout << "\nDesea asignar otra categoria?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+        while (deseaAgregar)
+        {
+            std::string cat;
+            std::cout << "\nSeleccione una categoria: ";
+            std::cin >> cat;
+            clearDeDatosDeEntrada();
+            Categoria *aux = obtenerCategoria(cat);
+
+            if (aux != 0)
+            {
+                if (aux_categorias->member(aux) != 1)
+                    aux_categorias->add(aux);
+                else // La categoria ya habia sido agregada a la lista auxiliar anteriormente
+                    std::cout << "\n\e[0;31mEsa categoria ya fue seleccionada anteriormente\e[0m";
+            }
+            else
+            {
+                std::cout << "\n\e[0;31mLa categoria ingresada no es correcta.\n\e[0m";
+            }
+
+            std::cout << "\nDesea asignar otra categoria?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+            std::cin >> opcionUsuario;
+            clearDeDatosDeEntrada();
+
+            if (opcionUsuario == 2)
+                deseaAgregar = false;
+        }
+
+        std::cout << "\n\e[0;35mDatos del videojuego:";
+        std::cout << "\n\e[0;34mNombre: " << nom;
+        std::cout << "\n\e[0;37mDescripcion: " << desc;
+        std::cout << "\n\e[0;34mCosto Mensual: " << cMensual;
+        std::cout << "\n\e[0;37mCosto Trimestral: " << cTristral;
+        std::cout << "\n\e[0;34mCosto Anual: " << cAnual;
+        std::cout << "\n\e[0;37mCosto Vitalicia: " << cVitalicio;
+
+        mostrarListaCategorias(aux_categorias);
+
+        std::cout << "\nDesea publicar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
         std::cin >> opcionUsuario;
         clearDeDatosDeEntrada();
 
-        if (opcionUsuario == 2)
-            deseaAgregar = false;
-    }
-
-    std::cout << "\n\e[0;35mDatos del videojuego:";
-    std::cout << "\n\e[0;34mNombre: " << nom;
-    std::cout << "\n\e[0;37mDescripcion: " << desc;
-    std::cout << "\n\e[0;34mCosto Mensual: " << cMensual;
-    std::cout << "\n\e[0;37mCosto Trimestral: " << cTristral;
-    std::cout << "\n\e[0;34mCosto Anual: " << cAnual;
-    std::cout << "\n\e[0;37mCosto Vitalicia: " << cVitalicio;
-
-    mostrarListaCategorias(aux_categorias);
-
-    std::cout << "\nDesea publicar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
-    std::cin >> opcionUsuario;
-    clearDeDatosDeEntrada();
-
-    if (opcionUsuario == 1)
-    {
-        // TODO: Aunque se agregue un videoJuego, no se añadieron las categorias, entonces falla en
-        // ver info de videojuego
-        StringKey *key = new StringKey(nom);
-        Videojuego *videojuegoAux = new Videojuego(nom, desc, cMensual, cTristral, cAnual, cVitalicio, aux_categorias);
-        videojuegos->add(key, videojuegoAux);
+        if (opcionUsuario == 1)
+        {
+            StringKey *key = new StringKey(nom);
+            Videojuego *videojuegoAux = new Videojuego(nom, desc, cMensual, cTristral, cAnual, cVitalicio, aux_categorias);
+            videojuegos->add(key, videojuegoAux);
+            d->setVideoJuego(videojuegoAux, key);
+            videojuegoAux->setDesarrollador(d);
+            std::cout << "\n\e[0;35mVideojuego Publicado.\n\n\e[0m";
+        }
+        else
+            delete aux_categorias;
     }
 }
 
@@ -632,8 +685,8 @@ void Sistema::VerInfoVideoJuego()
     Videojuego *aux = GetUnVideojuego(key);
 
     if (aux != 0)
-    {
-        nombreempresa = aux->Getdesarrollador()->Getempresa();
+    { // Se Re Caga aca un nuevo videojuego
+        nombreempresa = aux->GetDesarrollador()->Getempresa();
         std::cout << "\n\e[0;34mNombre: " << aux->Getnombre();
         std::cout << "\n\e[0;37mDescripcion: " << aux->Getdescripcion();
         std::cout << "\n\e[0;34mCosto Mensual: " << aux->GetcostoMensual();
@@ -868,30 +921,38 @@ void Sistema::EliminarVideojuego(Desarrollador *d)
 {
     std::string nom;
     d->mostrarVideojuegosDesarrollador();
-    std::cout << "\nIngrese nombre del videojuego a eliminar: ";
+    std::cout << "\nIngrese nombre del videojuego a eliminar: \e[0;92m";
     std::cin >> nom;
     clearDeDatosDeEntrada();
+
     Videojuego *aux = d->obtenerVideojuegodesarrollador(nom);
-    std::cout << aux;
 
     if (aux != 0)
     {
-        int op3;
-        std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
-        std::cin >> op3;
-        clearDeDatosDeEntrada();
-
-        if (op3 == 1)
+        bool tiene = aux->tienepartidas();
+        if (tiene == false)
         {
-            // Confirma eliminar el videojuego
-            d->EliminarEsteJuego(aux);
-            std::cout << "\n\e[1;33mVideojuego Eliminado.\e[1;33m\n";
+            int op3;
+            std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+            std::cin >> op3;
+            clearDeDatosDeEntrada();
+
+            if (op3 == 1)
+            {
+                // Confirma eliminar el videojuego
+                StringKey *key = new StringKey(nom);
+                d->EliminarEsteJuego(aux);
+                std::cout <<"Un nuevo usuario con nuevo videojuego falla aca\n Error: Invalid Key";
+                std::cout <<"Si logra destruir el objeto en EliminarEsteJuego(), pero no lo remueve en la lista siguiente\n";
+                videojuegos->remove(key);
+                std::cout << "\n\e[1;33mVideojuego Eliminado.\e[1;33m\n";
+            }
         }
+        else
+            std::cout << "\n\e[1;33mEse Videojuego aun tiene partidas activas.\e[1;33m\n";
     }
     else
-    {
         std::cout << "\n\e[1;33mNombre del videojuego no esta en tu lista.\e[1;33m\n";
-    }
 }
 
 void Sistema::imprimirMenuDesarrollador()
@@ -910,7 +971,7 @@ void Sistema::imprimirMenuDesarrollador()
             {
             case 1: // Publicar Videojuego
             {
-                publicarVideojuego();
+                publicarVideojuego(desarrolladorActual);
                 break;
             }
             case 2: // Eliminar Videojuego

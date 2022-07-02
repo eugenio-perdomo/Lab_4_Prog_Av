@@ -28,6 +28,8 @@ public:
 	void imprimirMenuJugador(Jugador *jugadorActual);
 	void clearDeDatosDeEntrada();
 
+	DtFecha* obtenerFecha();
+
 	// CASO DE USO 1: ALTA USUARIO
 	void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc);
 	void agregarDesarrollador(std::string email, std::string contrasenia, std::string empresa);
@@ -40,7 +42,7 @@ public:
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	void mostrarCategorias();
 	Categoria *obtenerCategoria(std::string categoria);
-	void publicarVideojuego(/*Sistema* s*/);
+	void publicarVideojuego(Desarrollador *d);
 	void mostrarListaCategorias(List *lista);
 
 	// CASO DE USO 4: SUSCRIBIRSE A VIDEOJUEGO

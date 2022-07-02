@@ -54,6 +54,8 @@ public:
 	virtual void imprimirMenuJugador(Jugador *jugadorActual) = 0;
 	virtual void clearDeDatosDeEntrada() = 0;
 
+	virtual DtFecha* obtenerFecha() = 0;
+
 	// CASO DE USO 1: ALTA USUARIO
 	virtual void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc) = 0;
 	virtual void agregarDesarrollador(std::string email, std::string contrasenia, std::string empresa) = 0;
@@ -66,7 +68,7 @@ public:
 	// CASO DE USO 3: PUBLICAR VIDEOJUEGO
 	virtual void mostrarCategorias() = 0;
 	virtual Categoria *obtenerCategoria(std::string categoria) = 0;
-	virtual void publicarVideojuego(/*Sistema* s*/) = 0;
+	virtual void publicarVideojuego(Desarrollador *d) = 0;
 	virtual void mostrarListaCategorias(List *lista) = 0;
 
 	// CASO DE USO 4: SUSCRIBIRSE A VIDEOJUEGO
