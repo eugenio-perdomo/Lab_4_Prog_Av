@@ -27,6 +27,8 @@ public:
 	void imprimirMenuJugador(Jugador *jugadorActual);
 	void clearDeDatosDeEntrada();
 
+	DtFecha* obtenerFecha();
+
 	// CASO DE USO 1: ALTA USUARIO
 	void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc);
 	void agregarDesarrollador(std::string email, std::string contrasenia, std::string empresa);

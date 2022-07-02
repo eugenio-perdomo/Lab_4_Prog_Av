@@ -1,4 +1,7 @@
 #include "../headers/Sistema.h"
+#include <iomanip>
+#include <ctime>
+
 Sistema::Sistema()
 {
     this->videojuegos = new OrderedDictionary;
@@ -6,6 +9,34 @@ Sistema::Sistema()
     this->jugadores = new OrderedDictionary;
     this->desarrolladores = new OrderedDictionary;
     this->fechaDelSistema = new DtFecha(03, 07, 2022, 00, 30, 10);
+}
+
+DtFecha* Sistema::obtenerFecha(){
+
+    auto t = time(nullptr); //Auxiliar para obtener la fecha y hora del sistema
+    auto tm = *localtime(&t); //Guarda todos los campos de fecha y hora
+
+    fechaDelSistema->setAnio(tm.tm_year+1900);
+    fechaDelSistema->setMes(tm.tm_mon);
+    fechaDelSistema->setDia(tm.tm_mday);
+    fechaDelSistema->setHora(tm.tm_hour);
+    fechaDelSistema->setMinuto(tm.tm_min);
+    fechaDelSistema->setSegundo(tm.tm_sec);
+
+    return fechaDelSistema;
+
+/*
+
+auto t = time(nullptr); //Auxiliar para obtener la fecha y hora del sistema
+auto tm = *localtime(&t); //Guarda todos los cambos de fecha y hora
+int prueba = tm.tm_hour; //Ejemplo de carga
+
+--- --- ---
+
+DtFecha *fecha = new DtFecha(tm.tm_year+1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min);
+*/
+
+
 }
 
 // Alta de usuario

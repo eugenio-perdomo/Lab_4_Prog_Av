@@ -23,6 +23,14 @@ public:
     int getDia();
     int getMes();
     int getAnio();
+
+    int setSegundo(int v);
+    int setMinuto(int v);
+    int setHora(int v);
+    int setDia(int v);
+    int setMes(int v);
+    int setAnio(int v);
+
     bool operator==(const DtFecha &df) const;
     bool operator<(const DtFecha &df) const;
     virtual ~DtFecha();
