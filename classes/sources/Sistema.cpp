@@ -846,9 +846,9 @@ void Sistema::EliminarVideojuego(Desarrollador *d)
             {
                 // Confirma eliminar el videojuego
                 StringKey *key = new StringKey(nom);
-                std::cout << key << std::endl;
                 d->EliminarEsteJuego(aux);
-                std::cout << "Falla aca" << std::endl;
+                std::cout <<"Un nuevo usuario con nuevo videojuego falla aca\n Error: Invalid Key";
+                std::cout <<"Si logra destruir el objeto en EliminarEsteJuego(), pero no lo remueve en la lista siguiente\n";
                 videojuegos->remove(key);
                 std::cout << "\n\e[1;33mVideojuego Eliminado.\e[1;33m\n";
             }
