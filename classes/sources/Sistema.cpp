@@ -532,7 +532,7 @@ void Sistema::mostrarListaVideojuegos(List *lista)
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
-        std::cout << aux->Getnombre();
+        std::cout << aux->GetNombreVidJ();
         it->next();
     }
     delete it;
@@ -659,7 +659,7 @@ void Sistema::mostrarVideojuegos()
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
-        std::cout << aux->Getnombre() << std::endl;
+        std::cout << aux->GetNombreVidJ() << std::endl;
         it->next();
     }
     std::cout << "\e[0m";
@@ -687,7 +687,7 @@ void Sistema::VerInfoVideoJuego()
     if (aux != 0)
     { // Se Re Caga aca un nuevo videojuego
         nombreempresa = aux->GetDesarrollador()->Getempresa();
-        std::cout << "\n\e[0;34mNombre: " << aux->Getnombre();
+        std::cout << "\n\e[0;34mNombre: " << aux->GetNombreVidJ();
         std::cout << "\n\e[0;37mDescripcion: " << aux->Getdescripcion();
         std::cout << "\n\e[0;34mCosto Mensual: " << aux->GetcostoMensual();
         std::cout << "\n\e[0;37mCosto Trimestral: " << aux->GetcostoTrimestral();

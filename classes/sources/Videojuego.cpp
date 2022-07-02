@@ -94,7 +94,10 @@ void Videojuego::Borrame()
     delete (this);
 }
 
-std::string Videojuego::Getnombre() { return this->nombre; }
+std::string Videojuego::GetNombreVidJ()
+{
+    return this->nombre;
+}
 
 void Videojuego::getCategorias()
 {

@@ -18,7 +18,7 @@ void Desarrollador::mostrarVideojuegosDesarrollador()
         bool tiene = aux->tienepartidas();
         
         if (tiene == false)
-            std::cout << "\e[0;35m" << aux->Getnombre() << "\n\e[0m";
+            std::cout << "\e[0;35m" << aux->GetNombreVidJ() << "\n\e[0m";
 
         it->next();
     }
@@ -39,11 +39,9 @@ void Desarrollador::setVideoJuego(Videojuego *vj, IKey *id)
 
 void Desarrollador::EliminarEsteJuego(Videojuego *v)
 {
-    std::cout << v->Getnombre();
     v->eliminarme();
-    StringKey *keyVidj = new StringKey(v->Getnombre());
+    StringKey *keyVidj = new StringKey(v->GetNombreVidJ());
     videojuegosdesarrollador->remove(keyVidj);
-    std::cout << "\n3. \n";
     v->Borrame();
 }
 

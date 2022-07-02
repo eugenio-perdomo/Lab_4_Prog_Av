@@ -44,7 +44,7 @@ public:
 
 	Videojuego(std::string nombre, std::string descripcion, float costoVitalicia, float costoMensual, float costoTrimestral, float costoAnual, Estadistica *est, Desarrollador * des);
 
-	std::string Getnombre();
+	std::string GetNombreVidJ();
 	void Setnombre(std::string val) { nombre = val; }
 	std::string Getdescripcion() { return descripcion; }
 	void Setdescripcion(std::string val) { descripcion = val; }
