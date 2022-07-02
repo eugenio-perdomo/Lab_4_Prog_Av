@@ -112,30 +112,34 @@ void Jugador::cancelarSuscripcion(Videojuego *vj)
     // suscripcion->remove(vj);
 }
 
-
-void Jugador::listarVideojuegosDeJugador(){
-
+void Jugador::listarVideojuegosDeJugador()
+{
     IIterator *it = suscripcion->getIterator();
+    std::cout << "\e[1;35mVideojuegos: ";
+    while (it->hasCurrent())
+    {
+        Suscripcion *aux = dynamic_cast<Suscripcion *>(it->getCurrent());
 
-    while (it->hasCurrent()){
-        Suscripcion *aux = dynamic_cast<Suscripcion*>(it->getCurrent());
-
-        if (aux->Getcancelada()==false){
-            std::cout << aux->GetNombreVideojuego();
+        if (aux->Getcancelada() == false)
+        {
+            std::cout << std::endl << aux->GetNombreVideojuego() << std::endl;
         }
-
         it->next();
     }
 }
 
-void Jugador::listarPartidasIndividualesFinalizadas(std::string nombreVideojuego){
+void Jugador::listarPartidasIndividualesFinalizadas(std::string nombreVideojuego)
+{
     IIterator *it = partidasIndividuales->getIterator();
+    std::cout << "\e[1;36mPartidas: ";
 
-    while (it->hasCurrent()){
-        Individual *aux = dynamic_cast<Individual*>(it->getCurrent());
+    while (it->hasCurrent())
+    {
+        Individual *aux = dynamic_cast<Individual *>(it->getCurrent());
 
-        if (aux->getFinalizado()==true && aux->getNombreVideojuego()==nombreVideojuego){
-            std::cout << "\nID: " << aux->getId();
+        if (aux->getFinalizado() == true && aux->getNombreVideojuego() == nombreVideojuego)
+        {
+            std::cout << "\n\nID: " << aux->getId();
             std::cout << "\nDuracion: " << aux->getDuracionPartida();
             std::cout << "\nInicio: " << aux->getFechaInicio()->getDia() << "/" << aux->getFechaInicio()->getMes() << "/" << aux->getFechaInicio()->getAnio() << " " << aux->getFechaInicio()->getHora() << ":" << aux->getFechaInicio()->getMinuto();
             std::cout << "\nInicio: " << aux->getFechaFin()->getDia() << "/" << aux->getFechaFin()->getMes() << "/" << aux->getFechaFin()->getAnio() << " " << aux->getFechaFin()->getHora() << ":" << aux->getFechaFin()->getMinuto();
@@ -145,32 +149,37 @@ void Jugador::listarPartidasIndividualesFinalizadas(std::string nombreVideojuego
     }
 }
 
-bool Jugador::comprobarContinuacion(int id, std::string nombreVideojuego){
+bool Jugador::comprobarContinuacion(int id, std::string nombreVideojuego)
+{
 
-    Integer* key = new Integer(id);
-    bool resultado=false;
-    
-    if (partidasIndividuales->member(key)){
-        Individual *aux = dynamic_cast<Individual*>(partidasIndividuales->find(key));
+    Integer *key = new Integer(id);
+    bool resultado = false;
 
-        if (aux->getFinalizado()==true && aux->getNombreVideojuego()==nombreVideojuego){
-            resultado=true;
+    if (partidasIndividuales->member(key))
+    {
+        Individual *aux = dynamic_cast<Individual *>(partidasIndividuales->find(key));
+
+        if (aux->getFinalizado() == true && aux->getNombreVideojuego() == nombreVideojuego)
+        {
+            resultado = true;
         }
     }
 
     return resultado;
 }
 
-void Jugador::agregarIndividual(Individual* aux){
-    StringKey* key = new StringKey(aux->getId());
+void Jugador::agregarIndividual(Individual *aux)
+{
+    StringKey *key = new StringKey(aux->getId());
 
-    partidasIndividuales->add(key,aux); 
-    partidas->add(key,aux);
+    partidasIndividuales->add(key, aux);
+    partidas->add(key, aux);
 }
 
-void Jugador::agregarMultijugador(Multijugador* aux){
-    StringKey* key = new StringKey(aux->getId());
+void Jugador::agregarMultijugador(Multijugador *aux)
+{
+    StringKey *key = new StringKey(aux->getId());
 
-    partidasMultijugador->add(key,aux); 
-    partidas->add(key,aux);
+    partidasMultijugador->add(key, aux);
+    partidas->add(key, aux);
 }

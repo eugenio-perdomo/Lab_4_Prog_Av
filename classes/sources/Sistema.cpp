@@ -47,10 +47,10 @@ void Sistema::menuCaso1()
     while (bandera == true)
     {
         std::string email, contrasenia;
-        std::cout << "\nIngresar email: ";
+        std::cout << "\nIngresar email: \e[1;36m";
         std::cin >> email;
         clearDeDatosDeEntrada();
-        std::cout << "Ingresar contrasenia: ";
+        std::cout << "Ingresar contrasenia: \e[1;36m";
         std::cin >> contrasenia;
         clearDeDatosDeEntrada();
 
@@ -121,10 +121,10 @@ void Sistema::menuCaso2()
     {
         while (bandera == true)
         {
-            std::cout << "\nIngrese email: ";
+            std::cout << "\nIngrese email: \e[1;36m";
             std::cin >> email;
             clearDeDatosDeEntrada();
-            std::cout << "Ingrese contrasenia: ";
+            std::cout << "Ingrese contrasenia: \e[1;36m";
             std::cin >> contrasenia;
             clearDeDatosDeEntrada();
             opcionUsuario = iniciarSesion(email, contrasenia);
@@ -150,6 +150,7 @@ void Sistema::menuCaso2()
                 jugadorActual = obtenerJugadorActual(email);
                 imprimirMenuJugador(jugadorActual);
                 bandera = false;
+                std::cout << std::endl;
                 break;
             }
             case 2:
@@ -159,6 +160,7 @@ void Sistema::menuCaso2()
                 desarrolladorActual = obtenerDesarrolladorActual(email);
                 imprimirMenuDesarrollador();
                 bandera = false;
+                std::cout << std::endl;
                 break;
             }
 
@@ -317,6 +319,13 @@ void Sistema::menuCaso3(int i)
         Suscripcion *sus5 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::UnMes, false, vj2, j1);
         fecha1 = new DtFecha(21, 12, 2020, 0, 00, 15);
         Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false, vj2, j2);
+
+        j1->setSuscripcion(sus1);
+        j2->setSuscripcion(sus2);
+        j3->setSuscripcion(sus3);
+        j4->setSuscripcion(sus4);
+        j1->setSuscripcion(sus5);
+        j2->setSuscripcion(sus6);
 
         // Ind
         fecha1 = new DtFecha(02, 06, 2021, 0, 00, 9);
@@ -547,7 +556,7 @@ void Sistema::suscribirseVideojuego()
     mostrarVideojuegos();
 
     std::string nombreVideojuego;
-    std::cout << "\nIndicar el nombre del videojuego: ";
+    std::cout << "\n\e[0mIndicar el nombre del videojuego: \e[0;92m";
     std::cin >> nombreVideojuego;
     clearDeDatosDeEntrada();
 
@@ -572,11 +581,13 @@ void Sistema::suscribirseVideojuego()
                 std::cin >> op2;
                 clearDeDatosDeEntrada();
 
-                jugadorActual->cancelarSuscripcion(GetUnVideojuego(key));
-
-                // Avisar a videojuego:
-                Videojuego *auxVideojuego1 = dynamic_cast<Videojuego *>(videojuegos->find(key));
-                auxVideojuego1->cancelarSuscripcion(jugadorActual->Getnick());
+                if (op2 == 1)
+                {
+                    jugadorActual->cancelarSuscripcion(GetUnVideojuego(key));
+                    // Avisar a videojuego:
+                    Videojuego *auxVideojuego1 = dynamic_cast<Videojuego *>(videojuegos->find(key));
+                    auxVideojuego1->cancelarSuscripcion(jugadorActual->Getnick());
+                }
             }
         }
         else
@@ -658,7 +669,7 @@ void Sistema::mostrarVideojuegos()
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
-        std::cout << aux->GetNombreVidJ() << std::endl;
+        std::cout << aux->GetNombreVidJ();
         it->next();
     }
     std::cout << "\e[0m";
@@ -676,7 +687,7 @@ void Sistema::VerInfoVideoJuego()
     std::string nom, nombreempresa;
     mostrarVideojuegos();
 
-    std::cout << "\nIngrese nombre del videojuego: ";
+    std::cout << "\nIngrese nombre del videojuego: \e[0;92m";
     std::cin >> nom;
     clearDeDatosDeEntrada();
 
@@ -705,11 +716,10 @@ void Sistema::VerInfoVideoJuego()
 // Iniciar partida
 void Sistema::iniciarPartida()
 {
-
     jugadorActual->listarVideojuegosDeJugador();
 
     std::string nombreVideojuego;
-    std::cout << "\nIndicar el nombre del videojuego:";
+    std::cout << "Indicar el nombre del videojuego: \e[0;92m";
     std::cin >> nombreVideojuego;
     clearDeDatosDeEntrada();
 
@@ -719,25 +729,21 @@ void Sistema::iniciarPartida()
         StringKey *keyVideojuego = new StringKey(nombreVideojuego);
 
         int tipoPartida;
-        std::cout << "\nSelecciona el tipo de partida:";
-        std::cout << "\n1- Individual";
-        std::cout << "\n2- Multijugador";
+        std::cout << "\nSelecciona el tipo de partida:\n1- Individual\n2- Multijugador\n\nOpcion: \e[0;92m";
         std::cin >> tipoPartida;
+        clearDeDatosDeEntrada();
 
         if (tipoPartida == 1)
         {
             // Partida individual
             int esContinuacion;
 
-            std::cout << "\nConfirmar si la partida es una continuación:";
-            std::cout << "\n1- Si";
-            std::cout << "\n2- No";
+            std::cout << "\nConfirmar si la partida es una continuación:\n1- Si\n2- No\n\nOpcion: \e[0;92m";
             std::cin >> esContinuacion;
+            clearDeDatosDeEntrada();
 
             if (esContinuacion == 1)
             {
-                // Es una continuacion
-
                 jugadorActual->listarPartidasIndividualesFinalizadas(nombreVideojuego);
 
                 int IdPartida;
@@ -746,14 +752,11 @@ void Sistema::iniciarPartida()
                 bool validacion = jugadorActual->comprobarContinuacion(IdPartida, nombreVideojuego);
 
                 if (validacion == true)
-                {
-                    // La partida finalizada es valida para continuar
-
+                { // La partida finalizada es valida para continuar
                     int confirmar;
-                    std::cout << "\nConfirmar partida:";
-                    std::cout << "\n1- Si";
-                    std::cout << "\n2- No";
+                    std::cout << "\nConfirmar partida:\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                     std::cin >> confirmar;
+                    clearDeDatosDeEntrada();
 
                     if (confirmar == 1)
                     {
@@ -765,23 +768,21 @@ void Sistema::iniciarPartida()
                     }
                     else
                     {
-                        std::cout << "\nProceso cancelado";
+                        std::cout << "\n\e[1;31mProceso Cancelado.\n\e[0m";
                     }
                 }
                 else
                 {
-                    std::cout << "\nEl ID ingresado no es valido";
+                    std::cout << "\n\e[1;31mEl ID ingresado no es valido.\n\e[0m";
                 }
             }
             else
-            {
-                // No es una continuacion
+            { // No es una continuacion
 
                 int confirmar;
-                std::cout << "\nConfirmar partida:";
-                std::cout << "\n1- Si";
-                std::cout << "\n2- No";
+                std::cout << "\nConfirmar partida:\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> confirmar;
+                clearDeDatosDeEntrada();
 
                 if (confirmar == 1)
                 {
@@ -793,7 +794,7 @@ void Sistema::iniciarPartida()
                 }
                 else
                 {
-                    std::cout << "\nProceso cancelado";
+                    std::cout << "\n\e[1;31mProceso Cancelado.\n\e[0m";
                 }
             }
         }
@@ -803,10 +804,9 @@ void Sistema::iniciarPartida()
             int seleccionEnVivo;
             bool enVivo;
 
-            std::cout << "\nConfirmar si la partida será transmitida en vivo";
-            std::cout << "\n1- Si";
-            std::cout << "\n2- No";
+            std::cout << "\nConfirmar si la partida sera transmitida en vivo:\n1- Si\n2- No\n\nOpcion: \e[0;92m";
             std::cin >> seleccionEnVivo;
+            clearDeDatosDeEntrada();
 
             if (seleccionEnVivo == 1)
             {
@@ -821,13 +821,12 @@ void Sistema::iniciarPartida()
 
             List *listaJugadores = new List();
             int cantJugadores = 0;
-
             int dejarAgregarNicks = 1;
 
             while (dejarAgregarNicks == 1)
             {
                 std::string nick;
-                std::cout << "\nIndicar nick del jugador";
+                std::cout << "\nIndicar nick del jugador: \e[0;92m";
                 std::cin >> nick;
                 clearDeDatosDeEntrada();
 
@@ -836,12 +835,11 @@ void Sistema::iniciarPartida()
                 if (confirmarJugadoresPorSuscripcion(nick, nombreVideojuego))
                 {
                     // Existe el jugador y tiene una suscripcion activa
-
                     Jugador *aux = dynamic_cast<Jugador *>(jugadores->find(key));
 
                     if (listaJugadores->member(aux))
                     {
-                        std::cout << "\nEl jugador ya se encuentra en la lista de selección";
+                        std::cout << "\n\e[1;33mEl jugador ya se encuentra en la lista de selección\e[0m\n";
                     }
                     else
                     {
@@ -851,13 +849,12 @@ void Sistema::iniciarPartida()
                 }
                 else
                 {
-                    std::cout << "\nEl jugador no existe o no cuenta con una suscripción activa para el videojuego";
+                    std::cout << "\n\e[1;31mEl jugador no existe o no cuenta con una suscripción activa para el videojuego\n\e[0m";
                 }
 
-                std::cout << "\nDesea agregar otro jugador?";
-                std::cout << "\n1- Si";
-                std::cout << "\n2- No";
+                std::cout << "\nDesea agregar otro jugador?\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> dejarAgregarNicks;
+                clearDeDatosDeEntrada();
             }
 
             Multijugador *partidaAux = new Multijugador(enVivo, cantJugadores, generarIdPartida(), nombreVideojuego, false, 0, fechaDelSistema);
@@ -869,7 +866,7 @@ void Sistema::iniciarPartida()
     }
     else
     {
-        std::cout << "\nEs necesario contar con una suscripción activa para ese videojuego";
+        std::cout << "\n\e[0;31mEs necesario contar con una suscripcion activa para ese videojuego.\n\e[0m";
     }
 }
 
@@ -1067,17 +1064,16 @@ void Sistema::finalizarPartida(Jugador *jugadorActual)
     std::cout << "\nFinalizar Partida sin implementar\n";
     IIterator *it = jugadorActual->getPartidas()->getIterator();
 
-    Partida *part = dynamic_cast<Partida *>(it->getCurrent()/*jugadorActual->getPartidas()->find(key)*/);
-        
+    Partida *part = dynamic_cast<Partida *>(it->getCurrent() /*jugadorActual->getPartidas()->find(key)*/);
+
     part->setFinalizado(true);
     /*part->setDuracionPartida();
     part->setFechaFin(DtFecha.Now());*/
-        
 }
 
 void Sistema::imprimirTextoPrincipal()
 {
-    std::cout << "\e[0;92mBienvenido - Elija una opcion\e[0m:";
+    std::cout << "\n\e[0;92mBienvenido - Elija una opcion\e[0m:";
     std::cout << "\n\e[0;92m1)\e[0m Alta de usuario.\n";
     std::cout << "\e[0;92m2)\e[0m Iniciar sesion.\n";
     std::cout << "\e[0;92m3)\e[0m Cargar datos de prueba.\n";
@@ -1086,7 +1082,7 @@ void Sistema::imprimirTextoPrincipal()
 
 void Sistema::imprimirTextoDelDesarrollador()
 {
-    std::cout << "\e[0;92mMenu de Desarrollador - Elija una opcion\e[0m:";
+    std::cout << "\n\e[0;92mMenu de Desarrollador - Elija una opcion\e[0m:";
     std::cout << "\n\e[0;92m1)\e[0m Publicar videojuego.\n";
     std::cout << "\e[0;92m2)\e[0m Eliminar videojuego.\n";
     std::cout << "\e[0;92m3)\e[0m Ver Informacion de un videojuego.\n";
@@ -1095,7 +1091,7 @@ void Sistema::imprimirTextoDelDesarrollador()
 
 void Sistema::imprimirTextoDelJugador()
 {
-    std::cout << "\e[0;92mMenu de Jugador - Elija una opcion\e[0m:";
+    std::cout << "\n\e[0;92mMenu de Jugador - Elija una opcion\e[0m:";
     std::cout << "\n\e[0;92m1)\e[0m Suscribirse a videojuego.\n";
     std::cout << "\e[0;92m2)\e[0m Iniciar partida.\n";
     std::cout << "\e[0;92m3)\e[0m Finalizar partida.\n";

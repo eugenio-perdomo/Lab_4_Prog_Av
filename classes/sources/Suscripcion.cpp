@@ -21,7 +21,7 @@ Suscripcion::~Suscripcion() {}
 
 std::string Suscripcion::GetNombreVideojuego()
 {
-    return juego->Getnombre();
+    return juego->GetNombreVidJ();
 }
 
 std::string Suscripcion::GetNombreJugador()
