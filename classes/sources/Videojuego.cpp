@@ -1,4 +1,5 @@
 #include "../headers/Videojuego.h"
+Videojuego::Videojuego() {}
 
 Videojuego::Videojuego(std::string _nombre, std::string _descripcion, float _costoVitalicia, float _costoMensual, float _costoTrimestral,
                        float _costoAnual, Estadistica *_est, Desarrollador *_des)
@@ -24,15 +25,19 @@ Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float co
     this->costoTrimestral = costoT;
     this->costoAnual = costoA;
     this->costoVitalicia = costoV;
-    this->suscripcion = new List();
+    // this->suscripcion = new List();
     this->categoria = new List();
-    this->categoria = cat;
-}
 
-Videojuego::Videojuego()
-{
-    this->categoria = new List();
-    this->suscripcion = new List();
+    IIterator *i = cat->getIterator();
+    Categoria *eachCat;
+
+    while (i->hasCurrent())
+    {
+        eachCat = (Categoria *)i->getCurrent();
+        setCategoria(eachCat);
+        i->next();
+    }
+    delete i;
 }
 
 void Videojuego::setCategoria(Categoria *c)
@@ -78,6 +83,7 @@ void Videojuego::eliminarme()
     delete it;
     delete itP;
 }
+
 void Videojuego::Borrame()
 {
     delete (this);
@@ -97,22 +103,23 @@ void Videojuego::getCategorias()
     delete it;
 }
 
-bool Videojuego::tienepartidas(){
+bool Videojuego::tienepartidas()
+{
     bool resultado = false;
     IIterator *it = this->partidas->getIterator();
     while (it->hasCurrent())
     {
         Partida *par = dynamic_cast<Partida *>(it->getCurrent());
         bool finalizada = par->getFinalizado();
-        if(finalizada == false) resultado = true;
-        
-        else it->next();
+        if (finalizada == false)
+            resultado = true;
+
+        else
+            it->next();
     }
     delete it;
     return resultado;
 }
-
-Videojuego::~Videojuego() {}
 
 void Videojuego::cancelarSuscripcion(std::string nick)
 {
@@ -131,3 +138,10 @@ void Videojuego::cancelarSuscripcion(std::string nick)
         }
     }
 }
+
+void Videojuego::setDesarrollador(Desarrollador *d)
+{
+    this->desarrollador = d;
+}
+
+Videojuego::~Videojuego() {}

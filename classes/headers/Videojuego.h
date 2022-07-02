@@ -51,6 +51,7 @@ public:
 	void SetcostoTrimestral(float val) { costoTrimestral = val; }
 	float GetcostoAnual() { return costoAnual; }
 	void SetcostoAnual(float val) { costoAnual = val; }
+	void setDesarrollador(Desarrollador *d);
 	Estadistica *Getestadistica() { return est; }
 	Desarrollador *Getdesarrollador() { return desarrollador; }
 	void Setestadistica(Estadistica *val) { est = val; }
