@@ -3,6 +3,7 @@
 
 class Jugador;
 class Videojuego;
+class Partida;
 
 #include "string.h"
 #include "../../ICollection/interfaces/ICollection.h"

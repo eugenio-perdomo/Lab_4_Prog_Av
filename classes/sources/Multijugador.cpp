@@ -17,6 +17,17 @@ Multijugador::Multijugador(bool transmitidaEnVivo,
     this->cantJugadores = cantJugadores;
 }
 
+Multijugador::Multijugador(bool transmitidaEnVivo,int cantJugadores,std::string _id,std::string _nombreVideojuego,bool _finalizado,float _duracionPartida,DtFecha *_fechaInicio){
+    this->transmitidaEnVivo=transmitidaEnVivo;
+    this->cantJugadores=cantJugadores;
+    this->id=id;
+    this->nombreVideojuego=nombreVideojuego;
+    this->finalizado=finalizado;
+    this->duracionPartida=duracionPartida;
+    this->fechaInicio=fechaInicio;
+    
+}
+
 bool Multijugador::getTransmitidaEnVivo()
 {
     return this->transmitidaEnVivo;

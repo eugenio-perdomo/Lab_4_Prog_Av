@@ -1,4 +1,5 @@
-#include "../headers/Sistema.h"
+#include "/headers/Sistema.h"
+#include <sstream>
 #include <iomanip>
 #include <ctime>
 
@@ -716,6 +717,7 @@ void Sistema::iniciarPartida()
     if (jugadorActual->verificarSuscripcion(nombreVideojuego))
     {
         // Tiene una suscripcion activa para ese videojuego
+        StringKey* keyVideojuego=new StringKey(nombreVideojuego);
 
         int tipoPartida;
         std::cout << "\nSelecciona el tipo de partida:";
@@ -737,33 +739,81 @@ void Sistema::iniciarPartida()
             {
                 // Es una continuacion
 
-                //[sin implementar] lista las partidas individuales finalizadas
-                jugadorActual->listarPartidas();
+                jugadorActual->listarPartidasIndividualesFinalizadas(nombreVideojuego);
 
-                //[sin implementar] selecciona la partida por su ID
+                int IdPartida;
+                std::cout << "\nIndicar ID de la partida a continuar: ";
+                std::cin >> IdPartida;
+                bool validacion = jugadorActual->comprobarContinuacion(IdPartida, nombreVideojuego);
+                
+                if (validacion==true){
+                    //La partida finalizada es valida para continuar
+
+                    int confirmar;
+                    std::cout << "\nConfirmar partida:";
+                    std::cout << "\n1- Si";
+                    std::cout << "\n2- No";
+                    std::cin >> confirmar;
+
+                    if (confirmar==1){
+                        Individual* partidaAux= new Individual(true,jugadorActual->Getnick(),generarIdPartida(),nombreVideojuego,false,0,fechaDelSistema);
+                        jugadorActual->agregarIndividual(partidaAux);
+                        
+                        Videojuego* videojuegoAux = dynamic_cast<Videojuego*>(videojuegos->find(keyVideojuego));
+                        videojuegoAux->agregarIndividual(partidaAux);
+
+                    } else {
+                        std::cout << "\nProceso cancelado";
+                    }
+
+                } else {
+                    std::cout << "\nEl ID ingresado no es valido";
+                }
+
             }
             else
             {
                 // No es una continuacion
-            }
 
-            //[sin implementar] confirmar partida individual,
-            // se da de alta la nueva partida con los datos ingresados,
-            // asignándole un identificador numérico autogenerado internamente por el sistema y la fecha y hora actual del mismo.
+                int confirmar;
+                std::cout << "\nConfirmar partida:";
+                std::cout << "\n1- Si";
+                std::cout << "\n2- No";
+                std::cin >> confirmar;
+
+                if (confirmar==1){
+                    Individual* partidaAux= new Individual(false,jugadorActual->Getnick(),generarIdPartida(),nombreVideojuego,false,0,fechaDelSistema);
+                    jugadorActual->agregarIndividual(partidaAux);
+
+                    Videojuego* videojuegoAux = dynamic_cast<Videojuego*>(videojuegos->find(keyVideojuego));
+                    videojuegoAux->agregarIndividual(partidaAux);
+                } else {
+                    std::cout << "\nProceso cancelado";
+                }
+
+            }
         }
         else
         {
             // Partida multijugador
-            int enVivo;
+            int seleccionEnVivo;
+            bool enVivo;
 
             std::cout << "\nConfirmar si la partida será transmitida en vivo";
             std::cout << "\n1- Si";
             std::cout << "\n2- No";
-            std::cin >> enVivo;
+            std::cin >> seleccionEnVivo;
+
+            if (seleccionEnVivo==1){
+                enVivo=true;
+            } else {
+                enVivo=false;
+            }
 
             listarJugadoresPorSuscripcion(nombreVideojuego, jugadorActual->Getnick());
 
             List *listaJugadores = new List();
+            int cantJugadores=0;
 
             int dejarAgregarNicks = 1;
 
@@ -789,6 +839,7 @@ void Sistema::iniciarPartida()
                     else
                     {
                         listaJugadores->add(aux);
+                        cantJugadores=cantJugadores+1;
                     }
                 }
                 else
@@ -802,9 +853,12 @@ void Sistema::iniciarPartida()
                 std::cin >> dejarAgregarNicks;
             }
 
-            //[sin implementar] confirmar partida multijugador,
-            // se da de alta la nueva partida con los datos ingresados,
-            // asignándole un identificador numérico autogenerado internamente por el sistema y la fecha y hora actual del mismo.
+            Multijugador* partidaAux= new Multijugador(enVivo,cantJugadores,generarIdPartida(),nombreVideojuego,false,0,fechaDelSistema);
+            jugadorActual->agregarMultijugador(partidaAux);
+
+            Videojuego* videojuegoAux = dynamic_cast<Videojuego*>(videojuegos->find(keyVideojuego));
+            videojuegoAux->agregarMultijugador(partidaAux);
+
         }
     }
     else
@@ -850,6 +904,16 @@ bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string 
     }
     delete it;
     return resultado;
+}
+
+std::string Sistema::generarIdPartida(){
+
+    ultimaPartida=ultimaPartida+1;
+
+    std::stringstream ss; 
+    ss << ultimaPartida;
+    std::string str = ss.str(); //Transforma ultima partida de INT a STRING
+    return str;
 }
 
 // Eliminar Videojuego

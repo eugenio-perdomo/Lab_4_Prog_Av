@@ -24,8 +24,8 @@
 
 #include "../../datatypes/headers/DtFecha.h"
 #include "Usuario.h"
-#include "Desarrollador.h"
 #include "Jugador.h"
+#include "Desarrollador.h"
 
 #include "Partida.h"
 #include "Multijugador.h"
@@ -83,7 +83,7 @@ public:
 	virtual void iniciarPartida() = 0;
 	virtual void listarJugadoresPorSuscripcion(std::string videojuego, std::string host) = 0;
 	virtual bool confirmarJugadoresPorSuscripcion(std::string jugador, std::string videojuego) = 0;
-
+	virtual std::string generarIdPartida() = 0;
 
 	// CASO DE USO : FINALIZAR PARTIDA
 	virtual void finalizarPartida(Jugador *jugadorActual) = 0;
