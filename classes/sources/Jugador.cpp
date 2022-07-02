@@ -102,7 +102,7 @@ void Jugador::cancelarSuscripcion(Videojuego *vj)
     {
         Suscripcion *aux = dynamic_cast<Suscripcion *>(it->getCurrent());
 
-        if (aux->GetNombreVideojuego() == vj->Getnombre())
+        if (aux->GetNombreVideojuego() == vj->GetNombreVidJ())
         {
             aux->Setcancelada(true);
         }

@@ -12,12 +12,13 @@ Sistema::Sistema()
     this->fechaDelSistema = new DtFecha(03, 07, 2022, 00, 30, 10);
 }
 
-DtFecha* Sistema::obtenerFecha(){
+DtFecha *Sistema::obtenerFecha()
+{
 
-    auto t = time(nullptr); //Auxiliar para obtener la fecha y hora del sistema
-    auto tm = *localtime(&t); //Guarda todos los campos de fecha y hora
+    auto t = time(nullptr);   // Auxiliar para obtener la fecha y hora del sistema
+    auto tm = *localtime(&t); // Guarda todos los campos de fecha y hora
 
-    fechaDelSistema->setAnio(tm.tm_year+1900);
+    fechaDelSistema->setAnio(tm.tm_year + 1900);
     fechaDelSistema->setMes(tm.tm_mon);
     fechaDelSistema->setDia(tm.tm_mday);
     fechaDelSistema->setHora(tm.tm_hour);
@@ -26,18 +27,16 @@ DtFecha* Sistema::obtenerFecha(){
 
     return fechaDelSistema;
 
-/*
+    /*
 
-auto t = time(nullptr); //Auxiliar para obtener la fecha y hora del sistema
-auto tm = *localtime(&t); //Guarda todos los cambos de fecha y hora
-int prueba = tm.tm_hour; //Ejemplo de carga
+    auto t = time(nullptr); //Auxiliar para obtener la fecha y hora del sistema
+    auto tm = *localtime(&t); //Guarda todos los cambos de fecha y hora
+    int prueba = tm.tm_hour; //Ejemplo de carga
 
---- --- ---
+    --- --- ---
 
-DtFecha *fecha = new DtFecha(tm.tm_year+1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min);
-*/
-
-
+    DtFecha *fecha = new DtFecha(tm.tm_year+1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min);
+    */
 }
 
 // Alta de usuario
@@ -717,7 +716,7 @@ void Sistema::iniciarPartida()
     if (jugadorActual->verificarSuscripcion(nombreVideojuego))
     {
         // Tiene una suscripcion activa para ese videojuego
-        StringKey* keyVideojuego=new StringKey(nombreVideojuego);
+        StringKey *keyVideojuego = new StringKey(nombreVideojuego);
 
         int tipoPartida;
         std::cout << "\nSelecciona el tipo de partida:";
@@ -745,9 +744,10 @@ void Sistema::iniciarPartida()
                 std::cout << "\nIndicar ID de la partida a continuar: ";
                 std::cin >> IdPartida;
                 bool validacion = jugadorActual->comprobarContinuacion(IdPartida, nombreVideojuego);
-                
-                if (validacion==true){
-                    //La partida finalizada es valida para continuar
+
+                if (validacion == true)
+                {
+                    // La partida finalizada es valida para continuar
 
                     int confirmar;
                     std::cout << "\nConfirmar partida:";
@@ -755,21 +755,23 @@ void Sistema::iniciarPartida()
                     std::cout << "\n2- No";
                     std::cin >> confirmar;
 
-                    if (confirmar==1){
-                        Individual* partidaAux= new Individual(true,jugadorActual->Getnick(),generarIdPartida(),nombreVideojuego,false,0,fechaDelSistema);
+                    if (confirmar == 1)
+                    {
+                        Individual *partidaAux = new Individual(true, jugadorActual->Getnick(), generarIdPartida(), nombreVideojuego, false, 0, fechaDelSistema);
                         jugadorActual->agregarIndividual(partidaAux);
-                        
-                        Videojuego* videojuegoAux = dynamic_cast<Videojuego*>(videojuegos->find(keyVideojuego));
-                        videojuegoAux->agregarIndividual(partidaAux);
 
-                    } else {
+                        Videojuego *videojuegoAux = dynamic_cast<Videojuego *>(videojuegos->find(keyVideojuego));
+                        videojuegoAux->agregarIndividual(partidaAux);
+                    }
+                    else
+                    {
                         std::cout << "\nProceso cancelado";
                     }
-
-                } else {
+                }
+                else
+                {
                     std::cout << "\nEl ID ingresado no es valido";
                 }
-
             }
             else
             {
@@ -781,16 +783,18 @@ void Sistema::iniciarPartida()
                 std::cout << "\n2- No";
                 std::cin >> confirmar;
 
-                if (confirmar==1){
-                    Individual* partidaAux= new Individual(false,jugadorActual->Getnick(),generarIdPartida(),nombreVideojuego,false,0,fechaDelSistema);
+                if (confirmar == 1)
+                {
+                    Individual *partidaAux = new Individual(false, jugadorActual->Getnick(), generarIdPartida(), nombreVideojuego, false, 0, fechaDelSistema);
                     jugadorActual->agregarIndividual(partidaAux);
 
-                    Videojuego* videojuegoAux = dynamic_cast<Videojuego*>(videojuegos->find(keyVideojuego));
+                    Videojuego *videojuegoAux = dynamic_cast<Videojuego *>(videojuegos->find(keyVideojuego));
                     videojuegoAux->agregarIndividual(partidaAux);
-                } else {
+                }
+                else
+                {
                     std::cout << "\nProceso cancelado";
                 }
-
             }
         }
         else
@@ -804,16 +808,19 @@ void Sistema::iniciarPartida()
             std::cout << "\n2- No";
             std::cin >> seleccionEnVivo;
 
-            if (seleccionEnVivo==1){
-                enVivo=true;
-            } else {
-                enVivo=false;
+            if (seleccionEnVivo == 1)
+            {
+                enVivo = true;
+            }
+            else
+            {
+                enVivo = false;
             }
 
             listarJugadoresPorSuscripcion(nombreVideojuego, jugadorActual->Getnick());
 
             List *listaJugadores = new List();
-            int cantJugadores=0;
+            int cantJugadores = 0;
 
             int dejarAgregarNicks = 1;
 
@@ -839,7 +846,7 @@ void Sistema::iniciarPartida()
                     else
                     {
                         listaJugadores->add(aux);
-                        cantJugadores=cantJugadores+1;
+                        cantJugadores = cantJugadores + 1;
                     }
                 }
                 else
@@ -853,12 +860,11 @@ void Sistema::iniciarPartida()
                 std::cin >> dejarAgregarNicks;
             }
 
-            Multijugador* partidaAux= new Multijugador(enVivo,cantJugadores,generarIdPartida(),nombreVideojuego,false,0,fechaDelSistema);
+            Multijugador *partidaAux = new Multijugador(enVivo, cantJugadores, generarIdPartida(), nombreVideojuego, false, 0, fechaDelSistema);
             jugadorActual->agregarMultijugador(partidaAux);
 
-            Videojuego* videojuegoAux = dynamic_cast<Videojuego*>(videojuegos->find(keyVideojuego));
+            Videojuego *videojuegoAux = dynamic_cast<Videojuego *>(videojuegos->find(keyVideojuego));
             videojuegoAux->agregarMultijugador(partidaAux);
-
         }
     }
     else
@@ -906,13 +912,14 @@ bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string 
     return resultado;
 }
 
-std::string Sistema::generarIdPartida(){
+std::string Sistema::generarIdPartida()
+{
 
-    ultimaPartida=ultimaPartida+1;
+    ultimaPartida = ultimaPartida + 1;
 
-    std::stringstream ss; 
+    std::stringstream ss;
     ss << ultimaPartida;
-    std::string str = ss.str(); //Transforma ultima partida de INT a STRING
+    std::string str = ss.str(); // Transforma ultima partida de INT a STRING
     return str;
 }
 
@@ -1023,7 +1030,7 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
             }
             case 2: // Iniciar partida
             {
-                std::cout << "\nIniciar Partida sin implementar\n";
+                iniciarPartida();
                 break;
             }
             case 3: // Finalizar partida
@@ -1058,10 +1065,14 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
 void Sistema::finalizarPartida(Jugador *jugadorActual)
 {
     std::cout << "\nFinalizar Partida sin implementar\n";
-    while (jugadorActual->getPartidas()->getIterator()->hasCurrent())
-    {
-        break;
-    }
+    IIterator *it = jugadorActual->getPartidas()->getIterator();
+
+    Partida *part = dynamic_cast<Partida *>(it->getCurrent()/*jugadorActual->getPartidas()->find(key)*/);
+        
+    part->setFinalizado(true);
+    /*part->setDuracionPartida();
+    part->setFechaFin(DtFecha.Now());*/
+        
 }
 
 void Sistema::imprimirTextoPrincipal()
