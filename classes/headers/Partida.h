@@ -32,8 +32,8 @@ public:
 	std::string getNombreVideojuego();
 	bool getFinalizado();
 	float getDuracionPartida();
-	DtFecha getFechaInicio();
-	DtFecha getFechaFin();
+	DtFecha* getFechaInicio();
+	DtFecha* getFechaFin();
 
 	void setId(std::string id);
 	void setNombreVideojuego(std::string nombreVideojuego);

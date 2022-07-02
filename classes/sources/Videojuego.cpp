@@ -14,7 +14,9 @@ Videojuego::Videojuego(std::string _nombre, std::string _descripcion, float _cos
     this->desarrollador = _des;
     this->categoria = new List();
     this->suscripcion = new List();
-    this->partidas = new OrderedDictionary;
+    this->partidas = new OrderedDictionary();
+    this->partidasIndividuales = new OrderedDictionary();
+    this->partidasMultijugador = new OrderedDictionary();
 }
 
 Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float costoT, float costoA, float costoV, List *cat)
@@ -26,8 +28,10 @@ Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float co
     this->costoAnual = costoA;
     this->costoVitalicia = costoV;
     this->suscripcion = new List();
-    this->partidas = new OrderedDictionary;
     this->categoria = new List();
+    this->partidas = new OrderedDictionary();
+    this->partidasIndividuales = new OrderedDictionary();
+    this->partidasMultijugador = new OrderedDictionary();
 
     IIterator *i = cat->getIterator();
     Categoria *eachCat;
@@ -144,6 +148,20 @@ void Videojuego::cancelarSuscripcion(std::string nick)
             }
         }
     }
+}
+
+void Videojuego::agregarIndividual(Individual* aux){
+    StringKey* key = new StringKey(aux->getId());
+
+    partidasIndividuales->add(key,aux); 
+    partidas->add(key,aux);
+}
+
+void Videojuego::agregarMultijugador(Multijugador* aux){
+    StringKey* key = new StringKey(aux->getId());
+
+    partidasMultijugador->add(key,aux); 
+    partidas->add(key,aux);
 }
 
 void Videojuego::setDesarrollador(Desarrollador *d)
