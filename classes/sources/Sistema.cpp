@@ -346,14 +346,19 @@ void Sistema::menuCaso3(int i)
 
         IKey *keyJuego = new StringKey("KingdomRush");
         vj1->setPartidaParaVideojuego(part, keyJuego);
+
         keyJuego = new StringKey("KingdomRush");
         vj1->setPartidaParaVideojuego((Partida *)pI2, keyJuego);
+
         keyJuego = new StringKey("Minecraft");
         vj3->setPartidaParaVideojuego((Partida *)pI3, keyJuego);
+
         keyJuego = new StringKey("Fortnite");
         vj2->setPartidaParaVideojuego((Partida *)pM1, keyJuego);
+
         keyJuego = new StringKey("Fortnite");
         vj2->setPartidaParaVideojuego((Partida *)pM2, keyJuego);
+
         keyJuego = new StringKey("Minecraft");
         vj3->setPartidaParaVideojuego((Partida *)pM3, keyJuego);
     }
@@ -648,8 +653,8 @@ void Sistema::VerInfoVideoJuego()
     Videojuego *aux = GetUnVideojuego(key);
 
     if (aux != 0)
-    {   // Se Re Caga aca un nuevo videojuego
-        nombreempresa = aux->Getdesarrollador()->Getempresa();
+    { // Se Re Caga aca un nuevo videojuego
+        nombreempresa = aux->GetDesarrollador()->Getempresa();
         std::cout << "\n\e[0;34mNombre: " << aux->Getnombre();
         std::cout << "\n\e[0;37mDescripcion: " << aux->Getdescripcion();
         std::cout << "\n\e[0;34mCosto Mensual: " << aux->GetcostoMensual();
@@ -824,27 +829,35 @@ void Sistema::EliminarVideojuego(Desarrollador *d)
     std::cout << "\nIngrese nombre del videojuego a eliminar: \e[0;92m";
     std::cin >> nom;
     clearDeDatosDeEntrada();
+
     Videojuego *aux = d->obtenerVideojuegodesarrollador(nom);
+
     if (aux != 0)
     {
-        int op3;
-        std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
-        std::cin >> op3;
-        clearDeDatosDeEntrada();
-
-        if (op3 == 1)
+        bool tiene = aux->tienepartidas();
+        if (tiene == false)
         {
-            // Confirma eliminar el videojuego
-            d->EliminarEsteJuego(aux);
-            StringKey *key = new StringKey(nom);
-            videojuegos->remove(key);
-            std::cout << "\n\e[1;33mVideojuego Eliminado.\e[1;33m\n";
+            int op3;
+            std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+            std::cin >> op3;
+            clearDeDatosDeEntrada();
+
+            if (op3 == 1)
+            {
+                // Confirma eliminar el videojuego
+                StringKey *key = new StringKey(nom);
+                std::cout << key << std::endl;
+                d->EliminarEsteJuego(aux);
+                std::cout << "Falla aca" << std::endl;
+                videojuegos->remove(key);
+                std::cout << "\n\e[1;33mVideojuego Eliminado.\e[1;33m\n";
+            }
         }
+        else
+            std::cout << "\n\e[1;33mEse Videojuego aun tiene partidas activas.\e[1;33m\n";
     }
     else
-    {
         std::cout << "\n\e[1;33mNombre del videojuego no esta en tu lista.\e[1;33m\n";
-    }
 }
 
 void Sistema::imprimirMenuDesarrollador()

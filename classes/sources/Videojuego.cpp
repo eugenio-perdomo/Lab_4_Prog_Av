@@ -25,7 +25,8 @@ Videojuego::Videojuego(std::string nom, std::string desc, float costoM, float co
     this->costoTrimestral = costoT;
     this->costoAnual = costoA;
     this->costoVitalicia = costoV;
-    // this->suscripcion = new List();
+    this->suscripcion = new List();
+    this->partidas = new OrderedDictionary;
     this->categoria = new List();
 
     IIterator *i = cat->getIterator();
@@ -110,13 +111,19 @@ bool Videojuego::tienepartidas()
     while (it->hasCurrent())
     {
         Partida *par = dynamic_cast<Partida *>(it->getCurrent());
-        bool finalizada = par->getFinalizado();
-        if (finalizada == false)
-            resultado = true;
-
+        if (par != 0)
+        {
+            bool finalizada = par->getFinalizado();
+            if (finalizada == false)
+            {
+                resultado = true;
+                break;
+            }
+        }
         else
             it->next();
     }
+
     delete it;
     return resultado;
 }
@@ -142,6 +149,11 @@ void Videojuego::cancelarSuscripcion(std::string nick)
 void Videojuego::setDesarrollador(Desarrollador *d)
 {
     this->desarrollador = d;
+}
+
+Desarrollador *Videojuego::GetDesarrollador()
+{
+    return this->desarrollador;
 }
 
 Videojuego::~Videojuego() {}
