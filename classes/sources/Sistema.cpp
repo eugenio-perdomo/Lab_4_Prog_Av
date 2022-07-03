@@ -72,11 +72,12 @@ void Sistema::menuCaso1()
     {
         std::string email, contrasenia;
         std::cout << "\nIngresar email: \e[1;36m";
-        std::cin >> email;
-        clearDeDatosDeEntrada();
+        std::cin.ignore();
+        std::getline(std::cin,email);
+
         std::cout << "Ingresar contrasenia: \e[1;36m";
-        std::cin >> contrasenia;
-        clearDeDatosDeEntrada();
+        std::cin.ignore();
+        std::getline(std::cin,contrasenia);
 
         std::cout << "Indicar tipo de usuario \n1- Jugador \n2- Desarrollador\n\nOpcion: \e[0;92m";
         std::cin >> tipo;
@@ -87,11 +88,11 @@ void Sistema::menuCaso1()
             // AGREGAR JUGADOR
             std::string nick, descripcion;
             std::cout << "Ingresar nick: ";
-            std::cin >> nick;
-            clearDeDatosDeEntrada();
+            std::cin.ignore();
+            std::getline(std::cin,nick);
             std::cout << "Ingresar descripcion: ";
-            std::cin >> descripcion;
-            clearDeDatosDeEntrada();
+            std::cin.ignore();
+            std::getline(std::cin,descripcion);
             agregarJugador(email, contrasenia, nick, descripcion);
         }
         else
@@ -99,7 +100,8 @@ void Sistema::menuCaso1()
             // AGREGAR DESARROLLADOR
             std::cout << "Ingresar empresa: ";
             std::string empresa;
-            clearDeDatosDeEntrada();
+            std::cin.ignore();
+            std::getline(std::cin,empresa);
             agregarDesarrollador(email, contrasenia, empresa);
         }
 
@@ -146,11 +148,11 @@ void Sistema::menuCaso2()
         while (bandera == true)
         {
             std::cout << "\nIngrese email: \e[1;36m";
-            std::cin >> email;
-            clearDeDatosDeEntrada();
+            std::cin.ignore();
+            std::getline(std::cin,email);
             std::cout << "Ingrese contrasenia: \e[1;36m";
-            std::cin >> contrasenia;
-            clearDeDatosDeEntrada();
+            std::cin.ignore();
+            std::getline(std::cin,contrasenia);
             opcionUsuario = iniciarSesion(email, contrasenia);
             switch (opcionUsuario)
             {
@@ -438,8 +440,8 @@ void Sistema::publicarVideojuego(Desarrollador *d)
     List *aux_categorias = new List();
 
     std::cout << "\nIngrese nombre: \e[0;92m";
-    std::cin >> nom;
-    clearDeDatosDeEntrada();
+    std::cin.ignore();
+    std::getline(std::cin,nom);
     StringKey *key = new StringKey(nom);
     if (videojuegos->member(key) == 1)
     {
@@ -448,8 +450,8 @@ void Sistema::publicarVideojuego(Desarrollador *d)
     else
     {
         std::cout << "\nIngrese descripcion: \e[0;92m";
-        std::cin >> desc;
-        clearDeDatosDeEntrada();
+        std::cin.ignore();
+        std::getline(std::cin,desc);
         std::cout << "\nIngrese costo menusal: \e[0;92m";
         std::cin >> cMensual;
         clearDeDatosDeEntrada();
@@ -469,8 +471,8 @@ void Sistema::publicarVideojuego(Desarrollador *d)
         {
             std::string cat;
             std::cout << "\nSeleccione una categoria: ";
-            std::cin >> cat;
-            clearDeDatosDeEntrada();
+            std::cin.ignore();
+            std::getline(std::cin,cat);
             Categoria *aux = obtenerCategoria(cat);
 
             if (aux != 0)
@@ -581,8 +583,8 @@ void Sistema::suscribirseVideojuego()
 
     std::string nombreVideojuego;
     std::cout << "\n\e[0mIndicar el nombre del videojuego: \e[0;92m";
-    std::cin >> nombreVideojuego;
-    clearDeDatosDeEntrada();
+    std::cin.ignore();
+    std::getline(std::cin,nombreVideojuego);
 
     StringKey *key = new StringKey(nombreVideojuego);
 
@@ -712,8 +714,8 @@ void Sistema::VerInfoVideoJuego()
     mostrarVideojuegos();
 
     std::cout << "\nIngrese nombre del videojuego: \e[0;92m";
-    std::cin >> nom;
-    clearDeDatosDeEntrada();
+    std::cin.ignore();
+    std::getline(std::cin,nom);
 
     StringKey *key = new StringKey(nom);
     Videojuego *aux = GetUnVideojuego(key);
@@ -744,8 +746,8 @@ void Sistema::iniciarPartida()
 
     std::string nombreVideojuego;
     std::cout << "Indicar el nombre del videojuego: \e[0;92m";
-    std::cin >> nombreVideojuego;
-    clearDeDatosDeEntrada();
+    std::cin.ignore();
+    std::getline(std::cin,nombreVideojuego);
 
     if (jugadorActual->verificarSuscripcion(nombreVideojuego))
     {
@@ -851,8 +853,8 @@ void Sistema::iniciarPartida()
             {
                 std::string nick;
                 std::cout << "\nIndicar nick del jugador: \e[0;92m";
-                std::cin >> nick;
-                clearDeDatosDeEntrada();
+                std::cin.ignore();
+                std::getline(std::cin,nick);
 
                 StringKey *key = new StringKey(nick);
 
@@ -950,8 +952,8 @@ void Sistema::EliminarVideojuego(Desarrollador *d)
     std::string nom;
     d->mostrarVideojuegosDesarrollador();
     std::cout << "\nIngrese nombre del videojuego a eliminar: \e[0;92m";
-    std::cin >> nom;
-    clearDeDatosDeEntrada();
+    std::cin.ignore();
+    std::getline(std::cin,nom);
 
     Videojuego *aux = d->obtenerVideojuegodesarrollador(nom);
 
@@ -1125,6 +1127,7 @@ void Sistema::imprimirTextoDelJugador()
 
 void Sistema::clearDeDatosDeEntrada()
 {
+    //ESTA FUNCION QUEDA OBSOLETA LA UTILIZAR getline()
     std::cin.clear();
     std::cin.ignore(10000, '\n');
     std::cout << "\e[0m";
