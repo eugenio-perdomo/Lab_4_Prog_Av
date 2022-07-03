@@ -33,11 +33,11 @@ float Partida::getDuracionPartida()
 {
     return this->duracionPartida;
 }
-DtFecha* Partida::getFechaInicio()
+DtFecha *Partida::getFechaInicio()
 {
     return fechaInicio;
 }
-DtFecha* Partida::getFechaFin()
+DtFecha *Partida::getFechaFin()
 {
     return fechaFin;
 }

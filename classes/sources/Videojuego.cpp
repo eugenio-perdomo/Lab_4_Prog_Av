@@ -152,6 +152,7 @@ void Videojuego::cancelarSuscripcion(std::string nick)
                 aux->Setcancelada(true);
             }
         }
+        it->next();
     }
 }
 

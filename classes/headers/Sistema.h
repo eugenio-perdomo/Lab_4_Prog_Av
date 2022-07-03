@@ -13,13 +13,14 @@ private:
 	Usuario *usuarioActual;
 	Desarrollador *desarrolladorActual;
 	Jugador *jugadorActual;
-	int ultimaPartida=0;
+	//ICollection *listaJugadores;
+	int ultimaPartida = 0;
 
 public:
 	Sistema();
-	void menuCaso1(/*Sistema* s*/);			// Alta de usuario
-	void menuCaso2(/*Sistema* s*/);			// Iniciar sesión
-	void menuCaso3(int i /*, Sistema* s*/); // Cargar datos de prueba
+	void menuCaso1();			// Alta de usuario
+	void menuCaso2();			// Iniciar sesión
+	void menuCaso3(int i); // Cargar datos de prueba
 
 	void imprimirTextoPrincipal();
 	void imprimirTextoDelDesarrollador();
@@ -28,8 +29,8 @@ public:
 	void imprimirMenuJugador(Jugador *jugadorActual);
 	void clearDeDatosDeEntrada();
 
-	DtFecha* obtenerFecha();
-	int calcularDiferenciaFecha(DtFecha* hora1);
+	DtFecha *obtenerFecha();
+	int calcularDiferenciaFecha(DtFecha *hora1);
 
 	// CASO DE USO 1: ALTA USUARIO
 	void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc);
@@ -64,7 +65,7 @@ public:
 	// CASO DE USO : FINALIZAR PARTIDA
 	void finalizarPartida(Jugador *jugadorActual);
 
-	//CASO DE USO : VER INFO VIDEOJUEGO
+	// CASO DE USO : VER INFO VIDEOJUEGO
 	virtual void VerInfoVideoJuego();
 
 	virtual ~Sistema();

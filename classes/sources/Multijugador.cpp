@@ -3,29 +3,30 @@
 Multijugador::Multijugador() {}
 
 Multijugador::Multijugador(bool transmitidaEnVivo,
-                           // DtFecha ultimaConexion,
                            int cantJugadores,
                            std::string _id,
                            std::string _nombreVideojuego,
                            bool _finalizado,
                            float _duracionPartida,
                            DtFecha *_fechaInicio,
-                           DtFecha *_fechaFin) : Partida(_id, _nombreVideojuego, _finalizado, _duracionPartida, _fechaInicio, _fechaFin)
+                           DtFecha *_fechaFin/*,
+                           ICollection *_listaJugadores*/) : Partida(_id, _nombreVideojuego, _finalizado, _duracionPartida, _fechaInicio, _fechaFin)
 {
     this->transmitidaEnVivo = transmitidaEnVivo;
-    // this->ultimaConexion = ultimaConexion;
     this->cantJugadores = cantJugadores;
+    /*List *jugadores = new List(); 
+    this->jugadores = _listaJugadores;*/
 }
 
-Multijugador::Multijugador(bool transmitidaEnVivo,int cantJugadores,std::string _id,std::string _nombreVideojuego,bool _finalizado,float _duracionPartida,DtFecha *_fechaInicio){
-    this->transmitidaEnVivo=transmitidaEnVivo;
-    this->cantJugadores=cantJugadores;
-    this->id=id;
-    this->nombreVideojuego=nombreVideojuego;
-    this->finalizado=finalizado;
-    this->duracionPartida=duracionPartida;
-    this->fechaInicio=fechaInicio;
-    
+Multijugador::Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio)
+{
+    this->transmitidaEnVivo = transmitidaEnVivo;
+    this->cantJugadores = cantJugadores;
+    this->id = id;
+    this->nombreVideojuego = nombreVideojuego;
+    this->finalizado = finalizado;
+    this->duracionPartida = duracionPartida;
+    this->fechaInicio = fechaInicio;
 }
 
 bool Multijugador::getTransmitidaEnVivo()

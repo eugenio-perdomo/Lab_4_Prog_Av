@@ -4,8 +4,6 @@
 #include <string>
 #include "../../ICollection/interfaces/ICollection.h"
 #include "../../datatypes/headers/DtFecha.h"
-//#include "Comentario.h"
-//#include "Videojuego.h"
 
 class Partida : public ICollectible
 {

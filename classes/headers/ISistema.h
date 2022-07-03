@@ -43,9 +43,9 @@ class ISistema
 {
 private:
 public:
-	virtual void menuCaso1(/*Sistema* s*/) = 0;
-	virtual void menuCaso2(/*Sistema* s*/) = 0;
-	virtual void menuCaso3(int i /*, Sistema* s*/) = 0;
+	virtual void menuCaso1() = 0;
+	virtual void menuCaso2() = 0;
+	virtual void menuCaso3(int i) = 0;
 
 	virtual void imprimirTextoPrincipal() = 0;
 	virtual void imprimirTextoDelDesarrollador() = 0;
@@ -54,8 +54,8 @@ public:
 	virtual void imprimirMenuJugador(Jugador *jugadorActual) = 0;
 	virtual void clearDeDatosDeEntrada() = 0;
 
-	virtual DtFecha* obtenerFecha() = 0;
-	virtual int calcularDiferenciaFecha(DtFecha* hora1) = 0;
+	virtual DtFecha *obtenerFecha() = 0;
+	virtual int calcularDiferenciaFecha(DtFecha *hora1) = 0;
 
 	// CASO DE USO 1: ALTA USUARIO
 	virtual void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc) = 0;
@@ -89,7 +89,7 @@ public:
 	// CASO DE USO : FINALIZAR PARTIDA
 	virtual void finalizarPartida(Jugador *jugadorActual) = 0;
 
-	//CASO DE USO : VER INFO VIDEOJUEGO
+	// CASO DE USO : VER INFO VIDEOJUEGO
 	virtual void VerInfoVideoJuego() = 0;
 
 	virtual ~ISistema();

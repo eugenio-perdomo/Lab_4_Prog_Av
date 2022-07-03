@@ -8,28 +8,27 @@ class Multijugador : public Partida
 {
 private:
 	bool transmitidaEnVivo;
-	//DtFecha *ultimaConexion;
+	// DtFecha *ultimaConexion;
 	int cantJugadores;
 	Transmision *transmision;
-	ICollection *jugadores;
+	// ICollection *jugadores;
 
 public:
 	Multijugador();
-	Multijugador(bool transmitidaEnVivo,int cantJugadores,std::string _id,std::string _nombreVideojuego,bool _finalizado,float _duracionPartida,DtFecha *_fechaInicio,DtFecha *_fechaFin);
-	Multijugador(bool transmitidaEnVivo,int cantJugadores,std::string _id,std::string _nombreVideojuego,bool _finalizado,float _duracionPartida,DtFecha *_fechaInicio);
+	Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio, DtFecha *_fechaFin/*, ICollection *_listaJugadores*/);
+	Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio);
 
 	bool getTransmitidaEnVivo();
-	//DtFecha getUltimaConexion();
+	// DtFecha getUltimaConexion();
 	int getCantJugadores();
 
 	void setTransmitidaEnVivo(bool transmitidaEnVivo);
-	//void setUltimaConexion(DtFecha *ultimaConexion);
+	// void setUltimaConexion(DtFecha *ultimaConexion);
 	void setCantJugadores(int cantJugadores);
 
 	Transmision *Gettransmision() { return transmision; }
 	void Settransmision(Transmision *val) { transmision = val; }
 	void eliminarMisComentarios();
-
 	virtual ~Multijugador();
 };
 

@@ -10,6 +10,7 @@ Sistema::Sistema()
     this->jugadores = new OrderedDictionary;
     this->desarrolladores = new OrderedDictionary;
     this->fechaDelSistema = new DtFecha(03, 07, 2022, 00, 30, 10);
+    // this->listaJugadores = new List();
 }
 
 DtFecha *Sistema::obtenerFecha()
@@ -28,37 +29,38 @@ DtFecha *Sistema::obtenerFecha()
     return fechaDelSistema;
 }
 
-int Sistema::calcularDiferenciaFecha(DtFecha* hora1){
+int Sistema::calcularDiferenciaFecha(DtFecha *hora1)
+{
     int resultado;
 
-    int anio1,anio2,mes1,mes2,dia1,dia2,hor1,hor2,minuto1,minuto2,segundo1,segundo2;
+    int anio1, anio2, mes1, mes2, dia1, dia2, hor1, hor2, minuto1, minuto2, segundo1, segundo2;
 
-    DtFecha *aux= obtenerFecha();
+    DtFecha *aux = obtenerFecha();
 
-    //Se convierte todo en minuto.
-    anio1=hora1->getAnio()*525600;
-    anio2=aux->getAnio()*525600;
+    // Se convierte todo en minuto.
+    anio1 = hora1->getAnio() * 525600;
+    anio2 = aux->getAnio() * 525600;
 
-    mes1=hora1->getMes()*43800;
-    mes2=aux->getMes()*43800;
-    
-    dia1=hora1->getDia()*1440;
-    dia2=aux->getDia()*1440;
-    
-    hor1=hora1->getHora()*60;
-    hor2=aux->getHora()*60;
-    
-    minuto1=hora1->getDia();
-    minuto2=aux->getDia();
-    
-    segundo1=hora1->getMinuto()/60;
-    segundo2=aux->getMinuto()/60;
+    mes1 = hora1->getMes() * 43800;
+    mes2 = aux->getMes() * 43800;
 
-    int fecha1,fecha2;
-    fecha1=anio1+mes1+dia1+hor1+minuto1+segundo1;
-    fecha2=anio2+mes2+dia2+hor2+minuto2+segundo2;
+    dia1 = hora1->getDia() * 1440;
+    dia2 = aux->getDia() * 1440;
 
-    resultado= fecha2-fecha1;
+    hor1 = hora1->getHora() * 60;
+    hor2 = aux->getHora() * 60;
+
+    minuto1 = hora1->getDia();
+    minuto2 = aux->getDia();
+
+    segundo1 = hora1->getMinuto() / 60;
+    segundo2 = aux->getMinuto() / 60;
+
+    int fecha1, fecha2;
+    fecha1 = anio1 + mes1 + dia1 + hor1 + minuto1 + segundo1;
+    fecha2 = anio2 + mes2 + dia2 + hor2 + minuto2 + segundo2;
+
+    resultado = fecha2 - fecha1;
 
     return resultado;
 }
@@ -72,12 +74,12 @@ void Sistema::menuCaso1()
     {
         std::string email, contrasenia;
         std::cout << "\nIngresar email: \e[1;36m";
-        std::cin.ignore();
-        std::getline(std::cin,email);
+        std::cin >> email;
+        clearDeDatosDeEntrada();
 
         std::cout << "Ingresar contrasenia: \e[1;36m";
-        std::cin.ignore();
-        std::getline(std::cin,contrasenia);
+        std::cin >> contrasenia;
+        clearDeDatosDeEntrada();
 
         std::cout << "Indicar tipo de usuario \n1- Jugador \n2- Desarrollador\n\nOpcion: \e[0;92m";
         std::cin >> tipo;
@@ -88,11 +90,13 @@ void Sistema::menuCaso1()
             // AGREGAR JUGADOR
             std::string nick, descripcion;
             std::cout << "Ingresar nick: ";
-            std::cin.ignore();
-            std::getline(std::cin,nick);
+            std::cin >> nick;
+            clearDeDatosDeEntrada();
+
             std::cout << "Ingresar descripcion: ";
-            std::cin.ignore();
-            std::getline(std::cin,descripcion);
+            std::cin >> descripcion;
+            clearDeDatosDeEntrada();
+
             agregarJugador(email, contrasenia, nick, descripcion);
         }
         else
@@ -100,11 +104,10 @@ void Sistema::menuCaso1()
             // AGREGAR DESARROLLADOR
             std::cout << "Ingresar empresa: ";
             std::string empresa;
-            std::cin.ignore();
-            std::getline(std::cin,empresa);
+            std::cin >> empresa;
+            clearDeDatosDeEntrada();
             agregarDesarrollador(email, contrasenia, empresa);
         }
-
         break;
     }
 }
@@ -148,11 +151,11 @@ void Sistema::menuCaso2()
         while (bandera == true)
         {
             std::cout << "\nIngrese email: \e[1;36m";
-            std::cin.ignore();
-            std::getline(std::cin,email);
+            std::cin >> email;
+            clearDeDatosDeEntrada();
             std::cout << "Ingrese contrasenia: \e[1;36m";
-            std::cin.ignore();
-            std::getline(std::cin,contrasenia);
+            std::cin >> contrasenia;
+            clearDeDatosDeEntrada();
             opcionUsuario = iniciarSesion(email, contrasenia);
             switch (opcionUsuario)
             {
@@ -271,11 +274,9 @@ void Sistema::menuCaso3(int i)
         jugadores->add(key, j3);
         key = new StringKey("camila@mail.com");
         jugadores->add(key, j4);
-        ICollection *listaJugadores;
-        listaJugadores->add(j1);
+        /*listaJugadores->add(j1);
         listaJugadores->add(j2);
-        listaJugadores->add(j3);
-
+        listaJugadores->add(j3);*/
 
         Categoria *c1 = new Categoria("PC", "Descripcion Categoria PC", "Plataforma");
         Categoria *c2 = new Categoria("PS4", "Descripcion Categoria PS4", "Plataforma");
@@ -372,13 +373,13 @@ void Sistema::menuCaso3(int i)
         // MultiJ
         fecha1 = new DtFecha(05, 06, 2021, 0, 00, 17);
         fecha2 = new DtFecha(05, 06, 2021, 0, 00, 19);
-        Multijugador *pM1 = new Multijugador(true, 2, "4", "Fortnite", true, 120, fecha1, fecha2, listaJugadores);
+        Multijugador *pM1 = new Multijugador(true, 2, "4", "Fortnite", true, 120, fecha1, fecha2 /*, listaJugadores*/);
         fecha1 = new DtFecha(06, 06, 2021, 0, 00, 17);
         fecha2 = new DtFecha(06, 06, 2021, 0, 00, 19);
-        Multijugador *pM2 = new Multijugador(true, 2, "5", "Fortnite", true, 120, fecha1, fecha2, listaJugadores);
+        Multijugador *pM2 = new Multijugador(true, 2, "5", "Fortnite", true, 120, fecha1, fecha2 /*, listaJugadores*/);
         fecha1 = new DtFecha(12, 06, 2021, 0, 00, 20);
         fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
-        Multijugador *pM3 = new Multijugador(false, 1, "6", "Minecraft", false, 0, fecha1, fecha2, listaJugadores);
+        Multijugador *pM3 = new Multijugador(false, 1, "6", "Minecraft", false, 0, fecha1, fecha2 /*, listaJugadores*/);
 
         IKey *keyDesarrollador = new StringKey("KingdomRush");
         d1->setVideoJuego(vj1, keyDesarrollador);
@@ -445,8 +446,8 @@ void Sistema::publicarVideojuego(Desarrollador *d)
     List *aux_categorias = new List();
 
     std::cout << "\nIngrese nombre: \e[0;92m";
-    std::cin.ignore();
-    std::getline(std::cin,nom);
+    std::cin >> nom;
+    clearDeDatosDeEntrada();
     StringKey *key = new StringKey(nom);
     if (videojuegos->member(key) == 1)
     {
@@ -455,8 +456,8 @@ void Sistema::publicarVideojuego(Desarrollador *d)
     else
     {
         std::cout << "\nIngrese descripcion: \e[0;92m";
-        std::cin.ignore();
-        std::getline(std::cin,desc);
+        std::cin >> desc;
+        clearDeDatosDeEntrada();
         std::cout << "\nIngrese costo menusal: \e[0;92m";
         std::cin >> cMensual;
         clearDeDatosDeEntrada();
@@ -476,8 +477,8 @@ void Sistema::publicarVideojuego(Desarrollador *d)
         {
             std::string cat;
             std::cout << "\nSeleccione una categoria: ";
-            std::cin.ignore();
-            std::getline(std::cin,cat);
+            std::cin >> cat;
+            clearDeDatosDeEntrada();
             Categoria *aux = obtenerCategoria(cat);
 
             if (aux != 0)
@@ -588,8 +589,8 @@ void Sistema::suscribirseVideojuego()
 
     std::string nombreVideojuego;
     std::cout << "\n\e[0mIndicar el nombre del videojuego: \e[0;92m";
-    std::cin.ignore();
-    std::getline(std::cin,nombreVideojuego);
+    std::cin >> nombreVideojuego;
+    clearDeDatosDeEntrada();
 
     StringKey *key = new StringKey(nombreVideojuego);
 
@@ -700,7 +701,7 @@ void Sistema::mostrarVideojuegos()
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
-        std::cout << aux->GetNombreVidJ();
+        std::cout << aux->GetNombreVidJ() << std::endl;
         it->next();
     }
     std::cout << "\e[0m";
@@ -719,14 +720,14 @@ void Sistema::VerInfoVideoJuego()
     mostrarVideojuegos();
 
     std::cout << "\nIngrese nombre del videojuego: \e[0;92m";
-    std::cin.ignore();
-    std::getline(std::cin,nom);
+    std::cin >> nom;
+    clearDeDatosDeEntrada();
 
     StringKey *key = new StringKey(nom);
     Videojuego *aux = GetUnVideojuego(key);
 
     if (aux != 0)
-    { // Se Re Caga aca un nuevo videojuego
+    {
         nombreempresa = aux->GetDesarrollador()->Getempresa();
         std::cout << "\n\e[0;34mNombre: " << aux->GetNombreVidJ();
         std::cout << "\n\e[0;37mDescripcion: " << aux->Getdescripcion();
@@ -751,8 +752,8 @@ void Sistema::iniciarPartida()
 
     std::string nombreVideojuego;
     std::cout << "Indicar el nombre del videojuego: \e[0;92m";
-    std::cin.ignore();
-    std::getline(std::cin,nombreVideojuego);
+    std::cin >> nombreVideojuego;
+    clearDeDatosDeEntrada();
 
     if (jugadorActual->verificarSuscripcion(nombreVideojuego))
     {
@@ -769,7 +770,7 @@ void Sistema::iniciarPartida()
             // Partida individual
             int esContinuacion;
 
-            std::cout << "\nConfirmar si la partida es una continuación:\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+            std::cout << "\nConfirmar si la partida es una continuacion:\n1- Si\n2- No\n\nOpcion: \e[0;92m";
             std::cin >> esContinuacion;
             clearDeDatosDeEntrada();
 
@@ -780,6 +781,7 @@ void Sistema::iniciarPartida()
                 int IdPartida;
                 std::cout << "\nIndicar ID de la partida a continuar: ";
                 std::cin >> IdPartida;
+                clearDeDatosDeEntrada();
                 bool validacion = jugadorActual->comprobarContinuacion(IdPartida, nombreVideojuego);
 
                 if (validacion == true)
@@ -858,8 +860,8 @@ void Sistema::iniciarPartida()
             {
                 std::string nick;
                 std::cout << "\nIndicar nick del jugador: \e[0;92m";
-                std::cin.ignore();
-                std::getline(std::cin,nick);
+                std::cin >> nick;
+                clearDeDatosDeEntrada();
 
                 StringKey *key = new StringKey(nick);
 
@@ -870,7 +872,7 @@ void Sistema::iniciarPartida()
 
                     if (listaJugadores->member(aux))
                     {
-                        std::cout << "\n\e[1;33mEl jugador ya se encuentra en la lista de selección\e[0m\n";
+                        std::cout << "\n\e[1;33mEl jugador ya se encuentra en la lista de seleccion\e[0m\n";
                     }
                     else
                     {
@@ -880,15 +882,15 @@ void Sistema::iniciarPartida()
                 }
                 else
                 {
-                    std::cout << "\n\e[1;31mEl jugador no existe o no cuenta con una suscripción activa para el videojuego\n\e[0m";
+                    std::cout << "\n\e[1;31mEl jugador no existe o no cuenta con una suscripcion activa para el videojuego\n\e[0m";
                 }
 
                 std::cout << "\nDesea agregar otro jugador?\n1- Si\n2- No\n\nOpcion: \e[0;92m";
                 std::cin >> dejarAgregarNicks;
                 clearDeDatosDeEntrada();
             }
-
-            Multijugador *partidaAux = new Multijugador(enVivo, cantJugadores, generarIdPartida(), nombreVideojuego, false, 0, fechaDelSistema,listaJugadores);
+            DtFecha *fecha = new DtFecha(0, 0, 0, 0, 0, 0);
+            Multijugador *partidaAux = new Multijugador(enVivo, cantJugadores, generarIdPartida(), nombreVideojuego, false, 0, fecha, fechaDelSistema /*, listaJugadores*/);
             jugadorActual->agregarMultijugador(partidaAux);
 
             Videojuego *videojuegoAux = dynamic_cast<Videojuego *>(videojuegos->find(keyVideojuego));
@@ -942,9 +944,7 @@ bool Sistema::confirmarJugadoresPorSuscripcion(std::string jugador, std::string 
 
 std::string Sistema::generarIdPartida()
 {
-
     ultimaPartida = ultimaPartida + 1;
-
     std::stringstream ss;
     ss << ultimaPartida;
     std::string str = ss.str(); // Transforma ultima partida de INT a STRING
@@ -957,8 +957,8 @@ void Sistema::EliminarVideojuego(Desarrollador *d)
     std::string nom;
     d->mostrarVideojuegosDesarrollador();
     std::cout << "\nIngrese nombre del videojuego a eliminar: \e[0;92m";
-    std::cin.ignore();
-    std::getline(std::cin,nom);
+    std::cin >> nom;
+    clearDeDatosDeEntrada();
 
     Videojuego *aux = d->obtenerVideojuegodesarrollador(nom);
 
@@ -975,10 +975,11 @@ void Sistema::EliminarVideojuego(Desarrollador *d)
             if (op3 == 1)
             {
                 // Confirma eliminar el videojuego
-                StringKey *key = new StringKey(nom);
-                videojuegos->remove(key);
+                StringKey *key = new StringKey(aux->GetNombreVidJ());
                 d->EliminarEsteJuego(aux);
+                this->videojuegos->remove(key);
                 std::cout << "\n\e[1;31mVideojuego Eliminado.\e[1;33m\n\n";
+                delete key;
             }
         }
         else
@@ -1093,9 +1094,11 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
 void Sistema::finalizarPartida(Jugador *jugadorActual)
 {
     string nom;
-    std::cout << "\nSeleccione la partida a finalizar\n";
+    std::cout << "\nSeleccione la partida a finalizar: \n\nOpcion: \e[0;92m";
     jugadorActual->mostrarPartidasNoFinalizadas();
-    std::getline(std::cin,nom);
+    std::cin >> nom;
+    clearDeDatosDeEntrada();
+
     StringKey *key = new StringKey(nom);
     Partida *part = dynamic_cast<Partida *>(jugadorActual->getPartidas()->find(key));
     DtFecha *ahora = obtenerFecha();
@@ -1104,11 +1107,12 @@ void Sistema::finalizarPartida(Jugador *jugadorActual)
     int duracion = calcularDiferenciaFecha(part->getFechaInicio());
     part->setDuracionPartida(duracion);
     Multijugador *multi = dynamic_cast<Multijugador *>(jugadorActual->getPartidas()->find(key));
-    if(/*la partida es multijugador*/){
-    IIterator *it = multi->getJugadores()->getIterator();
-    //acá seteria el tiempo de juego de cada jugadorS
+    /*if (/*la partida es multijugador*/
+    {
+        // IIterator *it = multi->jugadores->getIterator();
+        //  acá seteria el tiempo de juego de cada jugadorS
     }
-    
+
     /*
     part->setFechaFin(DtFecha.Now());*/
 }
@@ -1143,7 +1147,6 @@ void Sistema::imprimirTextoDelJugador()
 
 void Sistema::clearDeDatosDeEntrada()
 {
-    //ESTA FUNCION QUEDA OBSOLETA LA UTILIZAR getline()
     std::cin.clear();
     std::cin.ignore(10000, '\n');
     std::cout << "\e[0m";
