@@ -271,6 +271,11 @@ void Sistema::menuCaso3(int i)
         jugadores->add(key, j3);
         key = new StringKey("camila@mail.com");
         jugadores->add(key, j4);
+        ICollection *listaJugadores;
+        listaJugadores->add(j1);
+        listaJugadores->add(j2);
+        listaJugadores->add(j3);
+
 
         Categoria *c1 = new Categoria("PC", "Descripcion Categoria PC", "Plataforma");
         Categoria *c2 = new Categoria("PS4", "Descripcion Categoria PS4", "Plataforma");
@@ -367,13 +372,13 @@ void Sistema::menuCaso3(int i)
         // MultiJ
         fecha1 = new DtFecha(05, 06, 2021, 0, 00, 17);
         fecha2 = new DtFecha(05, 06, 2021, 0, 00, 19);
-        Multijugador *pM1 = new Multijugador(true, 2, "4", "Fortnite", true, 120, fecha1, fecha2);
+        Multijugador *pM1 = new Multijugador(true, 2, "4", "Fortnite", true, 120, fecha1, fecha2, listaJugadores);
         fecha1 = new DtFecha(06, 06, 2021, 0, 00, 17);
         fecha2 = new DtFecha(06, 06, 2021, 0, 00, 19);
-        Multijugador *pM2 = new Multijugador(true, 2, "5", "Fortnite", true, 120, fecha1, fecha2);
+        Multijugador *pM2 = new Multijugador(true, 2, "5", "Fortnite", true, 120, fecha1, fecha2, listaJugadores);
         fecha1 = new DtFecha(12, 06, 2021, 0, 00, 20);
         fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
-        Multijugador *pM3 = new Multijugador(false, 1, "6", "Minecraft", false, 0, fecha1, fecha2);
+        Multijugador *pM3 = new Multijugador(false, 1, "6", "Minecraft", false, 0, fecha1, fecha2, listaJugadores);
 
         IKey *keyDesarrollador = new StringKey("KingdomRush");
         d1->setVideoJuego(vj1, keyDesarrollador);
@@ -883,7 +888,7 @@ void Sistema::iniciarPartida()
                 clearDeDatosDeEntrada();
             }
 
-            Multijugador *partidaAux = new Multijugador(enVivo, cantJugadores, generarIdPartida(), nombreVideojuego, false, 0, fechaDelSistema);
+            Multijugador *partidaAux = new Multijugador(enVivo, cantJugadores, generarIdPartida(), nombreVideojuego, false, 0, fechaDelSistema,listaJugadores);
             jugadorActual->agregarMultijugador(partidaAux);
 
             Videojuego *videojuegoAux = dynamic_cast<Videojuego *>(videojuegos->find(keyVideojuego));
@@ -1087,13 +1092,24 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
 
 void Sistema::finalizarPartida(Jugador *jugadorActual)
 {
-    std::cout << "\nFinalizar Partida sin implementar\n";
-    IIterator *it = jugadorActual->getPartidas()->getIterator();
-
-    Partida *part = dynamic_cast<Partida *>(it->getCurrent() /*jugadorActual->getPartidas()->find(key)*/);
-
+    string nom;
+    std::cout << "\nSeleccione la partida a finalizar\n";
+    jugadorActual->mostrarPartidasNoFinalizadas();
+    std::getline(std::cin,nom);
+    StringKey *key = new StringKey(nom);
+    Partida *part = dynamic_cast<Partida *>(jugadorActual->getPartidas()->find(key));
+    DtFecha *ahora = obtenerFecha();
     part->setFinalizado(true);
-    /*part->setDuracionPartida();
+    part->setFechaFin(ahora);
+    int duracion = calcularDiferenciaFecha(part->getFechaInicio());
+    part->setDuracionPartida(duracion);
+    Multijugador *multi = dynamic_cast<Multijugador *>(jugadorActual->getPartidas()->find(key));
+    if(/*la partida es multijugador*/){
+    IIterator *it = multi->getJugadores()->getIterator();
+    //acá seteria el tiempo de juego de cada jugadorS
+    }
+    
+    /*
     part->setFechaFin(DtFecha.Now());*/
 }
 

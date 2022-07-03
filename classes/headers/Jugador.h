@@ -51,6 +51,7 @@ public:
 
 
 	void listarVideojuegosDeJugador();
+	void mostrarPartidasNoFinalizadas();
 
 	void listarPartidasIndividualesFinalizadas(std::string nombreVideojuego);
 	bool comprobarContinuacion(int id, std::string nombreVideojuego);

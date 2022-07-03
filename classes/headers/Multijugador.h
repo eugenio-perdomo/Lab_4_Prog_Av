@@ -11,6 +11,7 @@ private:
 	//DtFecha *ultimaConexion;
 	int cantJugadores;
 	Transmision *transmision;
+	ICollection *jugadores;
 
 public:
 	Multijugador();

@@ -112,6 +112,23 @@ void Jugador::cancelarSuscripcion(Videojuego *vj)
     // suscripcion->remove(vj);
 }
 
+void Jugador::mostrarPartidasNoFinalizadas()
+{
+    IIterator *it = this->partidas->getIterator();
+    std::cout << "\e[0;35mPartidas: \n\e[0m";
+    while (it->hasCurrent())
+    {
+        Partida *aux = dynamic_cast<Partida *>(it->getCurrent());
+        bool finalizada = aux->getFinalizado();
+        
+        if (finalizada == false)
+            std::cout << "\e[0;35m" << aux->getId() << "\n\e[0m";
+            std::cout << "\e[0;35m" << aux->getNombreVideojuego() << "\n\e[0m";
+        it->next();
+    }
+    delete it;
+}
+
 void Jugador::listarVideojuegosDeJugador()
 {
     IIterator *it = suscripcion->getIterator();
