@@ -29,6 +29,7 @@ public:
 	void clearDeDatosDeEntrada();
 
 	DtFecha* obtenerFecha();
+	int calcularDiferenciaFecha(DtFecha* hora1);
 
 	// CASO DE USO 1: ALTA USUARIO
 	void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc);

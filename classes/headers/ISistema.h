@@ -55,6 +55,7 @@ public:
 	virtual void clearDeDatosDeEntrada() = 0;
 
 	virtual DtFecha* obtenerFecha() = 0;
+	virtual int calcularDiferenciaFecha(DtFecha* hora1) = 0;
 
 	// CASO DE USO 1: ALTA USUARIO
 	virtual void agregarJugador(std::string email, std::string contrasenia, std::string nick, std::string desc) = 0;

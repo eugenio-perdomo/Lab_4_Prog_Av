@@ -26,17 +26,41 @@ DtFecha *Sistema::obtenerFecha()
     fechaDelSistema->setSegundo(tm.tm_sec);
 
     return fechaDelSistema;
+}
 
-    /*
+int Sistema::calcularDiferenciaFecha(DtFecha* hora1){
+    int resultado;
 
-    auto t = time(nullptr); //Auxiliar para obtener la fecha y hora del sistema
-    auto tm = *localtime(&t); //Guarda todos los cambos de fecha y hora
-    int prueba = tm.tm_hour; //Ejemplo de carga
+    int anio1,anio2,mes1,mes2,dia1,dia2,hor1,hor2,minuto1,minuto2,segundo1,segundo2;
 
-    --- --- ---
+    DtFecha *aux= obtenerFecha();
 
-    DtFecha *fecha = new DtFecha(tm.tm_year+1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min);
-    */
+    //Se convierte todo en minuto.
+    anio1=hora1->getAnio()*525600;
+    anio2=aux->getAnio()*525600;
+
+    mes1=hora1->getMes()*43800;
+    mes2=aux->getMes()*43800;
+    
+    dia1=hora1->getDia()*1440;
+    dia2=aux->getDia()*1440;
+    
+    hor1=hora1->getHora()*60;
+    hor2=aux->getHora()*60;
+    
+    minuto1=hora1->getDia();
+    minuto2=aux->getDia();
+    
+    segundo1=hora1->getMinuto()/60;
+    segundo2=aux->getMinuto()/60;
+
+    int fecha1,fecha2;
+    fecha1=anio1+mes1+dia1+hor1+minuto1+segundo1;
+    fecha2=anio2+mes2+dia2+hor2+minuto2+segundo2;
+
+    resultado= fecha2-fecha1;
+
+    return resultado;
 }
 
 // Alta de usuario
