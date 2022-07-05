@@ -23,6 +23,7 @@ public:
 	void mostrarVideojuegosDesarrollador();
 	void EliminarEsteJuego(Videojuego *v);
 	Videojuego *obtenerVideojuegodesarrollador(std::string _videojuego);
+	bool existeEsteVideojuego(StringKey* nombre);
 
 
 	virtual ~Desarrollador();

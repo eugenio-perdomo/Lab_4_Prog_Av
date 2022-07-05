@@ -123,7 +123,7 @@ void Jugador::mostrarPartidasNoFinalizadas()
         
         if (finalizada == false)
             std::cout << "\e[0;35m" << aux->getId() << "\n\e[0m";
-            std::cout << "\e[0;35m" << aux->getNombreVideojuego() << "\n\e[0m";
+            std::cout << "\e[0;35m" << aux->getNombreVideojuego() << "\n\e[0m" << std::endl;
         it->next();
     }
     delete it;
@@ -200,3 +200,26 @@ void Jugador::agregarMultijugador(Multijugador *aux)
     partidasMultijugador->add(key, aux);
     partidas->add(key, aux);
 }
+
+bool Jugador::esMultiJugador(StringKey *key){
+    bool resultado = partidasMultijugador->member(key);
+    return resultado;
+}
+
+bool Jugador::esIndividual(StringKey *key){
+    bool resultado = partidasIndividuales->member(key);
+    return resultado;
+}
+
+Individual* Jugador::getIndividual(StringKey *key){
+    Individual* aux= dynamic_cast<Individual *>(partidasIndividuales->find(key));
+    return aux;
+}
+
+
+Multijugador* Jugador::getMultijugador(StringKey *key){
+    Multijugador* aux= dynamic_cast<Multijugador *>(partidasMultijugador->find(key));
+    return aux;
+}
+
+

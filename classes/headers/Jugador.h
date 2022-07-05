@@ -59,6 +59,12 @@ public:
 	void agregarIndividual(Individual* aux);
 	void agregarMultijugador(Multijugador* aux);
 
+        bool esIndividual(StringKey *key);
+	bool esMultiJugador(StringKey *key);
+
+	Individual* getIndividual(StringKey *key);
+	Multijugador* getMultijugador(StringKey *key);
+
 
 	virtual ~Jugador();
 };

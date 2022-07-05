@@ -45,4 +45,11 @@ void Desarrollador::EliminarEsteJuego(Videojuego *v)
     v->Borrame();
 }
 
+bool Desarrollador::existeEsteVideojuego(StringKey* nombre){
+    bool resultado = videojuegosdesarrollador->member(nombre);
+    return resultado;
+
+}
+
+
 Desarrollador::~Desarrollador() {}

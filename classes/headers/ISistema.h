@@ -77,7 +77,7 @@ public:
 	virtual void mostrarVideojuegos() = 0;
 
 	// CASO DE USO : ELIMINAR VIDEOJUEGO
-	virtual void EliminarVideojuego(Desarrollador *d /*, Sistema* s*/) = 0;
+	virtual void EliminarVideojuego() = 0;
 	virtual void mostrarListaVideojuegos(List *lista) = 0;
 
 	// CASO DE USO : INICIAR PARTIDA
@@ -87,7 +87,7 @@ public:
 	virtual std::string generarIdPartida() = 0;
 
 	// CASO DE USO : FINALIZAR PARTIDA
-	virtual void finalizarPartida(Jugador *jugadorActual) = 0;
+	virtual void finalizarPartida() = 0;
 
 	// CASO DE USO : VER INFO VIDEOJUEGO
 	virtual void VerInfoVideoJuego() = 0;

@@ -53,7 +53,7 @@ public:
 	Videojuego *GetUnVideojuego(StringKey *nombreVideojuego);
 
 	// CASO DE USO : ELIMINAR VIDEOJUEGO
-	void EliminarVideojuego(Desarrollador *d /*, Sistema* s*/);
+	void EliminarVideojuego();
 	void mostrarListaVideojuegos(List *lista);
 
 	// CASO DE USO : INICIAR PARTIDA
@@ -63,7 +63,7 @@ public:
 	std::string generarIdPartida();
 
 	// CASO DE USO : FINALIZAR PARTIDA
-	void finalizarPartida(Jugador *jugadorActual);
+	void finalizarPartida();
 
 	// CASO DE USO : VER INFO VIDEOJUEGO
 	virtual void VerInfoVideoJuego();

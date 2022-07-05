@@ -62,32 +62,39 @@ void Videojuego::setPartidaParaVideojuego(Partida *part, IKey *_id)
 
 void Videojuego::eliminarme()
 {
-    delete (this->est);
-    IIterator *it = this->suscripcion->getIterator();
-    while (it->hasCurrent())
-    {
-        Suscripcion *sus = dynamic_cast<Suscripcion *>(it->getCurrent());
-        suscripcion->remove(sus);
-        sus->eliminarme();
-        delete (sus);
-        it->next();
+    delete (est);
+
+    if (suscripcion->isEmpty()==false){
+
+        IIterator *it = suscripcion->getIterator();
+        while (it->hasCurrent())
+        {
+            Suscripcion *sus = dynamic_cast<Suscripcion *>(it->getCurrent());
+            //suscripcion->remove(sus);
+            sus->eliminarme(); //a
+            //delete (sus);
+            it->next();
+        }
     }
 
-    IIterator *itP = this->partidas->getIterator();
-    while (it->hasCurrent())
-    {
-        Partida *part = dynamic_cast<Partida *>(it->getCurrent());
-        StringKey *key = new StringKey(part->getId());
-        partidas->remove(key);
-        // part->eliminarme(); TODO Este no va mas a partidas, va a multijugador
-        // dentro de 'partidas' hay que ver si existen multis
-        // Así como está va a remover las individuales y las multis, sin pasar por Transmision ni Comentarios.
-        delete (part);
-        it->next();
-    }
+
+    /*if (partidas->isEmpty()==false){
+
+        IIterator *itP = partidas->getIterator();
+        while (itP->hasCurrent()){
+            Partida *part = dynamic_cast<Partida *>(itP->getCurrent());
+            StringKey *key = new StringKey(part->getId());
+            partidas->remove(key);
+             part->eliminarme(); TODO Este no va mas a partidas, va a multijugador
+             dentro de 'partidas' hay que ver si existen multis
+             AsÃ­ como estÃ¡ va a remover las individuales y las multis, sin pasar por Transmision ni Comentarios.
+            delete (part);
+            itP->next();
+        }
+   }
     delete it;
     delete itP;
-}
+*/}
 
 void Videojuego::Borrame()
 {

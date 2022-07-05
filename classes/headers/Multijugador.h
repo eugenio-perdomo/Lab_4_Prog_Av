@@ -11,12 +11,13 @@ private:
 	// DtFecha *ultimaConexion;
 	int cantJugadores;
 	Transmision *transmision;
-	// ICollection *jugadores;
+	ICollection *jugadores;
 
 public:
 	Multijugador();
 	Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio, DtFecha *_fechaFin/*, ICollection *_listaJugadores*/);
-	Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio);
+	
+	Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio, List *participantes);
 
 	bool getTransmitidaEnVivo();
 	// DtFecha getUltimaConexion();
