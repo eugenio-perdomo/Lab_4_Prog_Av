@@ -35,8 +35,8 @@ public:
 	void Setnick(std::string val) { nick = val; }
 	std::string Getdescripcion() { return descripcion; }
 	void Setdescripcion(std::string val) { descripcion = val; }
-    void setPartidas(Partida *p, IKey *k);
-    IDictionary *getPartidas();
+	void setPartidas(Partida *p, IKey *k);
+	IDictionary *getPartidas();
 
 	std::string getContrasenia();
 
@@ -48,23 +48,20 @@ public:
 	bool verificarEsVitalicia(std::string nombreJuego);
 	void cancelarSuscripcion(Videojuego *vj);
 
-
-
 	void listarVideojuegosDeJugador();
 	void mostrarPartidasNoFinalizadas();
 
 	void listarPartidasIndividualesFinalizadas(std::string nombreVideojuego);
 	bool comprobarContinuacion(int id, std::string nombreVideojuego);
 
-	void agregarIndividual(Individual* aux);
-	void agregarMultijugador(Multijugador* aux);
+	void agregarIndividual(Individual *aux);
+	void agregarMultijugador(Multijugador *aux);
 
-        bool esIndividual(StringKey *key);
+	bool esIndividual(StringKey *key);
 	bool esMultiJugador(StringKey *key);
 
-	Individual* getIndividual(StringKey *key);
-	Multijugador* getMultijugador(StringKey *key);
-
+	Individual *getIndividual(StringKey *key);
+	Multijugador *getMultijugador(StringKey *key);
 
 	virtual ~Jugador();
 };

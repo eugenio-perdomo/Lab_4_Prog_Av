@@ -10,9 +10,8 @@ class Desarrollador : public Usuario
 {
 private:
 	std::string empresa;
-	IDictionary *videojuegosdesarrollador;
-
 public:
+	IDictionary *videojuegosdesarrollador;
 	Desarrollador();
 	Desarrollador(std::string email, std::string contrasenia, std::string empresa);
 
@@ -20,7 +19,7 @@ public:
 	void Setempresa(std::string val) { empresa = val; }
 	void setVideoJuego(Videojuego *vj, IKey *id);
 	std::string getContrasenia() { return contrasenia; }
-	void mostrarVideojuegosDesarrollador();
+	void mostrarVideojuegosDesarrollador(IDictionary *listaVid);
 	void EliminarEsteJuego(Videojuego *v);
 	Videojuego *obtenerVideojuegodesarrollador(std::string _videojuego);
 	bool existeEsteVideojuego(StringKey* nombre);

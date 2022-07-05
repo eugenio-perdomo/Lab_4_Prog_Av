@@ -274,9 +274,6 @@ void Sistema::menuCaso3(int i)
         jugadores->add(key, j3);
         key = new StringKey("camila@mail.com");
         jugadores->add(key, j4);
-        /*listaJugadores->add(j1);
-        listaJugadores->add(j2);
-        listaJugadores->add(j3);*/
 
         Categoria *c1 = new Categoria("PC", "Descripcion Categoria PC", "Plataforma");
         Categoria *c2 = new Categoria("PS4", "Descripcion Categoria PS4", "Plataforma");
@@ -342,22 +339,22 @@ void Sistema::menuCaso3(int i)
         DtFecha *fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
         Suscripcion *sus1 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::TresMeses, false, vj1, j1);
         fecha1 = new DtFecha(02, 06, 2021, 0, 00, 11);
-        Suscripcion *sus2 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::TresMeses, false, vj2, j2);
+        Suscripcion *sus2 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::TresMeses, false, vj2, j1);
         fecha1 = new DtFecha(04, 06, 2021, 0, 00, 9);
-        Suscripcion *sus3 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::UnMes, false, vj2, j3);
+        Suscripcion *sus3 = new Suscripcion(fecha1, MetodoPago::Paypal, Valor::UnMes, false, vj2, j2);
         fecha1 = new DtFecha(11, 06, 2021, 0, 00, 9);
-        Suscripcion *sus4 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Anio, false, vj3, j4);
+        Suscripcion *sus4 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Anio, false, vj3, j2);
         fecha1 = new DtFecha(03, 06, 2021, 0, 00, 7);
-        Suscripcion *sus5 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::UnMes, false, vj2, j1);
+        Suscripcion *sus5 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::UnMes, false, vj2, j3);
         fecha1 = new DtFecha(21, 12, 2020, 0, 00, 15);
-        Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false, vj2, j2);
+        Suscripcion *sus6 = new Suscripcion(fecha1, MetodoPago::Tarjeta, Valor::Vitalicia, false, vj3, j3);
 
         j1->setSuscripcion(sus1);
-        j2->setSuscripcion(sus2);
-        j3->setSuscripcion(sus3);
-        j4->setSuscripcion(sus4);
-        j1->setSuscripcion(sus5);
-        j2->setSuscripcion(sus6);
+        j1->setSuscripcion(sus2);
+        j2->setSuscripcion(sus3);
+        j2->setSuscripcion(sus4);
+        j3->setSuscripcion(sus5);
+        j3->setSuscripcion(sus6);
 
         // Ind
         fecha1 = new DtFecha(02, 06, 2021, 0, 00, 9);
@@ -368,7 +365,7 @@ void Sistema::menuCaso3(int i)
         Individual *pI2 = new Individual(false, "gamer", "2", "KingdomRush", true, 60, fecha1, fecha2);
         fecha1 = new DtFecha(12, 06, 2021, 0, 00, 16);
         fecha2 = new DtFecha(0, 0, 0, 0, 0, 0);
-        Individual *pI3 = new Individual(false, "gamer", "3", "Minecraft", true, 0, fecha1, fecha2);
+        Individual *pI3 = new Individual(false, "ari", "3", "Minecraft", false, 0, fecha1, fecha2);
 
         // MultiJ
         fecha1 = new DtFecha(05, 06, 2021, 0, 00, 17);
@@ -433,6 +430,14 @@ void Sistema::menuCaso3(int i)
 
         keyJuego = new StringKey("Minecraft");
         vj3->setPartidaParaVideojuego((Partida *)pM3, keyJuego);
+
+        j1->agregarIndividual(pI1);
+        j1->agregarIndividual(pI2);
+        j2->agregarIndividual(pI3);
+        j1->agregarMultijugador(pM1);
+        j1->agregarMultijugador(pM2);
+        j2->agregarMultijugador(pM3);
+
     }
 }
 
@@ -520,8 +525,8 @@ void Sistema::publicarVideojuego(Desarrollador *d)
             StringKey *key = new StringKey(nom);
             Videojuego *videojuegoAux = new Videojuego(nom, desc, cMensual, cTristral, cAnual, cVitalicio, aux_categorias);
             videojuegos->add(key, videojuegoAux);
-            d->setVideoJuego(videojuegoAux, key);
-            videojuegoAux->setDesarrollador(d);
+            this->desarrolladorActual->setVideoJuego(videojuegoAux, key);
+            videojuegoAux->setDesarrollador(this->desarrolladorActual);
             std::cout << "\n\e[0;35mVideojuego Publicado.\n\n\e[0m";
         }
         else
@@ -890,11 +895,11 @@ void Sistema::iniciarPartida()
                 clearDeDatosDeEntrada();
             }
             DtFecha *fecha = new DtFecha(0, 0, 0, 0, 0, 0);
-            Multijugador *partidaAux = new Multijugador(enVivo, cantJugadores, generarIdPartida(), nombreVideojuego, false, 0, obtenerFecha(), listaJugadores);
-            jugadorActual->agregarMultijugador(partidaAux);
+            Multijugador *partidaAux1 = new Multijugador(enVivo, cantJugadores, generarIdPartida(), nombreVideojuego, false, 0, obtenerFecha(), fecha, listaJugadores);
+            this->jugadorActual->agregarMultijugador(partidaAux1);
 
             Videojuego *videojuegoAux = dynamic_cast<Videojuego *>(videojuegos->find(keyVideojuego));
-            videojuegoAux->agregarMultijugador(partidaAux);
+            videojuegoAux->agregarMultijugador(partidaAux1);
         }
     }
     else
@@ -955,46 +960,49 @@ std::string Sistema::generarIdPartida()
 void Sistema::EliminarVideojuego()
 {
     std::string nom;
-    desarrolladorActual->mostrarVideojuegosDesarrollador();
+    desarrolladorActual->mostrarVideojuegosDesarrollador(videojuegos);
     std::cout << "\nIngrese nombre del videojuego a eliminar: \e[0;92m";
     std::cin >> nom;
     clearDeDatosDeEntrada();
 
-   StringKey* key = new StringKey(nom);
+    StringKey *key = new StringKey(nom);
 
-   bool existeVideojuego = desarrolladorActual->existeEsteVideojuego(key);
+    bool existeVideojuego = desarrolladorActual->existeEsteVideojuego(key);
 
-   if (existeVideojuego==true){
+    if (existeVideojuego == true)
+    {
+        Videojuego *aux = desarrolladorActual->obtenerVideojuegodesarrollador(nom);
 
-       Videojuego *aux = desarrolladorActual->obtenerVideojuegodesarrollador(nom);
-
-       if (aux != 0)
-       {
-           bool tiene = aux->tienepartidas();
-           if (tiene == false)
-           {
-               int op3;
-               std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
-               std::cin >> op3;
-               clearDeDatosDeEntrada();
-               if (op3 == 1)
-               {
-                      // Confirma eliminar el videojuego
-                      StringKey *key = new StringKey(aux->GetNombreVidJ());
-                      desarrolladorActual->EliminarEsteJuego(aux);
-                      this->videojuegos->remove(key);
-                      std::cout << "\n\e[1;31mVideojuego Eliminado.\e[1;33m\n\n";
-                      delete key;
-               }
-           }
-           else
-               std::cout << "\n\e[1;33mEse Videojuego aun tiene partidas activas.\e[1;33m\n";
-       }
-       else
-           std::cout << "\n\e[1;33mNombre del videojuego no esta en tu lista.\e[1;33m\n";
-   } else {
-      std::cout << "\n\e[1;33mNombre del videojuego no esta en tu lista.\e[1;33m\n";
-   }
+        if (aux != 0)
+        {
+            bool tiene = aux->tienepartidas();
+            if (tiene == false)
+            {
+                int op3;
+                std::cout << "\n\e[1;33mDesea eliminar el videojuego?\e[0m\n1- Si\n2- No\n\nOpcion: \e[0;92m";
+                std::cin >> op3;
+                clearDeDatosDeEntrada();
+                if (op3 == 1)
+                {
+                    // Confirma eliminar el videojuego
+                    if (this->videojuegos->member(key))
+                    {
+                        this->desarrolladorActual->EliminarEsteJuego(aux);
+                        this->videojuegos->remove(key);
+                        std::cout << "\n\e[1;31mVideojuego Eliminado.\e[1;33m\n\n";
+                    }
+                }
+            }
+            else
+                std::cout << "\n\e[1;33mEse Videojuego aun tiene partidas activas.\e[1;33m\n";
+        }
+        else
+            std::cout << "\n\e[1;33mNombre del videojuego no esta en tu lista.\e[1;33m\n";
+    }
+    else
+    {
+        std::cout << "\n\e[1;33mNombre del videojuego no esta en tu lista.\e[1;33m\n";
+    }
 }
 
 void Sistema::imprimirMenuDesarrollador()
@@ -1102,31 +1110,32 @@ void Sistema::imprimirMenuJugador(Jugador *jugadorActual)
 void Sistema::finalizarPartida()
 {
     string nom;
+    this->jugadorActual->mostrarPartidasNoFinalizadas();
     std::cout << "\nSeleccione la partida a finalizar: \n\nOpcion: \e[0;92m";
-    jugadorActual->mostrarPartidasNoFinalizadas();
     std::cin >> nom;
     clearDeDatosDeEntrada();
 
     StringKey *key = new StringKey(nom);
 
-    if (jugadorActual->esMultiJugador(key)==true){
-        //Es multijugador
-	Multijugador *part = dynamic_cast<Multijugador *>(jugadorActual->getMultijugador(key));
-	part->setFinalizado(true);
-	part->setFechaFin(obtenerFecha());
-	int duracion = calcularDiferenciaFecha(part->getFechaInicio());
-	part->setDuracionPartida(duracion * part->getCantJugadores());
+    if (jugadorActual->esMultiJugador(key) == true)
+    {
+        // Es multijugador
+        Multijugador *part = dynamic_cast<Multijugador *>(jugadorActual->getMultijugador(key));
+        part->setFinalizado(true);
+        part->setFechaFin(obtenerFecha());
+        int duracion = calcularDiferenciaFecha(part->getFechaInicio());
+        part->setDuracionPartida(duracion * part->getCantJugadores());
     }
 
-    if (jugadorActual->esIndividual(key)==true){
-        //Es individual
-	Individual *part = dynamic_cast<Individual *>(jugadorActual->getIndividual(key));
-	part->setFinalizado(true);
-	part->setFechaFin(obtenerFecha());
-	int duracion = calcularDiferenciaFecha(part->getFechaInicio());
-	part->setDuracionPartida(duracion);
+    if (jugadorActual->esIndividual(key) == true)
+    {
+        // Es individual
+        Individual *part = dynamic_cast<Individual *>(jugadorActual->getIndividual(key));
+        part->setFinalizado(true);
+        part->setFechaFin(obtenerFecha());
+        int duracion = calcularDiferenciaFecha(part->getFechaInicio());
+        part->setDuracionPartida(duracion);
     }
-
 }
 
 void Sistema::imprimirTextoPrincipal()

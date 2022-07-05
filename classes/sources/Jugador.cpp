@@ -114,16 +114,34 @@ void Jugador::cancelarSuscripcion(Videojuego *vj)
 
 void Jugador::mostrarPartidasNoFinalizadas()
 {
-    IIterator *it = this->partidas->getIterator();
-    std::cout << "\e[0;35mPartidas: \n\e[0m";
+    IIterator *itM = this->partidasMultijugador->getIterator();
+    std::cout << "\e[0;35mPartidas Multijugador: \n\e[0m";
+    while (itM->hasCurrent())
+    {
+        Partida *aux1 = dynamic_cast<Partida *>(itM->getCurrent());
+        bool finalizada = aux1->getFinalizado();
+
+        if (finalizada == false)
+        {
+            std::cout << "\e[0;35mId: " << aux1->getId() << "\n\e[0m";
+            std::cout << "\e[0;35mNombre: " << aux1->getNombreVideojuego() << "\n\e[0m" << std::endl;
+        }
+        itM->next();
+    }
+    delete itM;
+
+    IIterator *it = this->partidasIndividuales->getIterator();
+    std::cout << "\e[0;35mPartidas Individuales: \n\e[0m";
     while (it->hasCurrent())
     {
         Partida *aux = dynamic_cast<Partida *>(it->getCurrent());
         bool finalizada = aux->getFinalizado();
-        
+
         if (finalizada == false)
-            std::cout << "\e[0;35m" << aux->getId() << "\n\e[0m";
-            std::cout << "\e[0;35m" << aux->getNombreVideojuego() << "\n\e[0m" << std::endl;
+        {
+            std::cout << "\e[0;35mId: " << aux->getId() << "\n\e[0m";
+            std::cout << "\e[0;35mNombre: " << aux->getNombreVideojuego() << "\n\e[0m" << std::endl;
+        }
         it->next();
     }
     delete it;
@@ -139,7 +157,8 @@ void Jugador::listarVideojuegosDeJugador()
 
         if (aux->Getcancelada() == false)
         {
-            std::cout << std::endl << aux->GetNombreVideojuego() << std::endl;
+            std::cout << std::endl
+                      << aux->GetNombreVideojuego() << std::endl;
         }
         it->next();
     }
@@ -188,7 +207,6 @@ bool Jugador::comprobarContinuacion(int id, std::string nombreVideojuego)
 void Jugador::agregarIndividual(Individual *aux)
 {
     StringKey *key = new StringKey(aux->getId());
-
     partidasIndividuales->add(key, aux);
     partidas->add(key, aux);
 }
@@ -196,30 +214,30 @@ void Jugador::agregarIndividual(Individual *aux)
 void Jugador::agregarMultijugador(Multijugador *aux)
 {
     StringKey *key = new StringKey(aux->getId());
-
     partidasMultijugador->add(key, aux);
     partidas->add(key, aux);
 }
 
-bool Jugador::esMultiJugador(StringKey *key){
+bool Jugador::esMultiJugador(StringKey *key)
+{
     bool resultado = partidasMultijugador->member(key);
     return resultado;
 }
 
-bool Jugador::esIndividual(StringKey *key){
+bool Jugador::esIndividual(StringKey *key)
+{
     bool resultado = partidasIndividuales->member(key);
     return resultado;
 }
 
-Individual* Jugador::getIndividual(StringKey *key){
-    Individual* aux= dynamic_cast<Individual *>(partidasIndividuales->find(key));
+Individual *Jugador::getIndividual(StringKey *key)
+{
+    Individual *aux = dynamic_cast<Individual *>(partidasIndividuales->find(key));
     return aux;
 }
 
-
-Multijugador* Jugador::getMultijugador(StringKey *key){
-    Multijugador* aux= dynamic_cast<Multijugador *>(partidasMultijugador->find(key));
+Multijugador *Jugador::getMultijugador(StringKey *key)
+{
+    Multijugador *aux = dynamic_cast<Multijugador *>(partidasMultijugador->find(key));
     return aux;
 }
-
-

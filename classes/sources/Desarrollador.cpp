@@ -8,18 +8,23 @@ Desarrollador::Desarrollador(std::string _email, std::string _contrasenia, std::
     this->videojuegosdesarrollador = new OrderedDictionary;
 }
 
-void Desarrollador::mostrarVideojuegosDesarrollador()
+void Desarrollador::mostrarVideojuegosDesarrollador(IDictionary *listaVid)
 {
     IIterator *it = this->videojuegosdesarrollador->getIterator();
     std::cout << "\e[0;35mVideojuego con partidas finalizadas: \n\e[0m";
     while (it->hasCurrent())
     {
         Videojuego *aux = dynamic_cast<Videojuego *>(it->getCurrent());
-        bool tiene = aux->tienepartidas();
-        
-        if (tiene == false)
-            std::cout << "\e[0;35m" << aux->GetNombreVidJ() << "\n\e[0m";
+        StringKey *key = new StringKey(aux->GetNombreVidJ());
+        if (listaVid->member(key))
+        {
+            bool tiene = aux->tienepartidas();
 
+            if (tiene == false)
+            {
+                std::cout << "\e[0;35m" << aux->GetNombreVidJ() << "\n\e[0m";
+            }
+        }
         it->next();
     }
     delete it;
@@ -39,17 +44,15 @@ void Desarrollador::setVideoJuego(Videojuego *vj, IKey *id)
 
 void Desarrollador::EliminarEsteJuego(Videojuego *v)
 {
+    // StringKey *keyVidj = new StringKey(v->GetNombreVidJ());
     v->eliminarme();
-    StringKey *keyVidj = new StringKey(v->GetNombreVidJ());
-    videojuegosdesarrollador->remove(keyVidj);
-    v->Borrame();
+    // v->Borrame();
 }
 
-bool Desarrollador::existeEsteVideojuego(StringKey* nombre){
+bool Desarrollador::existeEsteVideojuego(StringKey *nombre)
+{
     bool resultado = videojuegosdesarrollador->member(nombre);
     return resultado;
-
 }
-
 
 Desarrollador::~Desarrollador() {}

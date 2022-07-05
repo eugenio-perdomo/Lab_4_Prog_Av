@@ -62,39 +62,32 @@ void Videojuego::setPartidaParaVideojuego(Partida *part, IKey *_id)
 
 void Videojuego::eliminarme()
 {
-    delete (est);
-
-    if (suscripcion->isEmpty()==false){
-
+    if (this->suscripcion->isEmpty() == false)
+    {
         IIterator *it = suscripcion->getIterator();
         while (it->hasCurrent())
         {
             Suscripcion *sus = dynamic_cast<Suscripcion *>(it->getCurrent());
-            //suscripcion->remove(sus);
-            sus->eliminarme(); //a
-            //delete (sus);
+            sus->eliminarme();
             it->next();
         }
+        delete it;
     }
 
-
-    /*if (partidas->isEmpty()==false){
-
+    if (partidas->isEmpty() == false)
+    {
         IIterator *itP = partidas->getIterator();
-        while (itP->hasCurrent()){
+        while (itP->hasCurrent())
+        {
             Partida *part = dynamic_cast<Partida *>(itP->getCurrent());
             StringKey *key = new StringKey(part->getId());
             partidas->remove(key);
-             part->eliminarme(); TODO Este no va mas a partidas, va a multijugador
-             dentro de 'partidas' hay que ver si existen multis
-             AsÃ­ como estÃ¡ va a remover las individuales y las multis, sin pasar por Transmision ni Comentarios.
-            delete (part);
             itP->next();
         }
-   }
-    delete it;
-    delete itP;
-*/}
+        delete itP;
+    }
+    delete (this->est);
+}
 
 void Videojuego::Borrame()
 {

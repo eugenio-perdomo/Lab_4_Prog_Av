@@ -14,7 +14,7 @@ private:
 	Desarrollador *desarrolladorActual;
 	Jugador *jugadorActual;
 	//ICollection *listaJugadores;
-	int ultimaPartida = 0;
+	int ultimaPartida = 6;
 
 public:
 	Sistema();

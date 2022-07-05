@@ -17,7 +17,7 @@ public:
 	Multijugador();
 	Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio, DtFecha *_fechaFin/*, ICollection *_listaJugadores*/);
 	
-	Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio, List *participantes);
+	Multijugador(bool transmitidaEnVivo, int cantJugadores, std::string _id, std::string _nombreVideojuego, bool _finalizado, float _duracionPartida, DtFecha *_fechaInicio, DtFecha *_fechaFin, List *participantes);
 
 	bool getTransmitidaEnVivo();
 	// DtFecha getUltimaConexion();
